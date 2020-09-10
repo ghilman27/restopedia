@@ -38,6 +38,11 @@ class MainApp extends HTMLElement {
                         <search-bar></search-bar>
                     </div>
                 </hero-element>
+                
+                <nav>
+                    <app-drawer></app-drawer>
+                    <top-navigation></top-navigation>
+                </nav>
             </header>
 
             <body>
