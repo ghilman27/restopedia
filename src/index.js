@@ -1,6 +1,5 @@
 import 'regenerator-runtime'; /* for async await transpile */
-import '../styles/main.css';
-import './app';
+import './views/main-app';
 
 window.addEventListener('load', () => {
     const root = document.getElementById('root');
