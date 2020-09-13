@@ -10,6 +10,7 @@ app-bar {
     left: 0;
     height: $app-bar-height;
     background: transparent;
+    justify-content: space-between;
 
     &.open {
         background: $color-app-bar-background;
@@ -36,6 +37,10 @@ app-bar {
         background: transparent;
         border: transparent;
         cursor: pointer;
+
+        @include desktop-responsive {
+            display: none;
+        }
 
         &__burger {
             @include transition-ease;
@@ -79,7 +84,7 @@ app-bar {
         }
     }
 
-    .nav-drawer {
+    .nav-drawer-mobile {
         position: fixed;
         right: 0;
         top: $app-bar-height;
@@ -98,7 +103,7 @@ app-bar {
         }
     }
 
-    .nav-menu {
+    .nav-mobile {
         @include flex-center-horizontal(column);
         justify-content: flex-start;
 
@@ -149,5 +154,91 @@ app-bar {
         @include full-width;
         border-top: 0.5px solid $color-nav-drawer-divider;
         margin: 1rem 0;
+    }
+
+    .nav-desktop {
+        @include flex-center-vertical(row);
+        justify-content: flex-start;
+        margin-right: 1.5rem;
+        display: none;
+
+        @include desktop-responsive {
+            display: flex;
+        }
+
+        &__item {
+            list-style-type: none;
+        }
+
+        &__link {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 2rem auto;
+            text-decoration: none;
+            text-transform: capitalize;
+            min-height: 44px;
+            height: 60px;
+            height: $app-bar-height;
+            font-size: 1.125rem;
+            color: $color-app-bar-text;
+            padding: 0 1rem;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+
+            &:hover {
+                background: $color-nav-menu-hover;
+            }
+
+            &.open {
+                background: $color-nav-drawer-background;
+            }
+        }
+
+        &__photo {
+            width: 30px;
+            border-radius: 100%;
+        }
+
+        &__username {
+            margin-left: 0.5rem;
+        }
+    }
+
+    .user-dropdown {
+        position: fixed;
+        right: 1.5rem;
+        top: $app-bar-height;
+        background: $color-nav-drawer-background;
+        color: $color-text-dark;
+        box-shadow: 0 1px 1px 0 rgba($color-card-shadow, 0.08), 0 1px 3px 1px rgba($color-card-shadow, 0.16);
+        opacity: 0;
+        @include transition-ease;
+
+        &.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &__info {
+            @include flex-center-vertical(column);
+            padding: 2rem;
+        }
+
+        &__photo {
+            width: 100px;
+            border-radius: 100%;
+        }
+
+        &__name {
+            margin-top: 1rem;
+        }
+
+        &__email {
+            margin-top: 0.5rem;
+            color: $color-text-subtle;
+            font-weight: 400;
+            text-transform: none;
+        }
     }
 }

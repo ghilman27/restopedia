@@ -36,10 +36,10 @@ $logo-font-family: 'Baumans';
 $app-bar-height: 60px;
 
 // responsive layout
-$mobile: 600px;
+$desktop: 900px;
 
-@mixin mobile-responsive {
-    @media (max-width: $mobile) {
+@mixin desktop-responsive {
+    @media (min-width: $desktop) {
         @content;
     }
 }

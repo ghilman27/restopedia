@@ -6,39 +6,36 @@ export default class AppBar extends LitElement {
     @property({type: Boolean})
     drawerOpen = false;
 
+    @property({type: Boolean})
+    dropdownOpen = false;
+
     @property({type: String})
     logoName = 'restopedia';
 
     @property({type: Object})
     user = {
-        name: 'Ghilman Al Fatih',
+        firstname: 'Ghilman',
+        lastname: 'Al Fatih',
         email: 'ghilman27@gmail.com',
         photo: '/images/profile.jpg',
     }
 
-    /*
-    * MENUS PROPERTIES WILL BE MOVED TO SEPARATE FILE (as input props)
-    * IF THE APP BECOME MORE COMPLEX LATER
-    * name: the name of navigation item
-    * link: navigation link (for future use, still unsure about the implementation)
-    * icon: the icon class in font awesome
-    *       more detail -> https://fontawesome.com/v4.7.0/icons/
-    */
     @property({type: Array})
     navMenus = [
         {
             name: 'home',
-            link: '',
+            link: '#',
             icon: 'fa fa-home',
         },
         {
             name: 'favourite',
-            link: '',
+            link: '#!',
             icon: 'fa fa-heart',
         },
         {
             name: 'about us',
-            link: '',
+            link: 'https://github.com/ghilman27',
+            newtab: true,
             icon: 'fab fa-github',
         },
     ];
@@ -47,12 +44,12 @@ export default class AppBar extends LitElement {
     accountMenus = [
         {
             name: 'settings',
-            link: '',
+            link: '#!',
             icon: 'fa fa-cog',
         },
         {
             name: 'sign out',
-            link: '',
+            link: '#!',
             icon: 'fas fa-sign-out-alt',
         },
     ]
@@ -60,10 +57,17 @@ export default class AppBar extends LitElement {
     connectedCallback() {
         super.connectedCallback();
         document.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('resize', this.handleResize);
+    }
+
+    handleResize = () => {
+        this.dropdownOpen = false;
+        this.drawerOpen = false;
+        if (!window.pageYOffset) this.classList.remove('open');
     }
 
     handleScroll = () => {
-        window.pageYOffset || this.drawerOpen
+        window.pageYOffset || this.drawerOpen || this.dropdownOpen
             ? this.classList.add('open')
             : this.classList.remove('open');
     }
@@ -78,35 +82,86 @@ export default class AppBar extends LitElement {
         }
     }
 
+    toggleDropdown(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (this.dropdownOpen) {
+            this.dropdownOpen = false;
+            if (!window.pageYOffset) this.classList.remove('open');
+        } else {
+            this.dropdownOpen = true;
+            this.classList.add('open');
+        }
+    }
+
     render() {
         return html`
             <a href="#!" class="app-logo">${this.logoName}</a>
             <button class="menu-btn" @click=${this.toggleDrawer}>
                 <span class="menu-btn__burger ${this.drawerOpen ? 'open' : ''}"></span>
             </button>
-            <nav class="nav-drawer ${this.drawerOpen ? 'open' : ''}">
+
+            <nav class="nav-drawer-desktop">
+                <ul class="nav-desktop">
+                    ${this.navMenus.map(item => html`
+                    <li class="nav-desktop__item">
+                        <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-desktop__link">
+                            <i class=${item.icon}></i>
+                            <span>${item.name}</span>
+                        </a>
+                    </li>
+                    `)}
+
+                    <li class="nav-desktop__item">
+                        <button @click=${this.toggleDropdown} class="nav-desktop__link ${this.dropdownOpen ? 'open' : ''}">
+                            <img @click=${this.toggleDropdown} src=${this.user.photo} alt="user-photo" class="nav-desktop__photo">
+                        </button>
+
+                        <div id="user-dropdown" class="user-dropdown ${this.dropdownOpen ? 'open' : ''}">
+                            <div class="user-dropdown__info">
+                                <img src=${this.user.photo} alt="user-photo" class="user-dropdown__photo">
+                                <h3 class="user-dropdown__name">${`${this.user.firstname} ${this.user.lastname}`}</h3>
+                                <h4 class="user-dropdown__email">${this.user.email}</h4>
+                            </div>
+
+                            ${this.accountMenus.map(item => html`
+                            <li class="nav-mobile__item">
+                                <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
+                                    <i class=${item.icon}></i>
+                                    <span>${item.name}</span>
+                                </a>
+                            </li>
+                            `)}
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <nav class="nav-drawer-mobile ${this.drawerOpen ? 'open' : ''}">
                 <div class="user-view">
                     <img src=${this.user.photo} alt="user-photo" class="user-view__photo">
-                    <h3 class="user-view__name">${this.user.name}</h3>
+                    <h3 class="user-view__name">${`${this.user.firstname} ${this.user.lastname}`}</h3>
                     <h4 class="user-view__email">${this.user.email}</h4>
                 </div>
-                <ul class="nav-menu">
+                <ul class="nav-mobile">
                     ${this.navMenus.map(item => html`
-                        <li class="nav-menu__item">
-                            <a href="#!" class="nav-menu__link">
-                                <i class=${item.icon}></i>
-                                <span>${item.name}</span>
-                            </a>
-                        </li>
+                    <li class="nav-mobile__item">
+                        <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
+                            <i class="${item.icon}"></i>
+                            <span>${item.name}</span>
+                        </a>
+                    </li>
                     `)}
+
                     <hr class="divider">
+
                     ${this.accountMenus.map(item => html`
-                        <li class="nav-menu__item">
-                            <a href="#!" class="nav-menu__link">
-                                <i class=${item.icon}></i>
-                                <span>${item.name}</span>
-                            </a>
-                        </li>
+                    <li class="nav-mobile__item">
+                        <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
+                            <i class=${item.icon}></i>
+                            <span>${item.name}</span>
+                        </a>
+                    </li>
                     `)}
                 </ul>
             </nav>
