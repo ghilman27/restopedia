@@ -118,6 +118,10 @@ app-bar {
             padding: 0 2rem;
             font-size: 1.125rem;
             color: $color-text-dark;
+
+            &:hover {
+                background: $color-nav-menu-hover;
+            }
         }
     }
 
