@@ -1,0 +1,17 @@
+@import '../../styles/config';
+@import '../../styles/helpers';
+
+resto-list {
+    @include display-block;
+
+    .list-title {
+        text-transform: capitalize;
+    }
+
+    .list-items {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+}

@@ -11,21 +11,21 @@ export default class RestoCard extends LitElement {
 
     render() {
         return html`
-            <div class="resto-card">
-                <li class="resto-card__item">
-                    <a href="#!" title="${this.data.name}">
-                        <div class="resto-card__media">
+            <!-- <div class="resto-card">
+                <li class="resto-card__item"> -->
+                    <!-- <a href="#!" title="${this.data.name}"> -->
+                        <div class="card__media">
                             <img src="${this.data.pictureId}" alt="${this.data.name}"/>
                         </div>
-                        <div class="resto-card__content">
-                            <h5 class="resto-card__title">${this.data.name}</h5>
+                        <div class="card__content">
+                            <h4 class="resto__title">${this.data.name}</h4>
                             <rating-bar rating=${this.data.rating}></rating-bar>
-                            <p class="resto-card__city">${this.data.city}</p>
-                            <p class="resto-card__description">${this.data.description}</p>
+                            <p class="resto__city">${this.data.city}</p>
+                            <p class="resto__description">${this.data.description}</p>
                         </div>
-                    </a>
-                </li>
-            </div>
+                    <!-- </a> -->
+                <!-- </li>
+            </div> -->
         `;
     }
 

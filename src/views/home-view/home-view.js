@@ -14,8 +14,8 @@ export default class HomeView extends LitElement {
     render() {
         return html`
             <hero-element id="jumbotron"></hero-element>
-            <div id="content" class="home-view__content">
-                <section id="recommended" class="home-view__section">
+            <div id="content" class="content">
+                <section id="recommended" class="section">
                     <resto-list 
                         title="recommended" 
                         .data=${this.recommended}
@@ -23,7 +23,7 @@ export default class HomeView extends LitElement {
                     </resto-list>
                 </section>
 
-                <section id="explore" class="home-view__section">
+                <section id="explore" class="section">
                     <resto-list 
                         title="explore" 
                         .data=${this.explore}

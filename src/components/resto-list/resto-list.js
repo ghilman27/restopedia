@@ -1,4 +1,5 @@
 import { LitElement, html, customElement} from 'lit-element';
+import './resto-list.scss';
 
 
 @customElement('resto-list')
@@ -11,10 +12,9 @@ export default class RestoList extends LitElement {
     }
 
     render() {
-        console.log(this.data)
         return html`
-            <h4 class="resto-list__title">${this.title}</h4>
-            <div class="resto-list__items">
+            <h2 class="list-title">${this.title}</h2>
+            <div class="list-items">
                 ${this.data.map(resto => html`
                     <resto-card .data="${resto}"></resto-card>
                 `)}
