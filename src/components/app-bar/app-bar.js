@@ -68,10 +68,10 @@ export default class AppBar extends LitElement {
             : this.classList.remove('open');
     }
 
-    toggleMenu() {
+    toggleDrawer() {
         if (this.drawerOpen) {
             this.drawerOpen = false;
-            this.classList.remove('open');
+            if (!window.pageYOffset) this.classList.remove('open');
         } else {
             this.drawerOpen = true;
             this.classList.add('open');
@@ -81,7 +81,7 @@ export default class AppBar extends LitElement {
     render() {
         return html`
             <a href="#!" class="app-logo">${this.logoName}</a>
-            <button class="menu-btn" @click=${this.toggleMenu}>
+            <button class="menu-btn" @click=${this.toggleDrawer}>
                 <span class="menu-btn__burger ${this.drawerOpen ? 'open' : ''}"></span>
             </button>
             <nav class="nav-drawer ${this.drawerOpen ? 'open' : ''}">
