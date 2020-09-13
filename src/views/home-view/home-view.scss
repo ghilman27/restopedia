@@ -1,0 +1,14 @@
+@import '../../styles/config';
+
+home-view {
+    display: grid;
+    grid-template-rows: 40vh auto;
+    
+    .home-view__content {
+        margin-top: -3rem;
+        background: $color-page-background;
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        padding: 3rem 1.5rem;
+    }
+}

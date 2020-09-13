@@ -1,6 +1,7 @@
-import data from '../data/DATA.json';
-import { LitElement, html, css, customElement} from 'lit-element';
-import { HeroElement } from '../components';
+import data from '../../data/DATA.json';
+import { LitElement, html, customElement} from 'lit-element';
+import '../../components';
+import './home-view.scss';
 
 @customElement('home-view')
 export default class HomeView extends LitElement {
@@ -12,12 +13,9 @@ export default class HomeView extends LitElement {
 
     render() {
         return html`
-            <div id="home-hero">
-                <hero-element></hero-element>
-            </div>
-
-            <div id="home-content">
-                <section id="home-recommended">
+            <hero-element id="jumbotron"></hero-element>
+            <div id="content" class="home-view__content">
+                <section id="recommended" class="home-view__section">
                     <resto-list 
                         title="recommended" 
                         .data=${this.recommended}
@@ -25,7 +23,7 @@ export default class HomeView extends LitElement {
                     </resto-list>
                 </section>
 
-                <section id="home-explore">
+                <section id="explore" class="home-view__section">
                     <resto-list 
                         title="explore" 
                         .data=${this.explore}

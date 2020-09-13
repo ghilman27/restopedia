@@ -1,0 +1,12 @@
+@import '../../styles/helpers';
+
+resto-card {
+    @include display-block;
+    
+    // temporary workaround
+    .resto-card__media {
+        img {
+            @include full-width;
+        }
+    }
+}

@@ -1,5 +1,5 @@
 import { LitElement, html, customElement} from 'lit-element';
-
+import './resto-card.scss';
 
 @customElement('resto-card')
 export default class RestoCard extends LitElement {

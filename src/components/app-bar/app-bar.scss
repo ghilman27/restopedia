@@ -1,0 +1,149 @@
+@import '../../styles/config';
+@import '../../styles/helpers';
+
+app-bar {
+    @include flex-center-vertical(row);
+    @include full-width;
+    @include transition-ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: $app-bar-height;
+    background: transparent;
+
+    &.open {
+        background: $color-app-bar-background;
+        box-shadow: 
+            0 2px 2px 0 rgba($black,0.14), 
+            0 3px 1px -2px rgba($black,0.12), 
+            0 1px 5px 0 rgba($black,0.2);
+    }
+
+    .app-logo {
+        margin-left: 1.5rem;
+        font-family: $logo-font-family;
+        color: $color-app-bar-text;
+        text-decoration: none;
+        font-size: 1.5rem;
+    }
+
+    .menu-btn {
+        @include flex-center(column);
+        position: absolute;
+        right: 1.5rem;
+        min-width: 44px;
+        min-height: 44px;
+        background: transparent;
+        border: transparent;
+        cursor: pointer;
+
+        &__burger {
+            @include transition-ease;
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: $color-app-bar-text;
+
+            &::before{
+                position: absolute;
+                width: 30px;
+                height: 3px;
+                background: $color-app-bar-text;
+                content: '';
+                right: 0;
+                top: -8px;
+            }
+
+            &::after{
+                position: absolute;
+                width: 30px;
+                height: 3px;
+                background: $color-app-bar-text;
+                content: '';
+                right: 0;
+                top: 8px;
+            }
+
+            &.open {
+                transform: rotate(360deg);
+                background: transparent;
+
+                &::before {
+                    transform: rotate(45deg) translate(5px, 6px);
+                }
+
+                &::after {
+                    transform: rotate(-45deg) translate(5px, -6px);
+                }
+            }
+        }
+    }
+
+    .nav-drawer {
+        position: fixed;
+        right: 0;
+        top: $app-bar-height;
+        width: 300px;
+        height: calc(100vh - #{$app-bar-height});
+        margin: 0;
+        display: grid;
+        grid-template-rows: 25vh auto;
+        row-gap: 1.5rem;
+        background: $color-nav-drawer-background;
+        transform: translateX(100%);
+        @include transition-ease;
+
+        &.open {
+            transform: translateY(0);
+        }
+    }
+
+    .nav-menu {
+        @include flex-center-horizontal(column);
+        justify-content: flex-start;
+
+        &__item {
+            @include full-width;
+            list-style-type: none;
+        }
+
+        &__link {
+            @include full-width;
+            display: grid;
+            grid-template-columns: 2.5rem auto;
+            align-items: center;
+            text-decoration: none;
+            text-transform: capitalize;
+            min-height: 44px;
+            padding: 0 2rem;
+            font-size: 1.125rem;
+            color: $color-text-dark;
+        }
+    }
+
+    .user-view {
+        @include flex-center-vertical(column);
+        padding: 2rem;
+
+        &__photo {
+            width: 100px;
+            border-radius: 100%;
+        }
+
+        &__name {
+            margin-top: 1rem;
+        }
+
+        &__email {
+            margin-top: 0.5rem;
+            color: $color-text-subtle;
+            font-weight: 400;
+        }
+    }
+
+    .divider {
+        @include full-width;
+        border-top: 0.5px solid $color-nav-drawer-divider;
+        margin: 1rem 0;
+    }
+}

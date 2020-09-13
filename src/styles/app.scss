@@ -1,0 +1,13 @@
+@import 'resets';
+@import 'config';
+
+body {
+    background: $color-page-background;
+    color: $color-text-dark;
+    font-family: $main-font-family;
+}
+
+footer {
+    background: $color-footer-background;
+    height: 10vh;
+}
