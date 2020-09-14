@@ -12,4 +12,10 @@ resto-list {
             grid-template-columns: repeat(4, 1fr);
         }
     }
+
+    .list-title {
+        @include responsive-min($large) {
+            text-align: center;
+        }
+    }
 }
