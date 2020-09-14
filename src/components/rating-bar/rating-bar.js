@@ -16,6 +16,7 @@ export default class RatingBar extends LitElement {
                 ${this.starScales.map(() => html`
                     <i class="fas fa-star base-star"></i>
                 `)}
+                <span class="rating-text">(${this.rating})</span>
             </div>
 
             <div class="gold-ratings">

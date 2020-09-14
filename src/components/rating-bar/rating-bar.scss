@@ -1,7 +1,8 @@
 @import '../../styles/config';
+@import '../../styles/helpers';
 
 rating-bar {
-    display: block;
+    @include flex-center-vertical(row);
     position: relative;
 
     i {
@@ -17,5 +18,9 @@ rating-bar {
     }
     .gold-star {
         color: $color-rating-star;
+    }
+    .rating-text {
+        font-size: 0.825rem;
+        color: $color-text-subtle;
     }
 }
