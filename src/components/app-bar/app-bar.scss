@@ -209,10 +209,11 @@ app-bar {
         color: $color-text-dark;
         box-shadow: 0 1px 1px 0 rgba($color-card-shadow, 0.08), 0 1px 3px 1px rgba($color-card-shadow, 0.16);
         opacity: 0;
+        visibility: hidden;
         @include transition-ease;
 
         &.open {
-            opacity: 1;
+            opacity: 1; // needed in order for transition to work
             visibility: visible;
         }
 
