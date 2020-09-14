@@ -1,0 +1,10 @@
+@import '../../styles/config';
+@import '../../styles/helpers';
+
+footer-bar {
+    @include flex-center(row);
+    background: $color-footer-background;
+    color: $color-text-light;
+    font-family: $main-font-family;
+    height: 10vh;
+}

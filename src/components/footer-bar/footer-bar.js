@@ -1,4 +1,5 @@
 import { LitElement, html, customElement} from 'lit-element';
+import './footer-bar.scss';
 
 @customElement('footer-bar')
 export default class FooterBar extends LitElement {
