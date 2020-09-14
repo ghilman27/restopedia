@@ -11,7 +11,7 @@ resto-card {
         img {
             @include full-width;
             height: 100vw;
-            max-height: 200px;
+            max-height: 175px;
             left: 0;
             right: 0;
             object-fit: cover;
@@ -21,7 +21,7 @@ resto-card {
 
     .card__content {
         @include flex-center-vertical(column);
-        max-height: 175px;
+        max-height: 200px;
         padding: 1rem;
     }
 
