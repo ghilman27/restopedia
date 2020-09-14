@@ -1,0 +1,20 @@
+@import '../../styles/config';
+
+rating-bar {
+    display: block;
+    position: relative;
+
+    i {
+        font-size: 0.825rem;
+    }
+    .gold-ratings {
+        position: absolute;
+        top: 0;
+    }
+    .base-star {
+        color: $color-rating-base;
+    }
+    .gold-star {
+        color: $color-rating-star;
+    }
+}
