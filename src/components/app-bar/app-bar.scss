@@ -13,6 +13,20 @@ app-bar {
     background: transparent;
     justify-content: space-between;
 
+    .aria-close-popup-btn {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        opacity: 0;
+        background-color: $color-app-bar-background;
+        padding: 8px;
+        color: $color-text-light;
+
+        &:focus {
+            opacity: 1;
+        }
+    }
+
     &.open {
         background: $color-app-bar-background;
         box-shadow: 
@@ -142,6 +156,8 @@ app-bar {
 
         &__name {
             margin-top: 1rem;
+            font-size: 1.13rem;
+            font-weight: bold;
         }
 
         &__email {
@@ -214,6 +230,7 @@ app-bar {
         box-shadow: 0 1px 1px 0 rgba($color-card-shadow, 0.08), 0 1px 3px 1px rgba($color-card-shadow, 0.16);
         opacity: 0;
         visibility: hidden;
+        padding-bottom: 2rem;
         @include transition-ease;
 
         &.open {
@@ -233,6 +250,8 @@ app-bar {
 
         &__name {
             margin-top: 1rem;
+            font-size: 1.13rem;
+            font-weight: bold;
         }
 
         &__email {
