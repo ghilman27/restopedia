@@ -34,6 +34,7 @@ export default class RestoCard extends LitElement {
                     </div>
                 </div>
                 <div class="card__content">
+                    <span class="resto__distance">${this.data.distance} km</span>
                     <h3 class="resto__title" tabindex="0">${this.data.name}</h3>
                     <p class="resto__city" tabindex="0">${this.data.city}</p>
                     <rating-bar rating=${this.data.rating} tabindex="0" aria-label="rating ${this.data.rating}"></rating-bar>
