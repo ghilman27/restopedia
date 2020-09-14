@@ -25,11 +25,16 @@ resto-card {
         padding: 1rem;
     }
 
+    .resto__title {
+        margin: 0.25rem 0;
+    }
+
     .resto__city {
-        margin: 0.5rem 0;
+        color: $color-text-subtle;
     }
 
     .resto__description {
+        margin: 0.75rem 0;
         overflow: hidden; 
         text-overflow: ellipsis; 
         -webkit-box-orient: vertical; 

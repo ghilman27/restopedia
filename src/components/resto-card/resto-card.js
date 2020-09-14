@@ -16,8 +16,8 @@ export default class RestoCard extends LitElement {
             </div>
             <div class="card__content">
                 <h3 class="resto__title">${this.data.name}</h3>
-                <rating-bar rating=${this.data.rating}></rating-bar>
                 <p class="resto__city">${this.data.city}</p>
+                <rating-bar rating=${this.data.rating}></rating-bar>
                 <p class="resto__description">${this.data.description}</p>
             </div>
         `;
