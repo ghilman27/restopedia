@@ -93,9 +93,13 @@ app-bar {
         row-gap: 1.5rem;
         background: $color-nav-drawer-background;
         transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
         @include transition-ease;
 
         &.open {
+            opacity: 1;
+            visibility: visible;
             transform: translateY(0);
         }
     }
