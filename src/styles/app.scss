@@ -1,5 +1,6 @@
 @import 'resets';
 @import 'config';
+@import 'helpers';
 
 body {
     background: $color-page-background;
@@ -8,6 +9,9 @@ body {
 }
 
 footer {
+    @include flex-center(row);
     background: $color-footer-background;
+    color: $color-text-light;
+    font-family: $main-font-family;
     height: 10vh;
 }
