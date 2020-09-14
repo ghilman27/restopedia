@@ -1,0 +1,54 @@
+@mixin flex-center($direction) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}
+
+@mixin flex-center-vertical($direction) {
+    display: flex;
+    flex-direction: $direction;
+    @if $direction == row {
+        align-items: center;
+    } @else if $direction == column {
+        justify-content: center;
+    } @else {
+        @error "direction should be either row or column";
+    }
+}
+
+@mixin flex-center-horizontal($direction) {
+    display: flex;
+    flex-direction: $direction;
+    @if $direction == row {
+        justify-content: center;
+    } @else if $direction == column {
+        align-items: center;
+    } @else {
+        @error "direction should be either row or column";
+    }
+}
+
+@mixin margin-horizontal-centering {
+    margin: 0 auto;
+}
+
+@mixin display-block {
+    display: block;
+}
+
+@mixin full-height {
+    height: 100%;
+}
+
+@mixin full-width {
+    width: 100%;
+}
+
+@mixin center-text {
+    text-align: center;
+}
+
+@mixin transition-ease {
+    transition: all 0.5s ease-in-out;
+}

@@ -1,0 +1,21 @@
+@import '../../styles/config';
+
+app-bar {
+    .menu-btn {
+        @include responsive-min($large) {
+            display: none;
+        }
+    }
+
+    .nav-desktop {
+        @include responsive-min($large) {
+            display: flex;
+        }
+    }
+
+    .app-logo {
+        @include responsive-max($large) {
+            margin-left: 1.5rem;
+        }
+    }
+}

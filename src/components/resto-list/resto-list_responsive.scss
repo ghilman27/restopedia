@@ -1,0 +1,21 @@
+@import '../../styles/config';
+
+resto-list {
+    .list-items {
+        @include responsive-min($medium) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @include responsive-min($large) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @include responsive-min($extra-large) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    .list-title {
+        @include responsive-min($large) {
+            text-align: center;
+        }
+    }
+}

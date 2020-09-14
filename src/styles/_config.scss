@@ -1,0 +1,57 @@
+// color library
+$white: #ffffff;
+$black: #000000;
+$medium-black: #424242;
+$light-grey: #f4f4f4;
+$medium-grey: #dedede;
+$light-orange: #F0A500;
+$dark-orange: #cf7500;
+$tokopedia-color: #42b549;
+
+// background color
+$color-page-background: $white;
+$color-footer-background: $light-orange;
+$color-app-bar-background: $light-orange;
+$color-search-bar: $white;
+$color-hero-shadow: rgba($black, 0.4);
+$color-nav-drawer-background: $white;
+$color-nav-menu-hover: $medium-grey;
+$color-card-shadow: $medium-black;
+$color-rating-star: $light-orange;
+$color-rating-base: $medium-grey;
+
+// text color
+$color-app-bar-text: $white;
+$color-text-light: $white;
+$color-text-dark: $black;
+$color-hero-text: $light-grey;
+$color-text-subtle: rgba($black, 0.5);
+
+// divider
+$color-nav-drawer-divider: $medium-grey;
+
+// font library
+$main-font-family: 'Roboto';
+$logo-font-family: 'Baumans';
+
+// layout
+$app-bar-height: 60px;
+$app-bar-margin: 2.5rem;
+
+// responsive layout
+$small: 300px;
+$medium: 600px;
+$large: 900px;
+$extra-large: 1200px;
+
+@mixin responsive-min($width) {
+    @media (min-width: $width) {
+        @content;
+    }
+}
+
+@mixin responsive-max($width) {
+    @media (max-width: $width) {
+        @content;
+    }
+}
