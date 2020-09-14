@@ -20,6 +20,8 @@ export default class RestoCard extends LitElement {
         return html`
             <a 
                 href="#!" 
+                tabindex="0"
+                aria-label="${this.data.name}"
                 title=${this.data.name}
                 class="card ${this.onHover ? 'hover' : ''}"
                 @mouseenter=${this.handleHover}
@@ -32,10 +34,10 @@ export default class RestoCard extends LitElement {
                     </div>
                 </div>
                 <div class="card__content">
-                    <h3 class="resto__title">${this.data.name}</h3>
-                    <p class="resto__city">${this.data.city}</p>
-                    <rating-bar rating=${this.data.rating}></rating-bar>
-                    <p class="resto__description">${this.data.description}</p>
+                    <h3 class="resto__title" tabindex="0">${this.data.name}</h3>
+                    <p class="resto__city" tabindex="0">${this.data.city}</p>
+                    <rating-bar rating=${this.data.rating} tabindex="0" aria-label="rating ${this.data.rating}"></rating-bar>
+                    <p class="resto__description" tabindex="0">${this.data.description}</p>
                 </div>
             </a>
         `;
