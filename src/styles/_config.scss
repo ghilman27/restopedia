@@ -34,12 +34,22 @@ $logo-font-family: 'Baumans';
 
 // layout
 $app-bar-height: 60px;
+$app-bar-margin: 2.5rem;
 
 // responsive layout
-$desktop: 900px;
+$small: 300px;
+$medium: 600px;
+$large: 900px;
+$extra-large: 1200px;
 
-@mixin desktop-responsive {
-    @media (min-width: $desktop) {
+@mixin responsive-min($width) {
+    @media (min-width: $width) {
+        @content;
+    }
+}
+
+@mixin responsive-max($width) {
+    @media (max-width: $width) {
         @content;
     }
 }

@@ -18,7 +18,7 @@ export default class RestoCard extends LitElement {
                             <img src="${this.data.pictureId}" alt="${this.data.name}"/>
                         </div>
                         <div class="card__content">
-                            <h4 class="resto__title">${this.data.name}</h4>
+                            <h3 class="resto__title">${this.data.name}</h3>
                             <rating-bar rating=${this.data.rating}></rating-bar>
                             <p class="resto__city">${this.data.city}</p>
                             <p class="resto__description">${this.data.description}</p>

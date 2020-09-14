@@ -21,7 +21,7 @@ app-bar {
     }
 
     .app-logo {
-        margin-left: 1.5rem;
+        margin-left: $app-bar-margin;
         font-family: $logo-font-family;
         color: $color-app-bar-text;
         text-decoration: none;
@@ -37,10 +37,6 @@ app-bar {
         background: transparent;
         border: transparent;
         cursor: pointer;
-
-        @include desktop-responsive {
-            display: none;
-        }
 
         &__burger {
             @include transition-ease;
@@ -156,15 +152,14 @@ app-bar {
         margin: 1rem 0;
     }
 
+    .nav-drawer-desktop {
+        margin-right: $app-bar-margin;
+    }
+
     .nav-desktop {
         @include flex-center-vertical(row);
         justify-content: flex-start;
-        margin-right: 1.5rem;
         display: none;
-
-        @include desktop-responsive {
-            display: flex;
-        }
 
         &__item {
             list-style-type: none;
@@ -207,7 +202,7 @@ app-bar {
 
     .user-dropdown {
         position: fixed;
-        right: 1.5rem;
+        right: $app-bar-margin;
         top: $app-bar-height;
         background: $color-nav-drawer-background;
         color: $color-text-dark;

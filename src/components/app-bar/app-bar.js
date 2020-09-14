@@ -1,5 +1,6 @@
 import { LitElement, html, customElement, property} from 'lit-element';
 import './app-bar.scss';
+import './app-bar_responsive.scss';
 
 @customElement('app-bar')
 export default class AppBar extends LitElement {
@@ -123,15 +124,16 @@ export default class AppBar extends LitElement {
                                 <h3 class="user-dropdown__name">${`${this.user.firstname} ${this.user.lastname}`}</h3>
                                 <h4 class="user-dropdown__email">${this.user.email}</h4>
                             </div>
-
-                            ${this.accountMenus.map(item => html`
-                            <li class="nav-mobile__item">
-                                <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
-                                    <i class=${item.icon}></i>
-                                    <span>${item.name}</span>
-                                </a>
-                            </li>
-                            `)}
+                            <ul>
+                                ${this.accountMenus.map(item => html`
+                                <li class="nav-mobile__item">
+                                    <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
+                                        <i class=${item.icon}></i>
+                                        <span>${item.name}</span>
+                                    </a>
+                                </li>
+                                `)}
+                            </ul>
                         </div>
                     </li>
                 </ul>

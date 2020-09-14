@@ -1,5 +1,6 @@
 import { LitElement, html, customElement} from 'lit-element';
 import './resto-list.scss';
+import './resto-list_responsive.scss';
 
 
 @customElement('resto-list')

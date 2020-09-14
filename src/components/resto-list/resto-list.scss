@@ -3,6 +3,8 @@
 
 resto-list {
     @include display-block;
+    @include margin-horizontal-centering;
+    max-width: $extra-large;
 
     .list-title {
         text-transform: capitalize;
