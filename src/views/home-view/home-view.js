@@ -8,7 +8,7 @@ export default class HomeView extends LitElement {
     constructor() {
         super();
         this.recommended = data.restaurants.recommended;
-        this.explore = data.restaurants.explore;
+        this.toppicks = data.restaurants.toppicks;
     }
 
     render() {
@@ -23,10 +23,10 @@ export default class HomeView extends LitElement {
                     </resto-list>
                 </section>
 
-                <section id="explore" class="section">
+                <section id="top-picks" class="section">
                     <resto-list 
-                        title="explore" 
-                        .data=${this.explore}
+                        title="top picks" 
+                        .data=${this.toppicks}
                     >
                     </resto-list>
                 </section>

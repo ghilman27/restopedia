@@ -14,7 +14,7 @@ export default class RestoList extends LitElement {
 
     render() {
         return html`
-            <h2 class="list-title">${this.title}</h2>
+            <h2 class="list-title" tabindex="0">${this.title}</h2>
             <div class="list-items">
                 ${this.data.map(resto => html`
                     <resto-card .data="${resto}"></resto-card>

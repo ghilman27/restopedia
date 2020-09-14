@@ -97,8 +97,14 @@ export default class AppBar extends LitElement {
 
     render() {
         return html`
-            <a href="#!" class="app-logo">${this.logoName}</a>
-            <button class="menu-btn" @click=${this.toggleDrawer}>
+            <a href="#!" aria-label="app-logo" class="app-logo">${this.logoName}</a>
+            <button 
+                class="menu-btn" 
+                @click=${this.toggleDrawer} 
+                aria-label="navigation drawer"
+                aria-haspopup="true" 
+                aria-expanded=${this.drawerOpen ? 'true' : 'false'}
+            >
                 <span class="menu-btn__burger ${this.drawerOpen ? 'open' : ''}"></span>
             </button>
 
@@ -114,15 +120,32 @@ export default class AppBar extends LitElement {
                     `)}
 
                     <li class="nav-desktop__item">
-                        <button @click=${this.toggleDropdown} class="nav-desktop__link ${this.dropdownOpen ? 'open' : ''}">
-                            <img @click=${this.toggleDropdown} src=${this.user.photo} alt="user-photo" class="nav-desktop__photo">
+                        <button 
+                            @click=${this.toggleDropdown} 
+                            class="nav-desktop__link ${this.dropdownOpen ? 'open' : ''}"
+                            aria-haspopup="true" 
+                            aria-expanded=${this.dropdownOpen ? 'true' : 'false'}
+                        >
+                            <img 
+                                @click=${this.toggleDropdown} 
+                                src=${this.user.photo} 
+                                alt="${this.user.firstname} ${this.user.lastname} profile" 
+                                class="nav-desktop__photo"
+                            >
                         </button>
 
                         <div id="user-dropdown" class="user-dropdown ${this.dropdownOpen ? 'open' : ''}">
                             <div class="user-dropdown__info">
-                                <img src=${this.user.photo} alt="user-photo" class="user-dropdown__photo">
-                                <h3 class="user-dropdown__name">${`${this.user.firstname} ${this.user.lastname}`}</h3>
-                                <h4 class="user-dropdown__email">${this.user.email}</h4>
+                                <img 
+                                    src=${this.user.photo} 
+                                    alt="profile picture" 
+                                    class="user-dropdown__photo"
+                                    tabindex="0"
+                                >
+                                <span class="user-dropdown__name" tabindex="0">
+                                    ${`${this.user.firstname} ${this.user.lastname}`}
+                                </span>
+                                <span class="user-dropdown__email" tabindex="0">${this.user.email}</span>
                             </div>
                             <ul>
                                 ${this.accountMenus.map(item => html`
@@ -134,6 +157,14 @@ export default class AppBar extends LitElement {
                                 </li>
                                 `)}
                             </ul>
+                            <button
+                                @click=${this.toggleDropdown} 
+                                class="aria-close-popup-btn"
+                                aria-haspopup="true" 
+                                aria-expanded="${this.dropdownOpen ? 'true' : 'false'}"
+                            >
+                                Close ${this.user.firstname} ${this.user.lastname} Profile
+                            </button>
                         </div>
                     </li>
                 </ul>
@@ -141,9 +172,9 @@ export default class AppBar extends LitElement {
 
             <nav class="nav-drawer-mobile ${this.drawerOpen ? 'open' : ''}">
                 <div class="user-view">
-                    <img src=${this.user.photo} alt="user-photo" class="user-view__photo">
-                    <h3 class="user-view__name">${`${this.user.firstname} ${this.user.lastname}`}</h3>
-                    <h4 class="user-view__email">${this.user.email}</h4>
+                    <img src=${this.user.photo} alt="profile picture" class="user-view__photo" tabindex="0">
+                    <span class="user-view__name" tabindex="0">${`${this.user.firstname} ${this.user.lastname}`}</span>
+                    <span class="user-view__email" tabindex="0">${this.user.email}</span>
                 </div>
                 <ul class="nav-mobile">
                     ${this.navMenus.map(item => html`
@@ -166,6 +197,14 @@ export default class AppBar extends LitElement {
                     </li>
                     `)}
                 </ul>
+                <button
+                    @click=${this.toggleDrawer} 
+                    class="aria-close-popup-btn"
+                    aria-haspopup="true" 
+                    aria-expanded=${this.drawerOpen ? 'true' : 'false'}
+                >
+                    Close Navigation Drawer
+                </button>
             </nav>
         `;
     }
