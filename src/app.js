@@ -1,4 +1,7 @@
 import { LitElement, html, customElement} from 'lit-element';
+import './styles/app.scss';
+import './components';
+import './views';
 
 @customElement('main-app')
 export default class MainApp extends LitElement {

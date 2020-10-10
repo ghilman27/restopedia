@@ -1,6 +1,5 @@
 import data from '../../data/DATA.json';
 import { LitElement, html, customElement} from 'lit-element';
-import '../../components';
 import './home-view.scss';
 
 @customElement('home-view')
