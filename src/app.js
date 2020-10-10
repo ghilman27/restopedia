@@ -6,7 +6,7 @@ export default class MainApp extends LitElement {
         return html`
             <a href="#content" class="skip-link">Skip to content</a>
             <header>
-                <app-bar></app-bar>
+                <app-shell></app-shell>
             </header>
             <main>
                 <home-view></home-view>

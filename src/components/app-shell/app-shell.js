@@ -1,8 +1,8 @@
 import { LitElement, html, customElement, property} from 'lit-element';
-import './app-bar.scss';
-import './app-bar_responsive.scss';
+import './app-shell.scss';
+import './app-shell_responsive.scss';
 
-@customElement('app-bar')
+@customElement('app-shell')
 export default class AppBar extends LitElement {
     @property({type: Boolean})
     drawerOpen = false;

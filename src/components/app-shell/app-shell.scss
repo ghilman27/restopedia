@@ -1,7 +1,7 @@
 @import '../../styles/config';
 @import '../../styles/helpers';
 
-app-bar {
+app-shell {
     @include flex-center-vertical(row);
     @include full-width;
     @include transition-ease;
