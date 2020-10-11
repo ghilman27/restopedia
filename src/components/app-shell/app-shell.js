@@ -1,14 +1,17 @@
 import { LitElement, html, customElement, property} from 'lit-element';
-import './app-bar.scss';
-import './app-bar_responsive.scss';
+import './app-shell.scss';
+import './app-shell_responsive.scss';
 
-@customElement('app-bar')
-export default class AppBar extends LitElement {
+@customElement('app-shell')
+export default class AppShell extends LitElement {
     @property({type: Boolean})
     drawerOpen = false;
 
     @property({type: Boolean})
     dropdownOpen = false;
+
+    @property({type: Boolean})
+    positionTop = true;
 
     @property({type: String})
     logoName = 'restopedia';
@@ -61,42 +64,33 @@ export default class AppBar extends LitElement {
         window.addEventListener('resize', this.handleResize);
     }
 
+    disconnectedCallback() {
+        document.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+
     handleResize = () => {
         this.dropdownOpen = false;
         this.drawerOpen = false;
-        if (!window.pageYOffset) this.classList.remove('open');
     }
 
     handleScroll = () => {
-        window.pageYOffset || this.drawerOpen || this.dropdownOpen
-            ? this.classList.add('open')
-            : this.classList.remove('open');
+        this.positionTop = !window.pageYOffset
     }
 
     toggleDrawer() {
-        if (this.drawerOpen) {
-            this.drawerOpen = false;
-            if (!window.pageYOffset) this.classList.remove('open');
-        } else {
-            this.drawerOpen = true;
-            this.classList.add('open');
-        }
+        this.drawerOpen = !this.drawerOpen
     }
 
     toggleDropdown(e) {
         e.preventDefault();
         e.stopPropagation();
-        if (this.dropdownOpen) {
-            this.dropdownOpen = false;
-            if (!window.pageYOffset) this.classList.remove('open');
-        } else {
-            this.dropdownOpen = true;
-            this.classList.add('open');
-        }
+        this.dropdownOpen = !this.dropdownOpen
     }
 
     render() {
         return html`
+        <div class="wrapper ${this.drawerOpen || this.dropdownOpen || !this.positionTop ? "open" : ""}">
             <a href="#!" aria-label="app-logo" class="app-logo">${this.logoName}</a>
             <button 
                 class="menu-btn" 
@@ -149,8 +143,8 @@ export default class AppBar extends LitElement {
                             </div>
                             <ul>
                                 ${this.accountMenus.map(item => html`
-                                <li class="nav-mobile__item">
-                                    <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
+                                <li class="user-dropdown__item">
+                                    <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="user-dropdown__link">
                                         <i class=${item.icon}></i>
                                         <span>${item.name}</span>
                                     </a>
@@ -206,6 +200,7 @@ export default class AppBar extends LitElement {
                     Close Navigation Drawer
                 </button>
             </nav>
+        </div>
         `;
     }
 

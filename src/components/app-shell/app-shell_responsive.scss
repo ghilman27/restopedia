@@ -1,6 +1,6 @@
 @import '../../styles/config';
 
-app-bar {
+app-shell {
     .menu-btn {
         @include responsive-min($large) {
             display: none;

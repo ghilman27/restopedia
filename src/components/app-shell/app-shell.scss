@@ -1,17 +1,27 @@
 @import '../../styles/config';
 @import '../../styles/helpers';
 
-app-bar {
-    @include flex-center-vertical(row);
-    @include full-width;
-    @include transition-ease;
-    position: fixed;
-    z-index: 2;
-    top: 0;
-    left: 0;
-    height: $app-bar-height;
-    background: transparent;
-    justify-content: space-between;
+app-shell {
+    .wrapper {
+        @include flex-center-vertical(row);
+        @include full-width;
+        @include transition-ease;
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        height: $app-bar-height;
+        background: transparent;
+        justify-content: space-between;
+
+        &.open {
+            background: $color-app-bar-background;
+            box-shadow: 
+                0 2px 2px 0 rgba($black,0.14), 
+                0 3px 1px -2px rgba($black,0.12), 
+                0 1px 5px 0 rgba($black,0.2);
+        }
+    }
 
     .aria-close-popup-btn {
         position: absolute;
@@ -25,14 +35,6 @@ app-bar {
         &:focus {
             opacity: 1;
         }
-    }
-
-    &.open {
-        background: $color-app-bar-background;
-        box-shadow: 
-            0 2px 2px 0 rgba($black,0.14), 
-            0 3px 1px -2px rgba($black,0.12), 
-            0 1px 5px 0 rgba($black,0.2);
     }
 
     .app-logo {
@@ -236,6 +238,28 @@ app-bar {
         &.open {
             opacity: 1; // needed in order for transition to work
             visibility: visible;
+        }
+
+        &__item {
+            @include full-width;
+            list-style-type: none;
+        }
+
+        &__link {
+            @include full-width;
+            display: grid;
+            grid-template-columns: 2.5rem auto;
+            align-items: center;
+            text-decoration: none;
+            text-transform: capitalize;
+            min-height: 44px;
+            padding: 0 2rem;
+            font-size: 1.125rem;
+            color: $color-text-dark;
+
+            &:hover {
+                background: $color-nav-menu-hover;
+            }
         }
 
         &__info {
