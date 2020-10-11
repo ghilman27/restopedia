@@ -64,6 +64,11 @@ export default class AppShell extends LitElement {
         window.addEventListener('resize', this.handleResize);
     }
 
+    disconnectedCallback() {
+        document.removeEventListener('scroll', this.handleScroll);
+        window.removeEventListener('resize', this.handleResize);
+    }
+
     handleResize = () => {
         this.dropdownOpen = false;
         this.drawerOpen = false;
