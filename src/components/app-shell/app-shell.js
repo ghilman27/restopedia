@@ -138,8 +138,8 @@ export default class AppShell extends LitElement {
                             </div>
                             <ul>
                                 ${this.accountMenus.map(item => html`
-                                <li class="nav-mobile__item">
-                                    <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
+                                <li class="user-dropdown__item">
+                                    <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="user-dropdown__link">
                                         <i class=${item.icon}></i>
                                         <span>${item.name}</span>
                                     </a>

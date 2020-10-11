@@ -240,6 +240,28 @@ app-shell {
             visibility: visible;
         }
 
+        &__item {
+            @include full-width;
+            list-style-type: none;
+        }
+
+        &__link {
+            @include full-width;
+            display: grid;
+            grid-template-columns: 2.5rem auto;
+            align-items: center;
+            text-decoration: none;
+            text-transform: capitalize;
+            min-height: 44px;
+            padding: 0 2rem;
+            font-size: 1.125rem;
+            color: $color-text-dark;
+
+            &:hover {
+                background: $color-nav-menu-hover;
+            }
+        }
+
         &__info {
             @include flex-center-vertical(column);
             padding: 2rem;
