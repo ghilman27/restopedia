@@ -32,12 +32,12 @@ class RestaurantAPI {
         return restaurants;
     }
 
-    static postReview = async ({restaurantId, restaurantName, review}) => {
+    static postReview = async ({restaurantId, reviewerName, review}) => {
         const headers = {
             ...DEFAULT_POST_HEADERS,
             body: {
                 id: restaurantId,
-                name: restaurantName,
+                name: reviewerName,
                 review: review
             }
         };
