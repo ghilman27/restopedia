@@ -2,50 +2,75 @@
 @import "../../styles/config";
 
 hero-element {
-    @include flex-center(column);
-    @include full-width;
-    padding: 3.5rem 1.5rem;
-    background: 
-        linear-gradient(
-            to right,
-            $color-hero-shadow,
-            $color-hero-shadow
-        ),
-        url("/images/heros/hero-image_2.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-    .hero__placeholder {
-        @include center-text;
-        color: $color-hero-text;
-    }
-    
-    .hero__greeting {
-        font-weight: 300;
-        margin-bottom: 0.25rem;
-        font-size: 1.125rem;
-    }
-    
-    .hero__desc {
-        font-weight: 300;
-        margin-bottom: 1rem;
-        font-size: 1.125rem;
-    }
-    
-    .hero__name {
-        font-weight: 500;
-        margin-bottom: 1rem;
-        font-size: 2rem;
-    }
-    
-    .hero__search-bar {
-        @include margin-horizontal-centering;
+    .hero {
+        @include flex-center(column);
         @include full-width;
-        background: #ffffff;
-        border-radius: 2rem;
-        height: 3rem;
-        max-width: 700px;
+        @include full-height;
+        padding: 3.5rem 1.5rem;
+        position: relative;
+
+        &__background {
+            @include full-width;
+            @include full-height;
+            position: absolute;
+    
+            img {
+                @include full-width;
+                @include full-height;
+                position: absolute;
+                top: 0;
+                left: 0;
+                object-fit: cover;
+                object-position: center;
+            }
+    
+            &::after {
+                @include full-height;
+                @include full-width;
+                content: '';
+                position: absolute;
+                background-image: 
+                linear-gradient(
+                    to right,
+                    $color-hero-shadow,
+                    $color-hero-shadow
+                );
+            }
+
+        }
+
+        &__placeholder {
+            @include center-text;
+            color: $color-hero-text;
+            position: relative;
+        }
+
+        &__greeting {
+            font-weight: 300;
+            margin-bottom: 0.25rem;
+            font-size: 1.125rem;
+        }
+        
+        &__desc {
+            font-weight: 300;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        
+        &__name {
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        
+        &__search-bar {
+            @include margin-horizontal-centering;
+            @include full-width;
+            background: #ffffff;
+            border-radius: 2rem;
+            height: 3rem;
+            max-width: 700px;
+        }
     }
 }
 
