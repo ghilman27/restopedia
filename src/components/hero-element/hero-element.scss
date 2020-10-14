@@ -2,6 +2,8 @@
 @import "../../styles/config";
 
 hero-element {
+    color: $color-hero-text;
+
     .hero {
         @include flex-center(column);
         @include full-width;
@@ -13,6 +15,7 @@ hero-element {
             @include full-width;
             @include full-height;
             position: absolute;
+            z-index: -2;
     
             img {
                 @include full-width;
@@ -39,28 +42,9 @@ hero-element {
 
         }
 
-        &__placeholder {
-            @include center-text;
-            color: $color-hero-text;
-            position: relative;
-        }
-
-        &__greeting {
-            font-weight: 300;
-            margin-bottom: 0.25rem;
-            font-size: 1.125rem;
-        }
-        
-        &__desc {
-            font-weight: 300;
-            margin-bottom: 1rem;
-            font-size: 1.125rem;
-        }
-        
-        &__name {
-            font-weight: 500;
-            margin-bottom: 1rem;
-            font-size: 2rem;
+        &__heading {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
         }
         
         &__search-bar {
@@ -70,6 +54,22 @@ hero-element {
             border-radius: 2rem;
             height: 3rem;
             max-width: 700px;
+        }
+    }
+
+    .greeting {
+        @include center-text;
+
+        &__say {
+            font-weight: 300;
+            margin-bottom: 0.25rem;
+            font-size: 1.25rem;
+        }
+
+        &__name {
+            font-weight: 500;
+            margin-bottom: 1rem;
+            font-size: 2rem;
         }
     }
 }

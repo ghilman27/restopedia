@@ -20,7 +20,11 @@ export default class HomeView extends LitElement {
     render() {
         if (this.data.length) {
             return html`
-                <hero-element id="jumbotron"></hero-element>
+                <hero-element 
+                    id="jumbotron" 
+                    .greeting=${true} 
+                    .heading=${"Let's explore foods near you"}
+                ></hero-element>
                 <div id="content" class="content">
                     <section id="recommended" class="section">
                         <resto-list 

@@ -1,15 +1,9 @@
 @import "../../styles/config";
 
 hero-element {
-    .hero__greeting, .hero__desc {
+    .hero__headings {
         @include responsive-min($medium) {
-            font-size: 1.375rem;
-        }
-    }
-
-    .hero__name {
-        @include responsive-min($medium) {
-            font-size: 2.375rem;
+            font-size: 2rem;
         }
     }
 }

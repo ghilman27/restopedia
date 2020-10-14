@@ -7,17 +7,29 @@ export default class HeroElement extends LitElement {
     @property({type: String})
     imageSrc = "/images/heros/hero-image_2.jpg";
 
+    @property({type: Boolean})
+    greeting = false;
+
+    @property({type: String})
+    heading = "";
+
     render() {
         return html`
         <div class="hero">
             <div class="hero__background">
-                <img src="${this.imageSrc}"/>
+                <img src="${this.restaurant ? this.restaurant.imageUrl : this.imageSrc}"/>
             </div>
-            <div class="hero__placeholder">
-                <p class="hero__greeting" tabindex="0">Good night,</p>
-                <p class="hero__name" tabindex="0">Ghilman</p>
-                <h1 class="hero__desc" tabindex="0">Let's explore good foods near you!</h1>
+
+            ${this.greeting ? html`
+            <div class="greeting">
+                <p class="greeting__say" tabindex="0">Good night,</p>
+                <p class="greeting__name" tabindex="0">Ghilman</p>
             </div>
+            ` : ''}
+
+            <h1 class="hero__heading" tabindex="0">
+                ${this.heading}
+            </h1>
         </div>
         `;
     }
