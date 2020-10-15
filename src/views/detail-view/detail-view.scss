@@ -1,0 +1,219 @@
+@import '../../styles/config';
+@import '../../styles/helpers';
+
+detail-view {
+    display: grid;
+    grid-template-rows: 50vh auto;
+
+    .divider {
+        border: 0.5px solid $color-rating-star;
+        margin: 0.5rem 0;
+    }
+    
+    .content {
+        margin-top: -3rem;
+        background: $color-page-background;
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        padding: 3rem 7.5%;
+        position: relative;
+    }
+
+    .wrapper {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: grid;
+        gap: 3rem;
+    }
+
+    .detail {
+        &__restaurant-name {
+            font-size: 1.75rem;
+            max-width: 1280px;
+            margin: 0 auto;
+            margin-bottom: 0.5rem;
+        }
+
+        &__address {
+            margin: 0.25rem 0;
+            color: $color-text-subtle;
+            text-transform: capitalize;
+        }
+
+        &__categories {
+            margin: 1rem 0;
+        }
+
+        &__category {
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            background: $color-rating-star;
+        }
+
+        &__desc {
+            margin-top: 2rem;
+            overflow: hidden;
+            line-height: 1.6;
+            text-overflow: ellipsis; 
+            -webkit-box-orient: vertical; 
+            display: -webkit-box; 
+            
+            &.clipped {
+                -webkit-line-clamp: 3;
+            }
+        }
+
+        &__toggle-desc {
+            border: none;
+            background: none;
+            color: $dark-orange;
+            font-size: 1rem;
+            padding: 0.25rem 0;
+            min-height: 44px;
+            cursor: pointer;
+        }
+    }
+
+    .menu {
+        &__wrapper {
+            display: grid;
+            gap: 1rem;
+        }
+
+        &__category {
+            text-align: center;
+            text-transform: capitalize;
+            padding: 1.5rem;
+        }
+
+        &__item {
+            display: block;
+            min-height: 44px;
+            padding: 0.75rem 0;
+            text-align: center;
+            list-style-type: none;
+            text-transform: capitalize;
+            border-bottom: 0.5px solid $color-text-subtle;
+        }
+    }
+
+    .reviews {
+        &__form {
+            margin: 2rem 0;
+        }
+
+        &__main {
+            display: grid;
+            gap: 2rem;
+        }
+
+        &__title {
+            margin-top: 1rem;
+        }
+    }
+
+    .review {
+        display: grid;
+        grid-template-columns: 3.5rem auto;
+
+        &__author-thumbnail {
+            i {
+                font-size: 2.5rem;
+            }
+        }
+
+        &__main {
+            display: grid;
+            gap: 1rem;
+        }
+
+        &__header {
+            @include flex-center-vertical(row);
+        }
+        
+        &__author {
+            font-weight: 700;
+            margin-right: 0.5rem;
+        }
+
+        &__date {
+            font-size: 0.875rem;
+            color: $color-text-subtle;
+        }
+
+    }
+
+    .form {
+        &__footer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0.5rem 0;
+        }
+
+        &__main {
+            width: 100%;
+        }
+
+        &__review, &__name {
+            flex: 1;
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 1rem;
+            border: none;  
+            width: 100%;
+            border-bottom: 1px solid $color-text-subtle;
+        }
+
+        &__name {
+            height: 44px;
+        }
+
+        &__review {
+            resize: none;
+        }
+
+        &__buttons {
+            display: flex;
+            flex: 1;
+            flex-direction: row;
+            justify-content: flex-end;
+            padding: 0.5rem 0;
+        }
+
+        &__button {
+            margin-left: 0.5rem;
+            padding: 0.5rem 1rem;
+            min-height: 44px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.875rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+
+            
+            &.submit {
+                background: $color-rating-star;
+                &:hover {
+                    background: 
+                        lighten(
+                            $color:$color-rating-star, 
+                            $amount: 5%
+                        );
+                }
+            }
+
+            &.cancel {
+                background: $color-rating-base;
+                &:hover {
+                    background: 
+                        lighten(
+                            $color:$color-rating-base, 
+                            $amount: 5%
+                        );
+                }
+            }
+        }
+    }
+}
