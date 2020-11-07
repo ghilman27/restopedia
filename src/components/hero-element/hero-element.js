@@ -27,9 +27,11 @@ export default class HeroElement extends LitElement {
             </div>
             ` : ''}
 
-            <h1 class="hero__heading" tabindex="0">
+            ${this.heading && html`
+			<h1 class="hero__heading" tabindex="0">
                 ${this.heading}
-            </h1>
+            </h1>`
+            }
         </div>
         `;
     }

@@ -1,5 +1,4 @@
-import data from '../../data/DATA.json';
-import API from '../../data/restaurantAPI';
+import API from 'src/data/api';
 import { LitElement, html, customElement, property} from 'lit-element';
 import './home-view.scss';
 

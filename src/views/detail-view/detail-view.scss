@@ -171,6 +171,7 @@ detail-view {
 
         &__review {
             resize: none;
+            overflow: hidden;
         }
 
         &__buttons {

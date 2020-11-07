@@ -6,6 +6,11 @@ const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
 module.exports = {
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, 'src'),
+    },
+  },
   entry: path.resolve(__dirname, 'src/index.js'),
   devtool: 'source-map',
   output: {

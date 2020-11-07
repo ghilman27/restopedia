@@ -12,7 +12,8 @@ export default class MainApp extends LitElement {
                 <app-shell></app-shell>
             </header>
             <main>
-                <home-view></home-view>
+                <!-- <home-view></home-view> -->
+                <detail-view .restaurantId=${'s1knt6za9kkfw1e867'}></detail-view>
             </main>
             <footer>
                 <footer-bar></footer-bar>

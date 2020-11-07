@@ -1,4 +1,4 @@
-import API from '../../data/restaurantAPI';
+import API from 'src/data/api';
 import { LitElement, html, customElement, property} from 'lit-element';
 import './detail-view.scss';
 import './detail-view_responsive.scss';
@@ -14,6 +14,8 @@ export default class DetailView extends LitElement {
     @property({type: Object})
     state = {
         descExtended: false,
+        customerReview: '',
+        customerName: '',
     }
 
     connectedCallback() {
@@ -21,22 +23,74 @@ export default class DetailView extends LitElement {
         if (this.restaurantId) {
             this.fetchData();
         } else {
-            throw new SyntaxError("restaurantId cannot be undefined");
+            const error = new SyntaxError("restaurantId cannot be undefined");
+            this.handleFetchError(error);
         }
     }
 
     async fetchData() {
-        this.restaurant = await API.getRestaurant(this.restaurantId);
-        this.restaurant.imageUrl = `${process.env.API_URL_IMAGE_LARGE}/${this.restaurant.pictureId}`;
+        try {
+            this.restaurant = await API.getRestaurant(this.restaurantId);
+            this.restaurant.imageUrl = `${process.env.API_URL_IMAGE_LARGE}/${this.restaurant.pictureId}`;
+        } catch (error) {
+            this.handleSubmitError(error);
+        }
     }
 
     toggleDesc() {
-        this.state = {...this.state, descExtended: !this.state.descExtended}
+        this.state = {
+            ...this.state, 
+            descExtended: !this.state.descExtended
+        };
     }
 
-    autoHeightInput(e) {
-        e.target.style.height = "auto";
-        e.target.style.height = e.target.scrollHeight + "px";
+    handleChange(event) {
+        this.state = {
+            ...this.state, 
+            [event.target.name]: event.target.value
+        };
+    }
+
+    resetForm() {
+        this.state = {
+            ...this.state,
+            customerReview: '',
+            customerName: '',
+        }
+    }
+
+    async updateReviews() {
+        const updatedReviews = await API.postReview({
+            id: this.restaurantId,
+            name: this.state.customerName,
+            review: this.state.customerReview,
+        });
+        this.restaurant.customerReviews = updatedReviews;
+    }
+
+    async handleSubmit(event) {
+        event.preventDefault();
+        try {
+            await this.updateReviews();
+            this.resetForm();
+        } catch (error) {
+            this.handleSubmitError(error);
+        }
+    }
+
+    handleSubmitError(error) {
+        // TODO
+        console.log(error);
+    }
+
+    handleFetchError(error) {
+        // TODO
+        console.log(error);
+    }
+
+    adjustInputHeight(event) {
+        event.target.style.height = "auto";
+        event.target.style.height = event.target.scrollHeight + "px";
     }
 
     render() {
@@ -52,8 +106,8 @@ export default class DetailView extends LitElement {
                     <div class="wrapper">
 
                         <section id="detail" class="detail">
-                            <h1 class="detail__restaurant-name">${this.restaurant.name}</h1>
-                            <p class="detail__address">
+                            <h1 class="detail__restaurant-name" tabindex="0">${this.restaurant.name}</h1>
+                            <p class="detail__address" tabindex="0">
                                 ${`${this.restaurant.address}, ${this.restaurant.city}`}
                             </p>
                             <rating-bar 
@@ -64,10 +118,10 @@ export default class DetailView extends LitElement {
                             ></rating-bar>
                             <div class="detail__categories">
                                 ${this.restaurant.categories.map((category) => html`
-                                <span class="detail__category">${category.name}</span>
+                                <span class="detail__category" tabindex="0" aria-label="category ${category.name}">${category.name}</span>
                                 `)}
                             </div>
-                            <p class="detail__desc ${this.state.descExtended ? "" : "clipped"}">
+                            <p class="detail__desc ${this.state.descExtended ? "" : "clipped"}" tabindex="0">
                                 ${this.restaurant.description}
                             </p>
                             <button class="detail__toggle-desc" @click=${this.toggleDesc}>
@@ -76,15 +130,15 @@ export default class DetailView extends LitElement {
                         </section>
     
                         <section id="menu" class="menu">
-                            <h2 class="menu__title">Menu</h2>
+                            <h2 class="menu__title" tabindex="0">Menu</h2>
                             <hr class="divider"/>
                             <div class="menu__wrapper">
                             ${Object.entries(this.restaurant.menus).map(([category, menus]) => html`
                                 <div class="menu__list">
-                                    <h3 class="menu__category">${category}</h3>
+                                    <h3 class="menu__category" tabindex="0">${category}</h3>
                                     <ul class="menu__items">
                                     ${menus.map(menu => html`
-                                        <li class="menu__item">${menu.name}</li>
+                                        <li class="menu__item" tabindex="0">${menu.name}</li>
                                     `)}
                                     </ul>
                                 </div>
@@ -93,30 +147,35 @@ export default class DetailView extends LitElement {
                         </section>
     
                         <section id="reviews" class="reviews">
-                            <h2 class="reviews__title">Reviews</h2>
+                            <h2 class="reviews__title" tabindex="0">Reviews</h2>
                             <hr class="divider"/>
 
                             <div class="reviews__form">
-                                <form class="form">
+                                <form class="form" @submit=${this.handleSubmit}>
                                     <div class="form__main">
                                         <textarea 
                                             class="form__review"
-                                            name="form-review" 
-                                            id="form-review"
-                                            @input=${this.autoHeightInput}
-                                            placeholder="Add a public review ..."
+                                            name="customerReview" 
+                                            id="customerReview"
+                                            placeholder="Add a public review"
+                                            aria-label="Add a public review"
                                             rows="1"
                                             required
+                                            .value=${this.state.customerReview}
+                                            @input=${this.adjustInputHeight}
+                                            @change=${this.handleChange}
                                         ></textarea>
                                     </div>
                                     <div class="form__footer">
                                         <input 
                                             class="form__name"
-                                            name="form-name" 
-                                            id="form-name"
+                                            name="customerName" 
+                                            id="customerName"
                                             type="text" 
                                             placeholder="Name (required)"
                                             required
+                                            .value=${this.state.customerName}
+                                            @change=${this.handleChange}
                                         >
                                         <div class="form__buttons">
                                             <button class="form__button cancel">
@@ -131,18 +190,18 @@ export default class DetailView extends LitElement {
                             </div>
 
                             <div class="reviews__main">
-                            ${this.restaurant.consumerReviews.map((consumerReview) => html`
+                            ${this.restaurant.customerReviews.map(({ name, date, review }) => html`
                                 <div class="review">
                                     <div class="review__author-thumbnail">
-                                        <i title="author-thumbnail" class="fa fa-user-circle"></i>
+                                        <i title="${name}-profile-picture" class="fa fa-user-circle" tabindex="0"></i>
                                     </div>
                                     <div class="review__main">
                                         <div class="review__header">
-                                            <span class="review__author">${consumerReview.name}</span>
-                                            <span class="review__date">${consumerReview.date}</span>
+                                            <span class="review__author" tabindex="0">${name}</span>
+                                            <span class="review__date" tabindex="0">${date}</span>
                                         </div>
                                         <div class="review__body">
-                                            <span class="review__content">${consumerReview.review}</span>
+                                            <span class="review__content" tabindex="0">${review}</span>
                                         </div>
                                     </div>
                                 </div>
