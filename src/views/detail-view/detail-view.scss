@@ -30,8 +30,34 @@ detail-view {
         &__restaurant-name {
             font-size: 1.75rem;
             max-width: 1280px;
-            margin: 0 auto;
+            margin-right: 1.5rem;
             margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        &__fav-button {
+            @include flex-center(row);
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            height: 44px;
+            width: 44px;
+            border: none;
+            background: $color-rating-star;
+            
+            i.favorite {
+                color: $white;
+            }
+    
+            @include responsive-min($medium) {
+                position: relative;
+                display: inline;
+                bottom: initial;
+                right: initial;
+            }
         }
 
         &__address {

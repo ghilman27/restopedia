@@ -1,4 +1,5 @@
 import API from 'src/data/api';
+import RestaurantDB from 'src/data/db';
 import { LitElement, html, customElement, property} from 'lit-element';
 import './detail-view.scss';
 import './detail-view_responsive.scss';
@@ -10,6 +11,9 @@ export default class DetailView extends LitElement {
 
     @property({type: Object})
     restaurant;
+
+    @property({type: Boolean})
+    favorite = false;
 
     @property({type: Object})
     state = {
@@ -79,16 +83,6 @@ export default class DetailView extends LitElement {
         }
     }
 
-    handleSubmitError(error) {
-        // TODO
-        console.log(error);
-    }
-
-    handleFetchError(error) {
-        // TODO
-        console.log(error);
-    }
-
     adjustInputHeight(event) {
         event.target.style.height = "auto";
         event.target.style.height = event.target.scrollHeight + "px";
@@ -109,6 +103,38 @@ export default class DetailView extends LitElement {
         }
     }
 
+    async handleFavorite() {
+        // TODO Change Redux State
+        this.toggleFavorite();
+        try {
+            this.favorite
+                ? RestaurantDB.saveRestaurant(this.restaurant)
+                : RestaurantDB.deleteRestaurant(this.restaurantId)
+        } catch (error) {
+            this.toggleFavorite();
+            this.handleFavoriteError();
+        }
+    }
+
+    toggleFavorite() {
+        this.favorite = !this.favorite;
+    }
+
+    handleSubmitError(error) {
+        // TODO
+        console.log(error);
+    }
+
+    handleFetchError(error) {
+        // TODO
+        console.log(error);
+    }
+
+    handleFavoriteError(error) {
+        // TODO
+        console.log(error);
+    }
+
     render() {
         if (this.restaurant) {
             return html`
@@ -123,6 +149,9 @@ export default class DetailView extends LitElement {
 
                         <section id="detail" class="detail">
                             <h1 class="detail__restaurant-name" tabindex="0">${this.restaurant.name}</h1>
+                            <button class="detail__fav-button" @click=${this.handleFavorite} tabindex="0" aria-label="favorite">
+                                <i class=${this.favorite ? "fas fa-heart favorite" : "far fa-heart"}></i>
+                            </button>
                             <p class="detail__address" tabindex="0">
                                 ${`${this.restaurant.address}, ${this.restaurant.city}`}
                             </p>
