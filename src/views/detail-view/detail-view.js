@@ -16,6 +16,7 @@ export default class DetailView extends LitElement {
         descExtended: false,
         customerReview: '',
         customerName: '',
+        formOpened: false,
     }
 
     connectedCallback() {
@@ -93,6 +94,21 @@ export default class DetailView extends LitElement {
         event.target.style.height = event.target.scrollHeight + "px";
     }
 
+    handleFormFocus() {
+        this.state = {
+            ...this.state,
+            formOpened: true,
+        }
+    }
+
+    handleCancel(event) {
+        event.preventDefault();
+        this.state = {
+            ...this.state,
+            formOpened: false,
+        }
+    }
+
     render() {
         if (this.restaurant) {
             return html`
@@ -164,8 +180,10 @@ export default class DetailView extends LitElement {
                                             .value=${this.state.customerReview}
                                             @input=${this.adjustInputHeight}
                                             @change=${this.handleChange}
+                                            @focus=${this.handleFormFocus}
                                         ></textarea>
                                     </div>
+                                    ${this.state.formOpened ? html`
                                     <div class="form__footer">
                                         <input 
                                             class="form__name"
@@ -178,7 +196,7 @@ export default class DetailView extends LitElement {
                                             @change=${this.handleChange}
                                         >
                                         <div class="form__buttons">
-                                            <button class="form__button cancel">
+                                            <button class="form__button cancel" @click=${this.handleCancel}>
                                                 Cancel
                                             </button>
                                             <button class="form__button submit" id="submit-review" type="submit">
@@ -186,6 +204,7 @@ export default class DetailView extends LitElement {
                                             </button>
                                         </div>
                                     </div>
+                                    ` : ''}
                                 </form>
                             </div>
 

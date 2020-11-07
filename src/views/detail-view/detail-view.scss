@@ -162,7 +162,12 @@ detail-view {
             padding: 1rem;
             border: none;  
             width: 100%;
-            border-bottom: 1px solid $color-text-subtle;
+            outline: none;
+            border-bottom: 1px solid $medium-grey;
+
+            &:focus {
+                border-bottom: 2px solid $black;
+            }
         }
 
         &__name {
