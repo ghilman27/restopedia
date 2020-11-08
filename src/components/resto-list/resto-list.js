@@ -9,6 +9,7 @@ export default class RestoList extends LitElement {
         return {
             title: {type: String},
             data: {type: Object},
+            deleteButton: {type: Boolean},
         }
     }
 
@@ -17,7 +18,7 @@ export default class RestoList extends LitElement {
             <h2 class="list-title" tabindex="0">${this.title}</h2>
             <div class="list-items">
                 ${this.data.map(resto => html`
-                    <resto-card .data="${resto}"></resto-card>
+                    <resto-card .data="${resto}" .deleteButton=${this.deleteButton}></resto-card>
                 `)}
             </div>
         `;

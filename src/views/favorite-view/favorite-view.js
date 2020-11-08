@@ -38,7 +38,8 @@ export default class FavoriteView extends LitElement {
                     <section id="recommended" class="section">
                         <resto-list 
                             .title=${"Favorite Restaurants"}
-                            .data=${this.restaurants}
+							.data=${this.restaurants}
+							.deleteButton=${true}
                         >
                         </resto-list>
                     </section>
