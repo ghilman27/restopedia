@@ -47,6 +47,11 @@
   "dependencies": {
     "idb": "^5.0.7",
     "lit-element": "^2.4.0",
+    "lodash": "^4.17.20",
+    "pwa-helpers": "^0.9.1",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.5"
   }
 }

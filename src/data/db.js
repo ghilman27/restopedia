@@ -1,4 +1,5 @@
 import { openDB } from 'idb';
+import { IdbWriteError, IdbGetError } from 'src/utils/errors';
 
 const DATABASE_NAME = process.env.DATABASE_NAME;
 const DATABASE_VERSION = process.env.DATABASE_VERSION;
@@ -15,7 +16,7 @@ class FavoriteRestaurantIdb {
 		try {
 			return (await db).get(OBJECT_STORE_NAME, id);
 		} catch (error) {
-			return error;
+			throw new IdbGetError(error);
 		}
 	}
 
@@ -23,7 +24,7 @@ class FavoriteRestaurantIdb {
 		try {
 			return (await db).getAll(OBJECT_STORE_NAME);
 		} catch (error) {
-			return error;
+			throw new IdbGetError(error);
 		}
 	}
 
@@ -31,7 +32,7 @@ class FavoriteRestaurantIdb {
 		try {
 			return (await db).put(OBJECT_STORE_NAME, restaurant);
 		} catch (error) {
-			return error;
+			throw new IdbWriteError(error);
 		}
 	}
 
@@ -39,7 +40,7 @@ class FavoriteRestaurantIdb {
 		try {
 			return (await db).delete(OBJECT_STORE_NAME, id);
 		} catch (error) {
-			return error;
+			throw new IdbWriteError(error);
 		}
 	}
 
@@ -47,7 +48,7 @@ class FavoriteRestaurantIdb {
 		try {
 			return (await db).getAllKeys(OBJECT_STORE_NAME);
 		} catch (error) {
-			return error;
+			throw new IdbGetError(error);
 		}
 	}
 
@@ -55,7 +56,7 @@ class FavoriteRestaurantIdb {
 		try {
 			return (await db).clear(OBJECT_STORE_NAME);
 		} catch (error) {
-			return error;
+			throw new IdbWriteError(error);
 		}
 	}
 }

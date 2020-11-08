@@ -1,11 +1,14 @@
 import API from 'src/data/api';
 import RestaurantDB from 'src/data/db';
 import { LitElement, html, customElement, property} from 'lit-element';
+import { connect } from 'pwa-helpers';
+import store from 'src/store';
+import { saveRestaurant, deleteRestaurant } from 'src/store/restaurant/actions';
 import './detail-view.scss';
 import './detail-view_responsive.scss';
 
 @customElement('detail-view')
-export default class DetailView extends LitElement {
+export default class DetailView extends connect(store)(LitElement) {
     @property({type: String})
     restaurantId;
 
@@ -21,6 +24,10 @@ export default class DetailView extends LitElement {
         customerReview: '',
         customerName: '',
         formOpened: false,
+    }
+
+    stateChanged(state) {
+        this.favorite = state.restaurant[this.restaurantId];
     }
 
     connectedCallback() {
@@ -104,20 +111,13 @@ export default class DetailView extends LitElement {
     }
 
     async handleFavorite() {
-        // TODO Change Redux State
-        this.toggleFavorite();
         try {
             this.favorite
-                ? await RestaurantDB.saveRestaurant(this.restaurant)
-                : await RestaurantDB.deleteRestaurant(this.restaurantId)
+                ? await store.dispatch(deleteRestaurant(this.restaurantId))
+                : await store.dispatch(saveRestaurant(this.restaurant))
         } catch (error) {
-            this.toggleFavorite();
-            this.handleFavoriteError();
+            this.handleFavoriteError(error);
         }
-    }
-
-    toggleFavorite() {
-        this.favorite = !this.favorite;
     }
 
     handleSubmitError(error) {
