@@ -49,6 +49,9 @@ export default class RestoCard extends LitElement {
                     <rating-bar rating=${this.data.rating} tabindex="0" aria-label="rating ${this.data.rating}"></rating-bar>
                     <p class="resto__description" tabindex="0">${this.data.description}</p>
                 </div>
+                <!-- <button class="card__delete-btn">
+                    <i class="fas fa-trash-alt"></i>
+                </button> -->
             </a>
         `;
     }

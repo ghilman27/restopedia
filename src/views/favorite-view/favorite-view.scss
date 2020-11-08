@@ -1,0 +1,18 @@
+@import '../../styles/config';
+
+favorite-view {
+    display: grid;
+    grid-template-rows: 50vh auto;
+    
+    .content {
+        margin-top: -3rem;
+        background: $color-page-background;
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        padding: 3rem 1.5rem;
+        position: relative;
+
+        display: grid;
+        gap: 3rem;
+    }
+}

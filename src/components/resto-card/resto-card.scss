@@ -7,6 +7,7 @@ resto-card {
     
     .card {
         @include display-block;
+        // position: relative;
         text-decoration: none;
         color: unset;
         border-radius: 1rem;
@@ -17,6 +18,28 @@ resto-card {
         &.hover {
             transform: scale(1.02);
         }
+
+        // &__delete-btn {
+        //     position: absolute;
+        //     top: 0;
+        //     right: 0;
+        //     font-size: 1rem;
+        //     width: 44px;
+        //     height: 44px;
+        //     border: none;
+        //     border-top-right-radius: 1rem;
+        //     border-bottom-left-radius: 0.5rem;
+        //     background: $light-orange;
+        //     cursor: pointer;
+
+        //     &:hover {
+        //         background: 
+        //             lighten(
+        //                 $color:$light-orange, 
+        //                 $amount: 5%
+        //             );
+        //     }
+        // }
     }
     
     .card__media {
