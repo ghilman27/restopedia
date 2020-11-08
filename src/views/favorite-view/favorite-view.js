@@ -1,9 +1,11 @@
-import FavoriteRestaurantIdb from 'src/data/db';
 import { LitElement, html, customElement, property } from 'lit-element';
+import _ from 'lodash'
+import { connect } from 'pwa-helpers';
+import store from 'src/store';
 import './favorite-view.scss';
 
 @customElement('favorite-view')
-export default class FavoriteView extends LitElement {
+export default class FavoriteView extends connect(store)(LitElement) {
 	@property({ type: Array })
 	restaurants = [];
 
@@ -12,18 +14,10 @@ export default class FavoriteView extends LitElement {
 
 	connectedCallback() {
 		super.connectedCallback();
-		this.getRestaurants();
 	}
 
-	async getRestaurants() {
-		this.requested = false;
-		try {
-			this.restaurants = await FavoriteRestaurantIdb.getRestaurants();
-			this.requested = true;
-		} catch (error) {
-			// TODO ERROR HANDLING
-			console.log(error);
-		}
+	stateChanged(state) {
+		this.restaurants = _.values(state.restaurant);
 	}
 
 	render() {
@@ -45,12 +39,9 @@ export default class FavoriteView extends LitElement {
                     </section>
                 </div>
 			`;
-		} else if (this.requested) {
-			// TODO
-			return html`You have no favorite restaurants`;
 		} else {
 			// TODO
-			return html`Loading`;
+			return html`You have no favorite restaurants`;
 		}
 	}
 

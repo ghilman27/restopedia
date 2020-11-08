@@ -9,7 +9,7 @@ export const saveRestaurant = (restaurant) => {
 			await RestaurantDB.saveRestaurant(restaurant);
 			dispatch({
 				type: SAVE_RESTAURANT,
-				payload: restaurant.id,
+				payload: restaurant,
 			});
 		} catch (error) {
 			throw new IdbWriteError(error);
@@ -36,11 +36,13 @@ export const setSavedRestaurants = () => {
 		const currentState = getState().restaurant;
 		try {
 			if (_.isEmpty(currentState)) {
-				const restaurantIds = await RestaurantDB.getRestaurantIds();
+				const restaurants = await RestaurantDB.getRestaurants();
 				let savedRestaurants;
-				if (restaurantIds.length) {
+				if (restaurants.length) {
 					savedRestaurants = Object.assign(
-						...restaurantIds.map((id) => ({ [id]: true }))
+						...restaurants.map((restaurant) => ({
+							[restaurant.id]: restaurant,
+						}))
 					);
 				}
 				dispatch({

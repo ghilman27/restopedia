@@ -27,7 +27,7 @@ export default class RestoCard extends connect(store)(LitElement) {
     }
 
     stateChanged(state) {
-        this.isFavorite = state.restaurant[this.data.id];
+        this.isFavorite = state.restaurant[this.data.id] ? true : false;
     }
 
     async handleDelete(event) {
@@ -85,6 +85,7 @@ export default class RestoCard extends connect(store)(LitElement) {
                 <button 
                     class="card__btn ${this.deleteButton ? "delete" : "disabled"}"
                     @click=${this.handleDelete}
+                    .disabled=${this.deleteButton ? false : true}
                 >
                     <i class=${this.deleteButton ? "fas fa-trash-alt" : "fas fa-heart"}></i>
                 </button>

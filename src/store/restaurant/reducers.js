@@ -9,13 +9,11 @@ export default (state = initialState, action) => {
         case SAVE_RESTAURANT:
             return {
                 ...state,
-                [payload]: true,
+                [payload.id]: payload,
             };
         case DELETE_RESTAURANT:
-            return {
-                ...state,
-                [payload]: false,
-            }
+            delete state[payload];
+            return state;
         case SET_INITIAL_STATE:
             return {
                 ...state,

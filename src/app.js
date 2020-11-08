@@ -20,9 +20,9 @@ export default class MainApp extends connect(store)(LitElement) {
                 <app-shell></app-shell>
             </header>
             <main>
-                <!-- <home-view></home-view> -->
-                <!-- <detail-view .restaurantId=${'w9pga3s2tubkfw1e867'}></detail-view> -->
+                <home-view></home-view>
                 <favorite-view></favorite-view>
+                <detail-view .restaurantId=${'w9pga3s2tubkfw1e867'}></detail-view>
             </main>
             <footer>
                 <footer-bar></footer-bar>

@@ -27,7 +27,7 @@ export default class DetailView extends connect(store)(LitElement) {
     }
 
     stateChanged(state) {
-        this.favorite = state.restaurant[this.restaurantId];
+        this.favorite = state.restaurant[this.restaurantId] ? true : false;
     }
 
     connectedCallback() {
