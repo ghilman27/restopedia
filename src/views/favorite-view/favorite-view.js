@@ -7,13 +7,23 @@ export default class FavoriteView extends LitElement {
 	@property({ type: Array })
 	restaurants = [];
 
+	@property({type: Boolean})
+	requested = false;
+
 	connectedCallback() {
 		super.connectedCallback();
 		this.getRestaurants();
 	}
 
 	async getRestaurants() {
-		this.restaurants = await FavoriteRestaurantIdb.getRestaurants();
+		this.requested = false;
+		try {
+			this.restaurants = await FavoriteRestaurantIdb.getRestaurants();
+			this.requested = true;
+		} catch (error) {
+			// TODO ERROR HANDLING
+			console.log(error);
+		}
 	}
 
 	render() {
@@ -34,8 +44,12 @@ export default class FavoriteView extends LitElement {
                     </section>
                 </div>
 			`;
-		} else {
+		} else if (this.requested) {
+			// TODO
 			return html`You have no favorite restaurants`;
+		} else {
+			// TODO
+			return html`Loading`;
 		}
 	}
 
