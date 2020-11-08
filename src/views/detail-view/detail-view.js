@@ -108,8 +108,8 @@ export default class DetailView extends LitElement {
         this.toggleFavorite();
         try {
             this.favorite
-                ? RestaurantDB.saveRestaurant(this.restaurant)
-                : RestaurantDB.deleteRestaurant(this.restaurantId)
+                ? await RestaurantDB.saveRestaurant(this.restaurant)
+                : await RestaurantDB.deleteRestaurant(this.restaurantId)
         } catch (error) {
             this.toggleFavorite();
             this.handleFavoriteError();

@@ -42,6 +42,22 @@ class FavoriteRestaurantIdb {
 			return error;
 		}
 	}
+
+	static async getRestaurantIds() {
+		try {
+			return (await db).getAllKeys(OBJECT_STORE_NAME);
+		} catch (error) {
+			return error;
+		}
+	}
+
+	static async clearDb() {
+		try {
+			return (await db).clear(OBJECT_STORE_NAME);
+		} catch (error) {
+			return error;
+		}
+	}
 }
 
 export default FavoriteRestaurantIdb;
