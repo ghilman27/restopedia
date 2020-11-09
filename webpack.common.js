@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssnanoWebpackPlugin = require('cssnano-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -71,6 +72,10 @@ module.exports = {
     new CssnanoWebpackPlugin({
       sourceMap: true
     }),
-    new Dotenv()
+    new Dotenv(),
+    new WorkboxPlugin.InjectManifest({
+      swSrc: "./src/worker.js",
+      swDest: "worker.js",
+  }),
   ],
 };
