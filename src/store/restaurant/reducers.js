@@ -12,8 +12,9 @@ export default (state = initialState, action) => {
                 [payload.id]: payload,
             };
         case DELETE_RESTAURANT:
-            delete state[payload];
-            return state;
+            const restaurants = {...state};
+            delete restaurants[payload];
+            return restaurants;
         case SET_INITIAL_STATE:
             return {
                 ...state,

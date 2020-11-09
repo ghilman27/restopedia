@@ -1,8 +1,12 @@
 import 'regenerator-runtime'; /* for async await transpile */
-import './app';
+import store from './store';
+import { setSavedRestaurants } from './store/restaurant/actions';
+import initRoutes from 'src/routes';
+import './styles/app.scss';
+import './components';
+import './views';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const body = document.querySelector('body');
-    const app = document.createElement('main-app');
-    body.appendChild(app);
+    store.dispatch(setSavedRestaurants());
+    initRoutes();
 })

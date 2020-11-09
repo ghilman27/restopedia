@@ -28,12 +28,12 @@ export default class AppShell extends LitElement {
     navMenus = [
         {
             name: 'home',
-            link: '#',
+            link: '/',
             icon: 'fa fa-home',
         },
         {
             name: 'favourite',
-            link: '#!',
+            link: '/favorites',
             icon: 'fa fa-heart',
         },
         {

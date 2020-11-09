@@ -9,6 +9,9 @@ import './detail-view_responsive.scss';
 
 @customElement('detail-view')
 export default class DetailView extends connect(store)(LitElement) {
+    @property({type: Object})
+    location;
+
     @property({type: String})
     restaurantId;
 
@@ -27,11 +30,13 @@ export default class DetailView extends connect(store)(LitElement) {
     }
 
     stateChanged(state) {
+        this.restaurantId = this.location.params.id;
         this.favorite = state.restaurant[this.restaurantId] ? true : false;
     }
 
     connectedCallback() {
         super.connectedCallback()
+        this.restaurantId = this.location.params.id;
         if (this.restaurantId) {
             this.fetchData();
         } else {

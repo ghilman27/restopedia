@@ -17,8 +17,11 @@ resto-card {
         &.hover {
             transform: scale(1.02);
         }
+    }
 
-        &__btn {
+    .indicator {
+        &__delete-btn, &__favorite {
+            @include flex-center(row);
             position: absolute;
             top: 0;
             right: 0;
@@ -29,18 +32,20 @@ resto-card {
             border-top-right-radius: 1rem;
             border-bottom-left-radius: 0.5rem;
             background: $light-orange;
-            cursor: pointer;
+        }
 
-            &.delete:hover {
+        &__favorite {
+            color: $white;
+        }
+
+        &__delete-btn {
+            cursor: pointer;
+            &:hover {
                 background: 
                     lighten(
                         $color:$light-orange, 
                         $amount: 5%
                     );
-            }
-
-            &.disabled {
-                color: $white;
             }
         }
     }

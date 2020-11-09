@@ -31,7 +31,6 @@ export default class RestoCard extends connect(store)(LitElement) {
     }
 
     async handleDelete(event) {
-        event.stopPropagation();
         event.preventDefault();
         try {
             await store.dispatch(deleteRestaurant(this.data.id))
@@ -81,14 +80,17 @@ export default class RestoCard extends connect(store)(LitElement) {
                     <rating-bar rating=${this.data.rating} tabindex="0" aria-label="rating ${rating}"></rating-bar>
                     <p class="resto__description" tabindex="0">${description}</p>
                 </div>
-                ${this.isFavorite ? html`
-                <button 
-                    class="card__btn ${this.deleteButton ? "delete" : "disabled"}"
-                    @click=${this.handleDelete}
-                    .disabled=${this.deleteButton ? false : true}
-                >
-                    <i class=${this.deleteButton ? "fas fa-trash-alt" : "fas fa-heart"}></i>
-                </button>
+                ${this.deleteButton ? html`
+                    <button 
+                        class="indicator__delete-btn"
+                        @click=${this.handleDelete}
+                    >
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                ` : this.isFavorite ? html`
+                    <div class="indicator__favorite">
+                        <i class="fas fa-heart"></i>
+                    </div>
                 ` : ''}
             </a>
         `;
