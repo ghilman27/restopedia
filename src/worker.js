@@ -1,7 +1,7 @@
 import 'regenerator-runtime';
 import { skipWaiting, clientsClaim } from 'workbox-core';
 import { precacheAndRoute } from 'workbox-precaching';
-import { registerRoute } from 'workbox-routing';
+import { registerRoute as workboxRegisterRoute } from 'workbox-routing';
 import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies';
 import { CacheableResponsePlugin } from 'workbox-cacheable-response';
 import { ExpirationPlugin } from 'workbox-expiration';
@@ -9,35 +9,49 @@ import { ExpirationPlugin } from 'workbox-expiration';
 skipWaiting();
 clientsClaim();
 
-registerRoute(
-	({ url }) => url.origin === process.env.API_BASE_URL,
-	new StaleWhileRevalidate({
-		cacheName: process.env.CACHE_NAME,
-	})
-);
+const registerRoute = ({
+	origin,
+	name,
+	strategy = StaleWhileRevalidate,
+	plugins = [
+		new CacheableResponsePlugin({
+			statuses: [200],
+		}),
+		new ExpirationPlugin({
+			maxAgeSeconds: 60 * 60 * 24 * 365,
+			maxEntries: 30,
+		}),
+	],
+}) => {
+	workboxRegisterRoute(
+		({ url }) => url.origin === origin,
+		new strategy({
+			cacheName: name,
+			plugins,
+		})
+	);
+};
 
-registerRoute(
-	({ url }) => url.origin === process.env.GOOGLE_FONTS_URL,
-	new StaleWhileRevalidate({
-		cacheName: process.env.GOOGLE_FONTS_CACHE_NAME,
-	})
-);
+registerRoute({
+	origin: process.env.API_BASE_URL,
+	name: process.env.CACHE_NAME,
+});
 
-registerRoute(
-	({ url }) => url.origin === process.env.GOOGLE_WEBFONTS_URL,
-	new CacheFirst({
-		cacheName: process.env.GOOGLE_WEBFONTS_CACHE_NAME,
-		plugins: [
-			new CacheableResponsePlugin({
-				statuses: [0, 200],
-			}),
-			new ExpirationPlugin({
-				maxAgeSeconds: 60 * 60 * 24 * 365,
-				maxEntries: 30,
-			}),
-		],
-	})
-);
+registerRoute({
+	origin: process.env.API_IMAGE_BASE_URL,
+	name: process.env.IMAGE_CACHE_NAME,
+});
+
+registerRoute({
+	origin: process.env.GOOGLE_FONTS_URL,
+	name: process.env.GOOGLE_FONTS_CACHE_NAME,
+});
+
+registerRoute({
+	origin: process.env.GOOGLE_WEBFONTS_URL,
+	name: process.env.GOOGLE_WEBFONTS_CACHE_NAME,
+	strategy: CacheFirst,
+});
 
 // self.addEventListener('push', function (event) {
 // 	let body;

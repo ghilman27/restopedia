@@ -125,6 +125,7 @@ export default class AppShell extends LitElement {
                                 src=${this.user.photo} 
                                 alt="${this.user.firstname} ${this.user.lastname} profile" 
                                 class="nav-desktop__photo"
+                                crossorigin="anonymous"
                             >
                         </button>
 
@@ -135,6 +136,7 @@ export default class AppShell extends LitElement {
                                     alt="profile picture" 
                                     class="user-dropdown__photo"
                                     tabindex="0"
+                                    crossorigin="anonymous"
                                 >
                                 <span class="user-dropdown__name" tabindex="0">
                                     ${`${this.user.firstname} ${this.user.lastname}`}
@@ -166,7 +168,7 @@ export default class AppShell extends LitElement {
 
             <nav class="nav-drawer-mobile ${this.drawerOpen ? 'open' : ''}">
                 <div class="user-view">
-                    <img src=${this.user.photo} alt="profile picture" class="user-view__photo" tabindex="0">
+                    <img src=${this.user.photo} alt="profile picture" class="user-view__photo" tabindex="0" crossorigin="anonymous">
                     <span class="user-view__name" tabindex="0">${`${this.user.firstname} ${this.user.lastname}`}</span>
                     <span class="user-view__email" tabindex="0">${this.user.email}</span>
                 </div>

@@ -23,7 +23,7 @@ class RestaurantAPI {
 			if (error) throw new HttpGetError(message);
 			return restaurants;
 		} catch (error) {
-			return error;
+			throw error;
 		}
 	};
 
@@ -34,7 +34,7 @@ class RestaurantAPI {
 			if (error) throw new HttpGetError(message);
 			return restaurant;
 		} catch (error) {
-			return error;
+			throw error;
 		}
 	};
 
@@ -45,7 +45,7 @@ class RestaurantAPI {
 			if (error) throw new HttpGetError(message);
 			return restaurants;
 		} catch (error) {
-			return error;
+			throw error;
 		}
 	};
 
@@ -61,7 +61,7 @@ class RestaurantAPI {
 			if (error) throw new HttpPostError(message);
             return customerReviews;
 		} catch (error) {
-			return error;
+			throw error;
 		}
 	};
 }

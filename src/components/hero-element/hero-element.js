@@ -17,7 +17,7 @@ export default class HeroElement extends LitElement {
         return html`
         <div class="hero">
             <div class="hero__background">
-                <img src="${this.imageSrc}"/>
+                <img src="${this.imageSrc}" crossorigin="anonymous"/>
             </div>
 
             ${this.greeting ? html`
