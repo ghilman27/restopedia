@@ -64,6 +64,10 @@ module.exports = {
           from: path.resolve(__dirname, 'src/public/'),
           to: path.resolve(__dirname, 'dist/'),
         },
+        { 
+          from: "./src/manifest.json",
+          to: "./manifest.json"
+        },
       ],
     }),
     new MiniCssExtractPlugin({

@@ -1,0 +1,41 @@
+{
+    "name": "Restopedia",
+    "short_name": "Restopedia",
+    "description": "Find your favorite restaurants!",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#cf7500",
+    "theme_color": "#cf7500",
+    "icons": [
+        {
+            "src": "./images/icon128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./images/icon180.png",
+            "sizes": "180x180",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./images/icon192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./images/icon270.png",
+            "sizes": "270x270",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "./images/icon512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
