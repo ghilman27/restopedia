@@ -21,3 +21,7 @@ body {
 .skip-link:focus {
     top: 0;
 }
+
+main {
+    min-height: calc(100vh - 10vh);
+}

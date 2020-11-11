@@ -1,5 +1,5 @@
 import { LitElement, html, customElement, property } from 'lit-element';
-import _ from 'lodash'
+import _ from 'lodash';
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import './favorite-view.scss';
@@ -9,7 +9,7 @@ export default class FavoriteView extends connect(store)(LitElement) {
 	@property({ type: Array })
 	restaurants = [];
 
-	@property({type: Boolean})
+	@property({ type: Boolean })
 	requested = false;
 
 	connectedCallback() {
@@ -28,20 +28,31 @@ export default class FavoriteView extends connect(store)(LitElement) {
 					.greeting=${true}
 					.heading=${"Let's dive to your favorites!"}
 				></hero-element>
-                <div id="content" class="content">
-                    <section id="recommended" class="section">
-                        <resto-list 
-                            .title=${"Favorite Restaurants"}
+				<div id="content" class="content">
+					<section id="recommended" class="section">
+						<resto-list
+							.title=${'Favorite Restaurants'}
 							.data=${this.restaurants}
 							.deleteButton=${true}
-                        >
-                        </resto-list>
-                    </section>
-                </div>
+						>
+						</resto-list>
+					</section>
+				</div>
 			`;
 		} else {
-			// TODO
-			return html`You have no favorite restaurants`;
+			return html`
+				<hero-element
+					id="jumbotron"
+					.greeting=${true}
+					.heading=${"Let's dive to your favorites!"}
+				></hero-element>
+				<div id="content" class="content">
+					<div class="not-found">
+						<i class="far fa-file"></i>
+						<p>You have no favorite restaurants</p>
+					</div>
+				</div>
+			`;
 		}
 	}
 

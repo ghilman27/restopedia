@@ -1,4 +1,5 @@
 @import '../../styles/config';
+@import '../../styles/helpers';
 
 favorite-view {
     display: grid;
@@ -14,5 +15,17 @@ favorite-view {
 
         display: grid;
         gap: 3rem;
+    }
+    
+    .not-found {
+        @include flex-center(column);
+        color: $medium-black;
+        font-size: 1.5rem;
+        
+        i {
+            font-size: 7rem;
+            margin-bottom: 2rem;
+            color: $medium-grey;
+        }
     }
 }
