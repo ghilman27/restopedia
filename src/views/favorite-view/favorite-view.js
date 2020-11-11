@@ -23,25 +23,6 @@ export default class FavoriteView extends connect(store)(LitElement) {
     }
 
     render() {
-        if (this.restaurants.length) {
-            return html`
-                <hero-element
-                    id="jumbotron"
-                    .greeting=${true}
-                    .heading=${"Let's dive to your favorites!"}
-                ></hero-element>
-                <div id="content" class="content">
-                    <section id="recommended" class="section">
-                        <resto-list
-                            .title=${'Favorite Restaurants'}
-                            .data=${this.restaurants}
-                            .deleteButton=${true}
-                        >
-                        </resto-list>
-                    </section>
-                </div>
-            `;
-        }
         return html`
             <hero-element
                 id="jumbotron"
@@ -49,12 +30,23 @@ export default class FavoriteView extends connect(store)(LitElement) {
                 .heading=${"Let's dive to your favorites!"}
             ></hero-element>
             <div id="content" class="content">
+                ${this.restaurants.length ? html`
+                <section id="recommended" class="section">
+                    <resto-list
+                        .title=${'Favorite Restaurants'}
+                        .data=${this.restaurants}
+                        .deleteButton=${true}
+                    >
+                    </resto-list>
+                </section>
+                ` : html`
                 <div class="not-found">
                     <i class="far fa-file"></i>
                     <p tabindex="0">You have no favorite restaurants</p>
                 </div>
+                `}
             </div>
-        `;
+            `;
     }
 
     createRenderRoot() {
