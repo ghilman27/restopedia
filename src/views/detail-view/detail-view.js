@@ -1,6 +1,7 @@
 import API from 'src/data/api';
-import RestaurantDB from 'src/data/db';
-import { LitElement, html, customElement, property} from 'lit-element';
+import {
+    LitElement, html, customElement, property,
+} from 'lit-element';
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import { saveRestaurant, deleteRestaurant } from 'src/store/restaurant/actions';
@@ -9,19 +10,19 @@ import './detail-view_responsive.scss';
 
 @customElement('detail-view')
 export default class DetailView extends connect(store)(LitElement) {
-    @property({type: Object})
+    @property({ type: Object })
     location;
 
-    @property({type: String})
+    @property({ type: String })
     restaurantId;
 
-    @property({type: Object})
+    @property({ type: Object })
     restaurant;
 
-    @property({type: Boolean})
+    @property({ type: Boolean })
     favorite = false;
 
-    @property({type: Object})
+    @property({ type: Object })
     state = {
         descExtended: false,
         customerReview: '',
@@ -31,16 +32,16 @@ export default class DetailView extends connect(store)(LitElement) {
 
     stateChanged(state) {
         this.restaurantId = this.location.params.id;
-        this.favorite = state.restaurant[this.restaurantId] ? true : false;
+        this.favorite = !!state.restaurant[this.restaurantId];
     }
 
     connectedCallback() {
-        super.connectedCallback()
+        super.connectedCallback();
         this.restaurantId = this.location.params.id;
         if (this.restaurantId) {
             this.fetchData();
         } else {
-            const error = new SyntaxError("restaurantId cannot be undefined");
+            const error = new SyntaxError('restaurantId cannot be undefined');
             this.handleFetchError(error);
         }
     }
@@ -56,15 +57,15 @@ export default class DetailView extends connect(store)(LitElement) {
 
     toggleDesc() {
         this.state = {
-            ...this.state, 
-            descExtended: !this.state.descExtended
+            ...this.state,
+            descExtended: !this.state.descExtended,
         };
     }
 
     handleChange(event) {
         this.state = {
-            ...this.state, 
-            [event.target.name]: event.target.value
+            ...this.state,
+            [event.target.name]: event.target.value,
         };
     }
 
@@ -73,7 +74,7 @@ export default class DetailView extends connect(store)(LitElement) {
             ...this.state,
             customerReview: '',
             customerName: '',
-        }
+        };
     }
 
     async updateReviews() {
@@ -95,16 +96,19 @@ export default class DetailView extends connect(store)(LitElement) {
         }
     }
 
+    // eslint-disable-next-line class-methods-use-this
     adjustInputHeight(event) {
-        event.target.style.height = "auto";
-        event.target.style.height = event.target.scrollHeight + "px";
+        // eslint-disable-next-line no-param-reassign
+        event.target.style.height = 'auto';
+        // eslint-disable-next-line no-param-reassign
+        event.target.style.height = `${event.target.scrollHeight}px`;
     }
 
     handleFormFocus() {
         this.state = {
             ...this.state,
             formOpened: true,
-        }
+        };
     }
 
     handleCancel(event) {
@@ -112,33 +116,39 @@ export default class DetailView extends connect(store)(LitElement) {
         this.state = {
             ...this.state,
             formOpened: false,
-        }
+        };
     }
 
     async handleFavorite() {
         try {
+            // eslint-disable-next-line no-unused-expressions
             this.favorite
                 ? await store.dispatch(deleteRestaurant(this.restaurantId))
-                : await store.dispatch(saveRestaurant(this.restaurant))
+                : await store.dispatch(saveRestaurant(this.restaurant));
         } catch (error) {
             this.handleFavoriteError(error);
         }
     }
 
+    /* eslint-disable no-console */
+    // eslint-disable-next-line class-methods-use-this
     handleSubmitError(error) {
         // TODO
         console.log(error);
     }
 
+    // eslint-disable-next-line class-methods-use-this
     handleFetchError(error) {
         // TODO
         console.log(error);
     }
 
+    // eslint-disable-next-line class-methods-use-this
     handleFavoriteError(error) {
         // TODO
         console.log(error);
     }
+    /* eslint-enable no-console */
 
     render() {
         if (this.restaurant) {
@@ -155,7 +165,7 @@ export default class DetailView extends connect(store)(LitElement) {
                         <section id="detail" class="detail">
                             <h1 class="detail__restaurant-name" tabindex="0">${this.restaurant.name}</h1>
                             <button class="detail__fav-button" @click=${this.handleFavorite} tabindex="0" aria-label="favorite">
-                                <i class=${this.favorite ? "fas fa-heart favorite" : "far fa-heart"}></i>
+                                <i class=${this.favorite ? 'fas fa-heart favorite' : 'far fa-heart'}></i>
                             </button>
                             <p class="detail__address" tabindex="0">
                                 ${`${this.restaurant.address}, ${this.restaurant.city}`}
@@ -171,11 +181,11 @@ export default class DetailView extends connect(store)(LitElement) {
                                 <span class="detail__category" tabindex="0" aria-label="category ${category.name}">${category.name}</span>
                                 `)}
                             </div>
-                            <p class="detail__desc ${this.state.descExtended ? "" : "clipped"}" tabindex="0">
+                            <p class="detail__desc ${this.state.descExtended ? '' : 'clipped'}" tabindex="0">
                                 ${this.restaurant.description}
                             </p>
                             <button class="detail__toggle-desc" @click=${this.toggleDesc}>
-                                ${this.state.descExtended ? "Read Less" : "Read More"}
+                                ${this.state.descExtended ? 'Read Less' : 'Read More'}
                             </button>
                         </section>
     
@@ -187,7 +197,7 @@ export default class DetailView extends connect(store)(LitElement) {
                                 <div class="menu__list">
                                     <h3 class="menu__category" tabindex="0">${category}</h3>
                                     <ul class="menu__items">
-                                    ${menus.map(menu => html`
+                                    ${menus.map((menu) => html`
                                         <li class="menu__item" tabindex="0">${menu.name}</li>
                                     `)}
                                     </ul>
@@ -265,12 +275,11 @@ export default class DetailView extends connect(store)(LitElement) {
                     </div>
                 </div>
             `;
-        } else {
-            return html`loading`;
         }
+        return html`loading`;
     }
 
     createRenderRoot() {
         return this;
-    };
+    }
 }

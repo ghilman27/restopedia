@@ -1,22 +1,24 @@
-import { LitElement, html, customElement, property} from 'lit-element';
+import {
+    LitElement, html, customElement, property,
+} from 'lit-element';
 import './app-shell.scss';
 import './app-shell_responsive.scss';
 
 @customElement('app-shell')
 export default class AppShell extends LitElement {
-    @property({type: Boolean})
+    @property({ type: Boolean })
     drawerOpen = false;
 
-    @property({type: Boolean})
+    @property({ type: Boolean })
     dropdownOpen = false;
 
-    @property({type: Boolean})
+    @property({ type: Boolean })
     positionTop = true;
 
-    @property({type: String})
+    @property({ type: String })
     logoName = 'restopedia';
 
-    @property({type: Object})
+    @property({ type: Object })
     user = {
         firstname: 'Ghilman',
         lastname: 'Al Fatih',
@@ -24,7 +26,7 @@ export default class AppShell extends LitElement {
         photo: '/images/profile.jpg',
     }
 
-    @property({type: Array})
+    @property({ type: Array })
     navMenus = [
         {
             name: 'home',
@@ -44,7 +46,7 @@ export default class AppShell extends LitElement {
         },
     ];
 
-    @property({type: Array})
+    @property({ type: Array })
     accountMenus = [
         {
             name: 'settings',
@@ -75,22 +77,22 @@ export default class AppShell extends LitElement {
     }
 
     handleScroll = () => {
-        this.positionTop = !window.pageYOffset
+        this.positionTop = !window.pageYOffset;
     }
 
     toggleDrawer() {
-        this.drawerOpen = !this.drawerOpen
+        this.drawerOpen = !this.drawerOpen;
     }
 
     toggleDropdown(e) {
         e.preventDefault();
         e.stopPropagation();
-        this.dropdownOpen = !this.dropdownOpen
+        this.dropdownOpen = !this.dropdownOpen;
     }
 
     render() {
         return html`
-        <div class="wrapper ${this.drawerOpen || this.dropdownOpen || !this.positionTop ? "open" : ""}">
+        <div class="wrapper ${this.drawerOpen || this.dropdownOpen || !this.positionTop ? 'open' : ''}">
             <a href="#!" aria-label="app-logo" class="app-logo">${this.logoName}</a>
             <button 
                 class="menu-btn" 
@@ -104,9 +106,9 @@ export default class AppShell extends LitElement {
 
             <nav class="nav-drawer-desktop">
                 <ul class="nav-desktop">
-                    ${this.navMenus.map(item => html`
+                    ${this.navMenus.map((item) => html`
                     <li class="nav-desktop__item">
-                        <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-desktop__link">
+                        <a href=${item.link} target=${item.newtab ? '_blank' : '_self'} class="nav-desktop__link">
                             <i class=${item.icon}></i>
                             <span>${item.name}</span>
                         </a>
@@ -144,9 +146,9 @@ export default class AppShell extends LitElement {
                                 <span class="user-dropdown__email" tabindex="0">${this.user.email}</span>
                             </div>
                             <ul>
-                                ${this.accountMenus.map(item => html`
+                                ${this.accountMenus.map((item) => html`
                                 <li class="user-dropdown__item">
-                                    <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="user-dropdown__link">
+                                    <a href=${item.link} target=${item.newtab ? '_blank' : '_self'} class="user-dropdown__link">
                                         <i class=${item.icon}></i>
                                         <span>${item.name}</span>
                                     </a>
@@ -173,9 +175,9 @@ export default class AppShell extends LitElement {
                     <span class="user-view__email" tabindex="0">${this.user.email}</span>
                 </div>
                 <ul class="nav-mobile">
-                    ${this.navMenus.map(item => html`
+                    ${this.navMenus.map((item) => html`
                     <li class="nav-mobile__item">
-                        <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
+                        <a href=${item.link} target=${item.newtab ? '_blank' : '_self'} class="nav-mobile__link">
                             <i class="${item.icon}"></i>
                             <span>${item.name}</span>
                         </a>
@@ -184,9 +186,9 @@ export default class AppShell extends LitElement {
 
                     <hr class="divider">
 
-                    ${this.accountMenus.map(item => html`
+                    ${this.accountMenus.map((item) => html`
                     <li class="nav-mobile__item">
-                        <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
+                        <a href=${item.link} target=${item.newtab ? '_blank' : '_self'} class="nav-mobile__link">
                             <i class=${item.icon}></i>
                             <span>${item.name}</span>
                         </a>
@@ -206,5 +208,5 @@ export default class AppShell extends LitElement {
         `;
     }
 
-    createRenderRoot() {return this};
+    createRenderRoot() { return this; }
 }

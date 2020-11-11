@@ -1,17 +1,19 @@
-import { LitElement, html, customElement, property} from 'lit-element';
+import {
+    LitElement, html, customElement, property,
+} from 'lit-element';
 import './hero-element.scss';
 import './hero-element_responsive.scss';
 
 @customElement('hero-element')
 export default class HeroElement extends LitElement {
-    @property({type: String})
-    imageSrc = "/images/heros/hero-image_2.jpg";
+    @property({ type: String })
+    imageSrc = '/images/heros/hero-image_2.jpg';
 
-    @property({type: Boolean})
+    @property({ type: Boolean })
     greeting = false;
 
-    @property({type: String})
-    heading = "";
+    @property({ type: String })
+    heading = '';
 
     render() {
         return html`
@@ -28,13 +30,12 @@ export default class HeroElement extends LitElement {
             ` : ''}
 
             ${this.heading && html`
-			<h1 class="hero__heading" tabindex="0">
+            <h1 class="hero__heading" tabindex="0">
                 ${this.heading}
-            </h1>`
-            }
+            </h1>`}
         </div>
         `;
     }
 
-    createRenderRoot() {return this};
+    createRenderRoot() { return this; }
 }

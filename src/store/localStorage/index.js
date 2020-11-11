@@ -4,16 +4,18 @@ export const loadFromLocalStorage = () => {
         if (serializedState === null) return undefined;
         return JSON.parse(serializedState);
     } catch (err) {
+        /* eslint-disable no-console */
         console.log(err);
         return undefined;
     }
 };
 
 export const saveToLocalStorage = (state) => {
-	try {
+    try {
         const serializedState = JSON.stringify(state);
         localStorage.setItem('state', serializedState);
-	} catch (err) {
+    } catch (err) {
         console.log(err);
-	}
+        /* eslint-enable no-console */
+    }
 };

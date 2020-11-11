@@ -8,13 +8,13 @@ import { loadFromLocalStorage, saveToLocalStorage } from './localStorage';
 const persistedState = loadFromLocalStorage();
 
 const rootReducers = combineReducers({
-	restaurant: restaurantReducers,
+    restaurant: restaurantReducers,
 });
 
 const store = createStore(
-	rootReducers,
-	persistedState,
-	composeWithDevTools(applyMiddleware(thunk))
+    rootReducers,
+    persistedState,
+    composeWithDevTools(applyMiddleware(thunk)),
 );
 
 store.subscribe(() => saveToLocalStorage(store.getState()));

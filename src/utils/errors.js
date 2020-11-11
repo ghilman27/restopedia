@@ -1,27 +1,28 @@
+// eslint-disable-next-line max-classes-per-file
 export class HttpGetError extends Error {
     constructor(message) {
         super(message);
-        this.name = "HttpGetError";
+        this.name = 'HttpGetError';
     }
 }
 
 export class HttpPostError extends Error {
     constructor(message) {
         super(message);
-        this.name = "HttpGetError";
+        this.name = 'HttpGetError';
     }
 }
 
 export class IdbWriteError extends Error {
     constructor(message) {
         super(message);
-        this.name = "IdbPutError";
+        this.name = 'IdbPutError';
     }
 }
 
 export class IdbGetError extends Error {
     constructor(message) {
         super(message);
-        this.name = "IdbGetError";
+        this.name = 'IdbGetError';
     }
 }

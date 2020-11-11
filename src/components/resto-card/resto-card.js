@@ -1,4 +1,6 @@
-import { LitElement, html, customElement, property} from 'lit-element';
+import {
+    LitElement, html, customElement, property,
+} from 'lit-element';
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import { deleteRestaurant } from 'src/store/restaurant/actions';
@@ -8,16 +10,16 @@ const IMAGE_BASE_URL = process.env.API_URL_IMAGE_SMALL;
 
 @customElement('resto-card')
 export default class RestoCard extends connect(store)(LitElement) {
-    @property({type: Object})
+    @property({ type: Object })
     data;
 
-    @property({type: Boolean})
+    @property({ type: Boolean })
     onHover = false;
 
-    @property({type: Boolean})
+    @property({ type: Boolean })
     isFavorite = false;
 
-    @property({type: Boolean})
+    @property({ type: Boolean })
     deleteButton = false;
 
     handleHover(event) {
@@ -27,15 +29,17 @@ export default class RestoCard extends connect(store)(LitElement) {
     }
 
     stateChanged(state) {
-        this.isFavorite = state.restaurant[this.data.id] ? true : false;
+        this.isFavorite = state.restaurant[this.data.id];
     }
 
     async handleDelete(event) {
         event.preventDefault();
         try {
-            await store.dispatch(deleteRestaurant(this.data.id))
+            await store.dispatch(deleteRestaurant(this.data.id));
         } catch (error) {
+            /* eslint-disable no-console */
             console.log(error);
+            /* eslint-enable no-console */
         }
     }
 
@@ -47,14 +51,14 @@ export default class RestoCard extends connect(store)(LitElement) {
     }
 
     render() {
-        const { 
-            name, 
-            restaurantUrl, 
-            imageUrl, 
-            distance, 
-            city, 
-            rating, 
-            description 
+        const {
+            name,
+            restaurantUrl,
+            imageUrl,
+            distance,
+            city,
+            rating,
+            description,
         } = this.data;
 
         return html`
@@ -87,7 +91,8 @@ export default class RestoCard extends connect(store)(LitElement) {
                     >
                         <i class="fas fa-trash-alt"></i>
                     </button>
-                ` : this.isFavorite ? html`
+                ` : ''}
+                ${this.isFavorite && !this.deleteButton ? html`
                     <div class="indicator__favorite">
                         <i class="fas fa-heart"></i>
                     </div>
@@ -96,5 +101,5 @@ export default class RestoCard extends connect(store)(LitElement) {
         `;
     }
 
-    createRenderRoot() {return this};
+    createRenderRoot() { return this; }
 }

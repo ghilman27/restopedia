@@ -1,14 +1,16 @@
 import API from 'src/data/api';
-import { LitElement, html, customElement, property} from 'lit-element';
+import {
+    LitElement, html, customElement, property,
+} from 'lit-element';
 import './home-view.scss';
 
 @customElement('home-view')
 export default class HomeView extends LitElement {
-    @property({type: Array})
+    @property({ type: Array })
     data = [];
 
     connectedCallback() {
-        super.connectedCallback()
+        super.connectedCallback();
         this.fetchData();
     }
 
@@ -34,12 +36,11 @@ export default class HomeView extends LitElement {
                     </section>
                 </div>
             `;
-        } else {
-            return html`loading`;
         }
+        return html`loading`;
     }
 
     createRenderRoot() {
         return this;
-    };
+    }
 }

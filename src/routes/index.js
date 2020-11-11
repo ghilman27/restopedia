@@ -20,6 +20,6 @@ export default () => {
         {
             path: '(.*)',
             component: 'home-view',
-        }
-    ])
-}
+        },
+    ]);
+};
