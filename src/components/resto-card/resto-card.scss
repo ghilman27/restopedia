@@ -95,17 +95,6 @@ resto-card {
         position: relative;
     }
 
-    .resto__distance {
-        position: absolute;
-        right: 0.825rem;
-        top: -0.825rem;
-        padding: 0.37rem;
-        background: $color-rating-star;
-        border-radius: 10%;
-        font-size: 0.9rem;
-        font-weight: bold;
-    }
-
     .resto__title {
         margin: 0.25rem 0;
     }

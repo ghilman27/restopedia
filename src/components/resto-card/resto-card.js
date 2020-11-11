@@ -47,7 +47,6 @@ export default class RestoCard extends connect(store)(LitElement) {
         super.connectedCallback();
         this.data.imageUrl = `${IMAGE_BASE_URL}/${this.data.pictureId}`;
         this.data.restaurantUrl = `restaurant/${this.data.id}`;
-        this.data.distance = (Math.random() * 10).toFixed(2);
     }
 
     render() {
@@ -55,7 +54,6 @@ export default class RestoCard extends connect(store)(LitElement) {
             name,
             restaurantUrl,
             imageUrl,
-            distance,
             city,
             rating,
             description,
@@ -78,7 +76,6 @@ export default class RestoCard extends connect(store)(LitElement) {
                     </div>
                 </div>
                 <div class="card__content">
-                    <span class="resto__distance">${distance} km</span>
                     <h3 class="resto__title" tabindex="0">${name}</h3>
                     <p class="resto__city" tabindex="0">${city}</p>
                     <rating-bar rating=${this.data.rating} tabindex="0" aria-label="rating ${rating}"></rating-bar>
@@ -88,12 +85,13 @@ export default class RestoCard extends connect(store)(LitElement) {
                     <button 
                         class="indicator__delete-btn"
                         @click=${this.handleDelete}
+                        aria-label="delete restaurant ${name} from favorite"
                     >
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 ` : ''}
                 ${this.isFavorite && !this.deleteButton ? html`
-                    <div class="indicator__favorite">
+                    <div class="indicator__favorite" tabindex="0" aria-label="restaurant ${name} has been added to favorite">
                         <i class="fas fa-heart"></i>
                     </div>
                 ` : ''}
