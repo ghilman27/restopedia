@@ -31,6 +31,8 @@ app-shell {
         background-color: $color-app-bar-background;
         padding: 8px;
         color: $color-text-light;
+        min-width: 44px;
+        min-height: 44px;
 
         &:focus {
             opacity: 1;
