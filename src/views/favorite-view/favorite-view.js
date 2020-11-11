@@ -51,7 +51,7 @@ export default class FavoriteView extends connect(store)(LitElement) {
             <div id="content" class="content">
                 <div class="not-found">
                     <i class="far fa-file"></i>
-                    <p>You have no favorite restaurants</p>
+                    <p tabindex="0">You have no favorite restaurants</p>
                 </div>
             </div>
         `;
