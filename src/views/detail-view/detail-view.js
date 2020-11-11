@@ -276,7 +276,7 @@ export default class DetailView extends connect(store)(LitElement) {
                 </div>
             `;
         }
-        return html`loading`;
+        return html`<loading-indicator></loading-indicator>`;
     }
 
     createRenderRoot() {

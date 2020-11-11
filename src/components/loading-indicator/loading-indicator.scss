@@ -1,0 +1,44 @@
+@import '../../styles/helpers';
+@import '../../styles/config';
+
+loading-indicator {
+    .container {
+        @include flex-center(column);
+        position: fixed;
+        background: transparent;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid $light-orange;
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1rem;
+        animation: spin 2s linear infinite;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

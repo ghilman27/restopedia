@@ -37,7 +37,7 @@ export default class HomeView extends LitElement {
                 </div>
             `;
         }
-        return html`loading`;
+        return html`<loading-indicator></loading-indicator>`;
     }
 
     createRenderRoot() {
