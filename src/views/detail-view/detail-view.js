@@ -47,7 +47,7 @@ export default class DetailView extends connect(store)(LitElement) {
             this.restaurant = await API.getRestaurant(this.restaurantId);
             this.restaurant.imageUrl = `${process.env.API_URL_IMAGE_LARGE}/${this.restaurant.pictureId}`;
         } catch (error) {
-            this.handleError(error);
+            this.renderToast(error);
         }
     }
 
@@ -86,10 +86,10 @@ export default class DetailView extends connect(store)(LitElement) {
         event.preventDefault();
         try {
             await this.updateReviews();
-            renderToast({ message: 'Submit Review Success' });
+            this.renderToast({ message: 'Submit Review Success' });
             this.resetForm();
         } catch (error) {
-            this.handleError(error);
+            this.renderToast(error);
         }
     }
 
@@ -123,22 +123,22 @@ export default class DetailView extends connect(store)(LitElement) {
             } else {
                 await store.dispatch(saveRestaurant(this.restaurant));
             }
-            this.renderToast(this.restaurant.name);
+            this.renderFavoriteNotification(this.restaurant.name);
         } catch (error) {
-            this.handleError(error);
+            this.renderToast(error);
         }
     }
 
-    renderToast(restaurantName) {
+    renderToast(message) {
+        renderToast(message, this);
+    }
+
+    renderFavoriteNotification(restaurantName) {
         if (this.favorite) {
-            renderToast({ message: `${restaurantName} has been added to favorite` });
+            this.renderToast({ message: `${restaurantName} has been added to favorite` });
         } else {
-            renderToast({ message: `${restaurantName} has been deleted from favorite` });
+            this.renderToast({ message: `${restaurantName} has been deleted from favorite` });
         }
-    }
-
-    handleError(error) {
-        renderToast(error, this);
     }
 
     render() {
