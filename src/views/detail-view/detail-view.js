@@ -86,6 +86,7 @@ export default class DetailView extends connect(store)(LitElement) {
         event.preventDefault();
         try {
             await this.updateReviews();
+            renderToast({ message: 'Submit Review Success' });
             this.resetForm();
         } catch (error) {
             this.handleError(error);
