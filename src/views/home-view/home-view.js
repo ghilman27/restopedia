@@ -2,6 +2,7 @@ import API from 'src/data/api';
 import {
     LitElement, html, customElement, property,
 } from 'lit-element';
+import renderErrorToast from 'src/utils/notifications';
 import './home-view.scss';
 
 @customElement('home-view')
@@ -15,29 +16,33 @@ export default class HomeView extends LitElement {
     }
 
     async fetchData() {
-        this.data = await API.getRestaurants();
+        try {
+            this.data = await API.getRestaurants();
+        } catch (error) {
+            this.handleFetchError(error);
+        }
+    }
+
+    handleFetchError(error) {
+        renderErrorToast(error, this);
     }
 
     render() {
-        if (this.data.length) {
-            return html`
-                <hero-element 
-                    id="jumbotron" 
-                    .greeting=${true} 
+        return html`
+            ${this.data.length ? html`
+                <hero-element
+                    id="jumbotron"
+                    .greeting=${true}
                     .heading=${"Let's explore foods near you"}
                 ></hero-element>
                 <div id="content" class="content">
                     <section id="recommended" class="section">
-                        <resto-list 
-                            title="recommended" 
-                            .data=${this.data}
-                        >
+                        <resto-list title="recommended" .data=${this.data}>
                         </resto-list>
                     </section>
                 </div>
-            `;
-        }
-        return html`<loading-indicator></loading-indicator>`;
+            ` : html`<loading-indicator></loading-indicator>`}
+        `;
     }
 
     createRenderRoot() {

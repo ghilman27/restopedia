@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { IdbWriteError, IdbGetError } from 'src/utils/errors';
 import { openDB } from 'idb';
 

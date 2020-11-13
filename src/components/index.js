@@ -5,3 +5,4 @@ export { default as RatingBar } from './rating-bar/rating-bar';
 export { default as RestoList } from './resto-list/resto-list';
 export { default as RestoCard } from './resto-card/resto-card';
 export { default as LoadingIndicator } from './loading-indicator/loading-indicator';
+export { default as NotificationToast } from './notification-toast/notification-toast';

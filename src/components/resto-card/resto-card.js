@@ -4,6 +4,7 @@ import {
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import { deleteRestaurant } from 'src/store/restaurant/actions';
+import renderToast from 'src/utils/notifications';
 import './resto-card.scss';
 
 const IMAGE_BASE_URL = process.env.API_URL_IMAGE_SMALL;
@@ -34,12 +35,12 @@ export default class RestoCard extends connect(store)(LitElement) {
 
     async handleDelete(event) {
         event.preventDefault();
+        const restaurant = this.data;
         try {
-            await store.dispatch(deleteRestaurant(this.data.id));
+            await store.dispatch(deleteRestaurant(restaurant.id));
+            renderToast({ message: `${restaurant.name} has been deleted from favorite` });
         } catch (error) {
-            /* eslint-disable no-console */
-            console.log(error);
-            /* eslint-enable no-console */
+            renderToast(error);
         }
     }
 

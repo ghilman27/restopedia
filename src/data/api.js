@@ -15,38 +15,64 @@ const fetchData = async (url, headers = undefined) => {
     return json;
 };
 
+const handleError = (error, ErrorClass) => {
+    if (error instanceof ErrorClass) {
+        return error;
+    }
+    if (!window.navigator.online) {
+        return new ErrorClass('Restaurant API request error: No connection');
+    }
+    return error;
+};
+
 class RestaurantAPI {
     static getRestaurants = async () => {
-        const url = `${API_BASE_URL}/list`;
-        const { error, message, restaurants } = await fetchData(url);
-        if (error) throw new HttpGetError(message);
-        return restaurants;
+        try {
+            const url = `${API_BASE_URL}/list`;
+            const { error, message, restaurants } = await fetchData(url);
+            if (error) throw new HttpGetError(`Restaurant list GET error: ${message}`);
+            return restaurants;
+        } catch (error) {
+            throw handleError(error, HttpGetError);
+        }
     };
 
     static getRestaurant = async (restaurantId) => {
-        const url = `${API_BASE_URL}/detail/${restaurantId}`;
-        const { error, message, restaurant } = await fetchData(url);
-        if (error) throw new HttpGetError(message);
-        return restaurant;
+        try {
+            const url = `${API_BASE_URL}/detail/${restaurantId}`;
+            const { error, message, restaurant } = await fetchData(url);
+            if (error) throw new HttpGetError(`Restaurant GET error (ID: ${restaurantId}): ${message}`);
+            return restaurant;
+        } catch (error) {
+            throw handleError(error, HttpGetError);
+        }
     };
 
     static searchRestaurants = async (query) => {
-        const url = `${API_BASE_URL}/search?q=${query}`;
-        const { error, message, restaurants } = await fetchData(url);
-        if (error) throw new HttpGetError(message);
-        return restaurants;
+        try {
+            const url = `${API_BASE_URL}/search?q=${query}`;
+            const { error, message, restaurants } = await fetchData(url);
+            if (error) throw new HttpGetError(`Restaurant search request with keyword ${query} error: ${message}`);
+            return restaurants;
+        } catch (error) {
+            throw handleError(error, HttpGetError);
+        }
     };
 
     static postReview = async ({ id, name, review }) => {
-        const url = `${API_BASE_URL}/review`;
-        const body = JSON.stringify({ id, name, review });
-        const headers = { ...DEFAULT_POST_HEADERS, body };
-        const { error, message, customerReviews } = await fetchData(
-            url,
-            headers,
-        );
-        if (error) throw new HttpPostError(message);
-        return customerReviews;
+        try {
+            const url = `${API_BASE_URL}/review`;
+            const body = JSON.stringify({ id, name, review });
+            const headers = { ...DEFAULT_POST_HEADERS, body };
+            const { error, message, customerReviews } = await fetchData(
+                url,
+                headers,
+            );
+            if (error) throw new HttpPostError(`Post review error of restaurant with ID ${id}: ${message}`);
+            return customerReviews;
+        } catch (error) {
+            throw handleError(error, HttpPostError);
+        }
     };
 }
 

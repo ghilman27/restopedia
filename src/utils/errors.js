@@ -9,14 +9,14 @@ export class HttpGetError extends Error {
 export class HttpPostError extends Error {
     constructor(message) {
         super(message);
-        this.name = 'HttpGetError';
+        this.name = 'HttpPostError';
     }
 }
 
 export class IdbWriteError extends Error {
     constructor(message) {
         super(message);
-        this.name = 'IdbPutError';
+        this.name = 'IdbWriteError';
     }
 }
 

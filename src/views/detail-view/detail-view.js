@@ -5,6 +5,7 @@ import {
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import { saveRestaurant, deleteRestaurant } from 'src/store/restaurant/actions';
+import renderToast from 'src/utils/notifications';
 import './detail-view.scss';
 import './detail-view_responsive.scss';
 
@@ -38,12 +39,7 @@ export default class DetailView extends connect(store)(LitElement) {
     connectedCallback() {
         super.connectedCallback();
         this.restaurantId = this.location.params.id;
-        if (this.restaurantId) {
-            this.fetchData();
-        } else {
-            const error = new SyntaxError('restaurantId cannot be undefined');
-            this.handleFetchError(error);
-        }
+        this.fetchData();
     }
 
     async fetchData() {
@@ -51,7 +47,7 @@ export default class DetailView extends connect(store)(LitElement) {
             this.restaurant = await API.getRestaurant(this.restaurantId);
             this.restaurant.imageUrl = `${process.env.API_URL_IMAGE_LARGE}/${this.restaurant.pictureId}`;
         } catch (error) {
-            this.handleSubmitError(error);
+            this.handleError(error);
         }
     }
 
@@ -92,7 +88,7 @@ export default class DetailView extends connect(store)(LitElement) {
             await this.updateReviews();
             this.resetForm();
         } catch (error) {
-            this.handleSubmitError(error);
+            this.handleError(error);
         }
     }
 
@@ -121,38 +117,32 @@ export default class DetailView extends connect(store)(LitElement) {
 
     async handleFavorite() {
         try {
-            // eslint-disable-next-line no-unused-expressions
-            this.favorite
-                ? await store.dispatch(deleteRestaurant(this.restaurantId))
-                : await store.dispatch(saveRestaurant(this.restaurant));
+            if (this.favorite) {
+                await store.dispatch(deleteRestaurant(this.restaurantId));
+            } else {
+                await store.dispatch(saveRestaurant(this.restaurant));
+            }
+            this.renderToast(this.restaurant.name);
         } catch (error) {
-            this.handleFavoriteError(error);
+            this.handleError(error);
         }
     }
 
-    /* eslint-disable no-console */
-    // eslint-disable-next-line class-methods-use-this
-    handleSubmitError(error) {
-        // TODO
-        console.log(error);
+    renderToast(restaurantName) {
+        if (this.favorite) {
+            renderToast({ message: `${restaurantName} has been added to favorite` });
+        } else {
+            renderToast({ message: `${restaurantName} has been deleted from favorite` });
+        }
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    handleFetchError(error) {
-        // TODO
-        console.log(error);
+    handleError(error) {
+        renderToast(error, this);
     }
-
-    // eslint-disable-next-line class-methods-use-this
-    handleFavoriteError(error) {
-        // TODO
-        console.log(error);
-    }
-    /* eslint-enable no-console */
 
     render() {
-        if (this.restaurant) {
-            return html`
+        return html`
+            ${this.restaurant ? html`
                 <hero-element 
                     id="jumbotron" 
                     .imageSrc=${this.restaurant.imageUrl}
@@ -188,7 +178,7 @@ export default class DetailView extends connect(store)(LitElement) {
                                 ${this.state.descExtended ? 'Read Less' : 'Read More'}
                             </button>
                         </section>
-    
+
                         <section id="menu" class="menu">
                             <h2 class="menu__title" tabindex="0">Menu</h2>
                             <hr class="divider"/>
@@ -205,7 +195,7 @@ export default class DetailView extends connect(store)(LitElement) {
                             `)}
                             </div>
                         </section>
-    
+
                         <section id="reviews" class="reviews">
                             <h2 class="reviews__title" tabindex="0">Reviews</h2>
                             <hr class="divider"/>
@@ -274,9 +264,8 @@ export default class DetailView extends connect(store)(LitElement) {
 
                     </div>
                 </div>
-            `;
-        }
-        return html`<loading-indicator></loading-indicator>`;
+            ` : html`<loading-indicator></loading-indicator>`}
+        `;
     }
 
     createRenderRoot() {
