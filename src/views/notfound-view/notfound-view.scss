@@ -1,0 +1,14 @@
+@import '../../styles/config';
+@import '../../styles/helpers';
+
+notfound-view {
+    .not-found {
+        @include flex-center(column);
+        @include center-text;
+        width: 100vw;
+        height: 90vh;
+        color: $white;
+        font-size: 2rem;
+        background: $dark-orange;
+    }
+}

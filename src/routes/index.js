@@ -16,10 +16,9 @@ export default () => {
             path: '/favorites',
             component: 'favorite-view',
         },
-        // TODO Fallback Router
         {
             path: '(.*)',
-            component: 'home-view',
+            component: 'notfound-view',
         },
     ]);
 };
