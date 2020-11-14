@@ -4,6 +4,7 @@ import {
 import _ from 'lodash';
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
+import { setSelectedPage } from 'src/store/shell/actions';
 import './favorite-view.scss';
 
 @customElement('favorite-view')
@@ -14,12 +15,20 @@ export default class FavoriteView extends connect(store)(LitElement) {
     @property({ type: Boolean })
     requested = false;
 
+    @property({ type: String })
+    pageTitle = 'favorites';
+
     connectedCallback() {
         super.connectedCallback();
+        this.setSelectedPage();
     }
 
     stateChanged(state) {
         this.restaurants = _.values(state.restaurant);
+    }
+
+    setSelectedPage() {
+        store.dispatch(setSelectedPage(this.pageTitle));
     }
 
     render() {

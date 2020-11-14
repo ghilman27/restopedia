@@ -5,6 +5,7 @@ import {
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import { saveRestaurant, deleteRestaurant } from 'src/store/restaurant/actions';
+import { setSelectedPage } from 'src/store/shell/actions';
 import renderToast from 'src/utils/notifications';
 import './detail-view.scss';
 import './detail-view_responsive.scss';
@@ -23,6 +24,9 @@ export default class DetailView extends connect(store)(LitElement) {
     @property({ type: Boolean })
     favorite = false;
 
+    @property({ type: String })
+    pageTitle = 'detail';
+
     @property({ type: Object })
     state = {
         descExtended: false,
@@ -39,7 +43,12 @@ export default class DetailView extends connect(store)(LitElement) {
     connectedCallback() {
         super.connectedCallback();
         this.restaurantId = this.location.params.id;
+        this.setSelectedPage();
         this.fetchData();
+    }
+
+    setSelectedPage() {
+        store.dispatch(setSelectedPage(this.pageTitle));
     }
 
     async fetchData() {

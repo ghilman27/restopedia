@@ -1,0 +1,66 @@
+@import 'src/styles/config';
+@import 'src/styles/helpers';
+
+nav-bar {
+    margin-right: $app-bar-margin;
+
+    .nav-desktop {
+        @include flex-center-vertical(row);
+        justify-content: flex-start;
+        display: none;
+
+        &__item {
+            list-style-type: none;
+            border-radius: 4px;
+
+            &.selected {
+                box-shadow: inset 0px -10px 10px -10px $medium-grey;
+                background: linear-gradient(
+                    to top,
+                    rgba($white, 0.2),
+                    transparent
+                );
+            }
+        }
+
+        &__link {
+            display: grid;
+            align-items: center;
+            grid-template-columns: 2rem auto;
+            text-decoration: none;
+            text-transform: capitalize;
+            min-height: 44px;
+            height: 60px;
+            height: $app-bar-height;
+            font-size: 1.125rem;
+            color: $color-app-bar-text;
+            padding: 0 1rem;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            border-radius: 4px;
+
+            &:hover {
+                box-shadow: inset 0px -10px 10px -10px $medium-grey;
+                background: linear-gradient(
+                    to top,
+                    rgba($white, 0.2),
+                    transparent
+                );
+            }
+
+            &.open {
+                background: $color-nav-drawer-background;
+            }
+        }
+
+        &__photo {
+            width: 30px;
+            border-radius: 100%;
+        }
+
+        &__username {
+            margin-left: 0.5rem;
+        }
+    }
+}

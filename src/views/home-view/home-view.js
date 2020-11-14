@@ -2,17 +2,28 @@ import API from 'src/data/api';
 import {
     LitElement, html, customElement, property,
 } from 'lit-element';
+import { connect } from 'pwa-helpers';
+import store from 'src/store';
+import { setSelectedPage } from 'src/store/shell/actions';
 import renderErrorToast from 'src/utils/notifications';
 import './home-view.scss';
 
 @customElement('home-view')
-export default class HomeView extends LitElement {
+export default class HomeView extends connect(store)(LitElement) {
     @property({ type: Array })
     data = [];
 
+    @property({ type: String })
+    pageTitle = 'home';
+
     connectedCallback() {
         super.connectedCallback();
+        this.setSelectedPage();
         this.fetchData();
+    }
+
+    setSelectedPage() {
+        store.dispatch(setSelectedPage(this.pageTitle));
     }
 
     async fetchData() {
