@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initRoutes();
 
-    // if (!('serviceWorker' in navigator)) {
-    //     /* eslint-disable no-console */
-    //     console.log('Service worker is not supported');
-    //     /* eslint-enable no-console */
-    // } else {
-    //     registerServiceWorker();
-    // }
+    if (!('serviceWorker' in navigator)) {
+        /* eslint-disable no-console */
+        console.log('Service worker is not supported');
+        /* eslint-enable no-console */
+    } else {
+        registerServiceWorker();
+    }
 });

@@ -1,0 +1,17 @@
+@import 'src/styles/config';
+
+restaurant-menus {
+    .menu {
+        &__wrapper {
+            @include responsive-min($medium) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    
+        &__title {
+            @include responsive-min($medium) {
+                text-align: center;
+            }
+        }
+    }
+}

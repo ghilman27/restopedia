@@ -4,9 +4,10 @@ import {
 } from 'lit-element';
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
-import { saveRestaurant, deleteRestaurant } from 'src/store/restaurant/actions';
 import { setSelectedPage } from 'src/store/shell/actions';
 import renderToast from 'src/utils/notifications';
+import './restaurant-info/restaurant-info';
+import './restaurant-menus/restaurant-menus';
 import './detail-view.scss';
 import './detail-view_responsive.scss';
 
@@ -21,23 +22,14 @@ export default class DetailView extends connect(store)(LitElement) {
     @property({ type: Object })
     restaurant;
 
-    @property({ type: Boolean })
-    favorite = false;
-
     @property({ type: String })
     pageTitle = 'detail';
 
     @property({ type: Object })
     state = {
-        descExtended: false,
         customerReview: '',
         customerName: '',
         formOpened: false,
-    }
-
-    stateChanged(state) {
-        this.restaurantId = this.location.params.id;
-        this.favorite = !!state.restaurant[this.restaurantId];
     }
 
     connectedCallback() {
@@ -58,13 +50,6 @@ export default class DetailView extends connect(store)(LitElement) {
         } catch (error) {
             this.renderToast(error);
         }
-    }
-
-    toggleDesc() {
-        this.state = {
-            ...this.state,
-            descExtended: !this.state.descExtended,
-        };
     }
 
     handleChange(event) {
@@ -102,6 +87,10 @@ export default class DetailView extends connect(store)(LitElement) {
         }
     }
 
+    renderToast = (message) => {
+        renderToast(message);
+    }
+
     adjustInputHeight = (event) => {
         const inputText = event.target;
         inputText.style.height = 'auto';
@@ -123,31 +112,6 @@ export default class DetailView extends connect(store)(LitElement) {
         };
     }
 
-    async handleFavorite() {
-        try {
-            if (this.favorite) {
-                await store.dispatch(deleteRestaurant(this.restaurantId));
-            } else {
-                await store.dispatch(saveRestaurant(this.restaurant));
-            }
-            this.renderFavoriteNotification(this.restaurant.name);
-        } catch (error) {
-            this.renderToast(error);
-        }
-    }
-
-    renderToast(message) {
-        renderToast(message, this);
-    }
-
-    renderFavoriteNotification(restaurantName) {
-        if (this.favorite) {
-            this.renderToast({ message: `${restaurantName} has been added to favorite` });
-        } else {
-            this.renderToast({ message: `${restaurantName} has been deleted from favorite` });
-        }
-    }
-
     render() {
         return html`
             ${this.restaurant ? html`
@@ -161,47 +125,11 @@ export default class DetailView extends connect(store)(LitElement) {
                     <div class="wrapper">
 
                         <section id="detail" class="detail">
-                            <h1 class="detail__restaurant-name" tabindex="0">${this.restaurant.name}</h1>
-                            <button class="detail__fav-button" @click=${this.handleFavorite} tabindex="0" aria-label="favorite">
-                                <i class=${this.favorite ? 'fas fa-heart favorite' : 'far fa-heart'}></i>
-                            </button>
-                            <p class="detail__address" tabindex="0">
-                                ${`${this.restaurant.address}, ${this.restaurant.city}`}
-                            </p>
-                            <rating-bar 
-                                class="detail__rating" 
-                                rating=${this.restaurant.rating} 
-                                tabindex="0" 
-                                aria-label="rating ${this.restaurant.rating}"
-                            ></rating-bar>
-                            <div class="detail__categories">
-                                ${this.restaurant.categories.map((category) => html`
-                                <span class="detail__category" tabindex="0" aria-label="category ${category.name}">${category.name}</span>
-                                `)}
-                            </div>
-                            <p class="detail__desc ${this.state.descExtended ? '' : 'clipped'}" tabindex="0">
-                                ${this.restaurant.description}
-                            </p>
-                            <button class="detail__toggle-desc" @click=${this.toggleDesc}>
-                                ${this.state.descExtended ? 'Read Less' : 'Read More'}
-                            </button>
+                            <restaurant-info .restaurant=${this.restaurant}></restaurant-info>
                         </section>
 
                         <section id="menu" class="menu">
-                            <h2 class="menu__title" tabindex="0">Menu</h2>
-                            <hr class="divider"/>
-                            <div class="menu__wrapper">
-                            ${Object.entries(this.restaurant.menus).map(([category, menus]) => html`
-                                <div class="menu__list">
-                                    <h3 class="menu__category" tabindex="0">${category}</h3>
-                                    <ul class="menu__items">
-                                    ${menus.map((menu) => html`
-                                        <li class="menu__item" tabindex="0">${menu.name}</li>
-                                    `)}
-                                    </ul>
-                                </div>
-                            `)}
-                            </div>
+                            <restaurant-menus .menus=${this.restaurant.menus}></restaurant-menus>
                         </section>
 
                         <section id="reviews" class="reviews">
