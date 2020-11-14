@@ -1,4 +1,4 @@
-import 'regenerator-runtime'; /* for async await transpile */
+import 'regenerator-runtime';
 import store from './store';
 import { setSavedRestaurants } from './store/restaurant/actions';
 import initRoutes from './routes';
@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initRoutes();
 
-    if (!('serviceWorker' in navigator)) {
-        /* eslint-disable no-console */
-        console.log('Service worker is not supported');
-        /* eslint-enable no-console */
-    } else {
-        registerServiceWorker();
-    }
+    // if (!('serviceWorker' in navigator)) {
+    //     /* eslint-disable no-console */
+    //     console.log('Service worker is not supported');
+    //     /* eslint-enable no-console */
+    // } else {
+    //     registerServiceWorker();
+    // }
 });

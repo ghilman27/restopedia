@@ -102,12 +102,10 @@ export default class DetailView extends connect(store)(LitElement) {
         }
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    adjustInputHeight(event) {
-        // eslint-disable-next-line no-param-reassign
-        event.target.style.height = 'auto';
-        // eslint-disable-next-line no-param-reassign
-        event.target.style.height = `${event.target.scrollHeight}px`;
+    adjustInputHeight = (event) => {
+        const inputText = event.target;
+        inputText.style.height = 'auto';
+        inputText.style.height = `${inputText.scrollHeight}px`;
     }
 
     handleFormFocus() {

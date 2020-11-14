@@ -1,4 +1,5 @@
 import { LitElement, html, customElement } from 'lit-element';
+import './resto-card/resto-card';
 import './resto-list.scss';
 import './resto-list_responsive.scss';
 

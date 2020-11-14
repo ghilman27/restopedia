@@ -84,9 +84,9 @@ module.exports = {
             sourceMap: true,
         }),
         new Dotenv(),
-        new WorkboxPlugin.InjectManifest({
-            swSrc: './src/worker.js',
-            swDest: 'worker.js',
-        }),
+        // new WorkboxPlugin.InjectManifest({
+        //     swSrc: './src/worker.js',
+        //     swDest: 'worker.js',
+        // }),
     ],
 };
