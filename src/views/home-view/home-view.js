@@ -1,16 +1,13 @@
 import API from 'src/data/api';
 import {
-    LitElement, html, customElement, property,
+    html, customElement, property,
 } from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { setSelectedPage } from 'src/store/global/actions';
 import renderErrorToast from 'src/utils/notifications';
-import setSkipToContentHref from 'src/utils/skipToContent';
+import BaseView from 'src/views/base-view';
 import './home-view.scss';
 
 @customElement('home-view')
-export default class HomeView extends connect(store)(LitElement) {
+export default class HomeView extends BaseView {
     @property({ type: Array })
     data = [];
 
@@ -19,17 +16,7 @@ export default class HomeView extends connect(store)(LitElement) {
 
     connectedCallback() {
         super.connectedCallback();
-        this.setSelectedPage();
         this.fetchData();
-        this.setSkipToContentHref();
-    }
-
-    setSelectedPage() {
-        store.dispatch(setSelectedPage(this.pageTitle));
-    }
-
-    setSkipToContentHref() {
-        setSkipToContentHref(this.location.pathname);
     }
 
     async fetchData() {
@@ -60,9 +47,5 @@ export default class HomeView extends connect(store)(LitElement) {
                 </div>
             ` : html`<loading-indicator></loading-indicator>`}
         `;
-    }
-
-    createRenderRoot() {
-        return this;
     }
 }

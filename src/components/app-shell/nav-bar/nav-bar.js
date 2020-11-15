@@ -34,9 +34,9 @@ export default class NavBar extends connect(store)(LitElement) {
         this.darkMode = state.global.darkMode;
     }
 
-    toggleDropdown(e) {
-        e.preventDefault();
-        e.stopPropagation();
+    toggleDropdown(event) {
+        event.preventDefault();
+        event.stopPropagation();
         if (this.dropdownOpen) {
             store.dispatch(setDropdownOpen(false));
         } else {
