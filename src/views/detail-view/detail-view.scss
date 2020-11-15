@@ -1,14 +1,8 @@
 @import 'src/styles/config';
-@import 'src/styles/helpers';
 
 detail-view {
     display: grid;
     grid-template-rows: 50vh auto;
-
-    .divider {
-        border: 0.5px solid $color-rating-star;
-        margin: 0.5rem 0;
-    }
     
     .content {
         margin-top: -3rem;
@@ -24,132 +18,5 @@ detail-view {
         margin: 0 auto;
         display: grid;
         gap: 3rem;
-    }
-
-    .reviews {
-        &__form {
-            margin: 2rem 0;
-        }
-
-        &__main {
-            display: grid;
-            gap: 2rem;
-        }
-
-        &__title {
-            margin-top: 1rem;
-        }
-    }
-
-    .review {
-        display: grid;
-        grid-template-columns: 3.5rem auto;
-
-        &__author-thumbnail {
-            i {
-                font-size: 2.5rem;
-            }
-        }
-
-        &__main {
-            display: grid;
-            gap: 1rem;
-        }
-
-        &__header {
-            @include flex-center-vertical(row);
-        }
-        
-        &__author {
-            font-weight: 700;
-            margin-right: 0.5rem;
-        }
-
-        &__date {
-            font-size: 0.875rem;
-            color: $color-text-subtle;
-        }
-
-    }
-
-    .form {
-        &__footer {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            margin: 0.5rem 0;
-        }
-
-        &__main {
-            width: 100%;
-        }
-
-        &__review, &__name {
-            flex: 1;
-            font-family: inherit;
-            font-size: 1rem;
-            padding: 1rem;
-            border: none;  
-            width: 100%;
-            outline: none;
-            border-bottom: 1px solid $medium-grey;
-
-            &:focus {
-                border-bottom: 2px solid $black;
-            }
-        }
-
-        &__name {
-            height: 44px;
-        }
-
-        &__review {
-            resize: none;
-            overflow: hidden;
-        }
-
-        &__buttons {
-            display: flex;
-            flex: 1;
-            flex-direction: row;
-            justify-content: flex-end;
-            padding: 0.5rem 0;
-        }
-
-        &__button {
-            margin-left: 0.5rem;
-            padding: 0.5rem 1rem;
-            min-height: 44px;
-            min-width: 44px;
-            text-transform: uppercase;
-            font-weight: 700;
-            font-size: 0.875rem;
-            border: none;
-            border-radius: 0.25rem;
-            cursor: pointer;
-
-            
-            &.submit {
-                background: $color-rating-star;
-                &:hover {
-                    background: 
-                        lighten(
-                            $color:$color-rating-star, 
-                            $amount: 5%
-                        );
-                }
-            }
-
-            &.cancel {
-                background: $color-rating-base;
-                &:hover {
-                    background: 
-                        lighten(
-                            $color:$color-rating-base, 
-                            $amount: 5%
-                        );
-                }
-            }
-        }
     }
 }

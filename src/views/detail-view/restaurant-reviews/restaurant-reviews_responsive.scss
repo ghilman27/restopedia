@@ -1,16 +1,10 @@
 @import 'src/styles/config';
 
-detail-view {
+restaurant-reviews {
     .reviews {
         &__title {
             @include responsive-min($medium) {
                 text-align: center;
-            }
-        }
-
-        &__main {
-            @include responsive-min($medium) {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
     }

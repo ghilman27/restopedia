@@ -1,0 +1,7 @@
+@import 'src/styles/config';
+
+review-list {
+    @include responsive-min($medium) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
