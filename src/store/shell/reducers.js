@@ -3,13 +3,6 @@ import actionHandlers from './handlers';
 const initialShellState = {
     drawerOpen: false,
     dropdownOpen: false,
-    logoName: 'restopedia',
-    user: {
-        firstname: 'Ghilman',
-        lastname: 'Al Fatih',
-        email: 'ghilman27@gmail.com',
-        photo: '/images/profile.jpg',
-    },
     navMenus: [
         {
             name: 'home',
@@ -40,7 +33,6 @@ const initialShellState = {
             icon: 'fas fa-sign-out-alt',
         },
     ],
-    selectedPage: 'home',
 };
 
 const createReducers = (initialState, handlers) => (state = initialState, action) => {

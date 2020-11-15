@@ -1,5 +1,5 @@
 import {
-    SET_DRAWER_OPEN, SET_DROPDOWN_OPEN,
+    SET_SELECTED_PAGE, SET_DARK_MODE,
 } from './types';
 
 const changeState = (stateName) => (state, action) => ({
@@ -8,6 +8,6 @@ const changeState = (stateName) => (state, action) => ({
 });
 
 export default {
-    [SET_DRAWER_OPEN]: changeState('drawerOpen'),
-    [SET_DROPDOWN_OPEN]: changeState('dropdownOpen'),
+    [SET_SELECTED_PAGE]: changeState('selectedPage'),
+    [SET_DARK_MODE]: changeState('darkMode'),
 };

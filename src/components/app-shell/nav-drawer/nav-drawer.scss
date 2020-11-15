@@ -9,9 +9,9 @@ nav-drawer {
         left: 0;
         bottom: 0;
         opacity: 0;
-        background-color: $color-app-bar-background;
+        background-color: var(--color-app-bar-background);
         padding: 8px;
-        color: $color-text-light;
+        color: $white;
         min-width: 44px;
         min-height: 44px;
 
@@ -30,7 +30,7 @@ nav-drawer {
         display: grid;
         grid-template-rows: 25vh auto;
         row-gap: 1.5rem;
-        background: $color-nav-drawer-background;
+        background: var(--color-nav-drawer-background);
         transform: translateX(100%);
         opacity: 0;
         visibility: hidden;
@@ -52,7 +52,7 @@ nav-drawer {
             list-style-type: none;
 
             &.selected {
-                background: $color-nav-menu-hover;
+                background: var(--color-nav-drawer-menu-hover);
             }
         }
 
@@ -66,10 +66,10 @@ nav-drawer {
             min-height: 44px;
             padding: 0 2rem;
             font-size: 1.125rem;
-            color: $color-text-dark;
+            color: var(--color-text-base);
 
             &:hover {
-                background: $color-nav-menu-hover;
+                background: var(--color-nav-drawer-menu-hover);
             }
         }
     }
@@ -91,14 +91,14 @@ nav-drawer {
 
         &__email {
             margin-top: 0.5rem;
-            color: $color-text-subtle;
+            color: var(--color-text-subtle);
             font-weight: 400;
         }
     }
 
     .divider {
         @include full-width;
-        border-top: 0.5px solid $color-nav-drawer-divider;
+        border-top: 0.5px solid var(--color-nav-drawer-divider);
         margin: 1rem 0;
     }
 }

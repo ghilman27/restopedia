@@ -1,5 +1,5 @@
 import {
-    SET_DRAWER_OPEN, SET_DROPDOWN_OPEN,
+    SET_SELECTED_PAGE, SET_DARK_MODE,
 } from './types';
 
 const createAction = (actionType) => (payload) => (dispatch) => {
@@ -9,5 +9,5 @@ const createAction = (actionType) => (payload) => (dispatch) => {
     });
 };
 
-export const setDrawerOpen = createAction(SET_DRAWER_OPEN);
-export const setDropdownOpen = createAction(SET_DROPDOWN_OPEN);
+export const setSelectedPage = createAction(SET_SELECTED_PAGE);
+export const setDarkMode = createAction(SET_DARK_MODE);

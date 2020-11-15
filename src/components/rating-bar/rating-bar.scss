@@ -14,13 +14,13 @@ rating-bar {
         top: 0;
     }
     .base-star {
-        color: $color-rating-base;
+        color: var(--color-rating-base);
     }
     .gold-star {
-        color: $color-rating-star;
+        color: var(--color-rating-star);
     }
     .rating-text {
         font-size: 0.825rem;
-        color: $color-text-subtle;
+        color: var(--color-text-subtle);
     }
 }

@@ -54,7 +54,11 @@ export default class RestaurantInfo extends connect(store)(LitElement) {
     render() {
         return html`
             <h1 class="detail__restaurant-name" tabindex="0">${this.restaurant.name}</h1>
-            <button class="detail__fav-button" @click=${this.handleFavorite} tabindex="0" aria-label="favorite">
+            <button 
+                class="detail__fav-button" 
+                @click=${this.handleFavorite} 
+                tabindex="0" 
+                aria-label="${this.favorite ? 'remove from favorite' : 'add to favorite'}">
                 <i class=${this.favorite ? 'fas fa-heart favorite' : 'far fa-heart'}></i>
             </button>
             <p class="detail__address" tabindex="0">

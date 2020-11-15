@@ -6,9 +6,10 @@ user-dropdown {
         position: fixed;
         right: $app-bar-margin;
         top: $app-bar-height;
-        background: $color-nav-drawer-background;
-        color: $color-text-dark;
-        box-shadow: 0 1px 1px 0 rgba($color-card-shadow, 0.08), 0 1px 3px 1px rgba($color-card-shadow, 0.16);
+        background: var(--color-nav-dropdown-background);
+        color: var(--color-text-base);
+        box-shadow: 0 1px 1px 0 rgba(var(--color-nav-dropdown-shadow), 0.08),
+            0 1px 3px 1px rgba(var(--color-nav-dropdown-shadow), 0.16);
         opacity: 0;
         visibility: hidden;
         padding-bottom: 2rem;
@@ -34,10 +35,10 @@ user-dropdown {
             min-height: 44px;
             padding: 0 2rem;
             font-size: 1.125rem;
-            color: $color-text-dark;
+            color: var(--color-text-base);
 
             &:hover {
-                background: $color-nav-menu-hover;
+                background: var(--color-nav-dropdown-menu-hover);
             }
         }
 
@@ -59,7 +60,7 @@ user-dropdown {
 
         &__email {
             margin-top: 0.5rem;
-            color: $color-text-subtle;
+            color: var(--color-text-subtle);
             font-weight: 400;
             text-transform: none;
         }
@@ -70,9 +71,9 @@ user-dropdown {
         left: 0;
         bottom: 0;
         opacity: 0;
-        background-color: $color-app-bar-background;
+        background-color: var(--color-app-bar-background);
         padding: 8px;
-        color: $color-text-light;
+        color: $color-text-white;
         min-width: 44px;
         min-height: 44px;
 

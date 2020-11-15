@@ -4,6 +4,7 @@ import {
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import { setDrawerOpen, setDropdownOpen } from 'src/store/shell/actions';
+import { setDarkMode } from 'src/store/global/actions';
 import './nav-bar/nav-bar';
 import './nav-drawer/nav-drawer';
 import './app-shell.scss';
@@ -23,6 +24,9 @@ export default class AppShell extends connect(store)(LitElement) {
     @property({ type: String })
     logoName;
 
+    @property({ type: Boolean })
+    darkMode;
+
     connectedCallback() {
         super.connectedCallback();
         document.addEventListener('scroll', this.handleScroll);
@@ -38,7 +42,19 @@ export default class AppShell extends connect(store)(LitElement) {
     stateChanged(state) {
         this.drawerOpen = state.shell.drawerOpen;
         this.dropdownOpen = state.shell.dropdownOpen;
-        this.logoName = state.shell.logoName;
+        this.logoName = state.global.appName;
+        this.darkMode = state.global.darkMode;
+
+        this.decideDarkMode();
+    }
+
+    decideDarkMode() {
+        const body = document.querySelector('body');
+        if (this.darkMode) {
+            body.classList.add('dark');
+        } else {
+            body.classList.remove('dark');
+        }
     }
 
     handleResize = () => {
@@ -60,10 +76,25 @@ export default class AppShell extends connect(store)(LitElement) {
         }
     }
 
+    toggleDarkMode() {
+        if (this.darkMode) {
+            store.dispatch(setDarkMode(false));
+        } else {
+            store.dispatch(setDarkMode(true));
+        }
+    }
+
     render() {
         return html`
         <div class="wrapper ${this.drawerOpen || this.dropdownOpen || !this.positionTop ? 'open' : ''}">
             <a href="#!" aria-label="app-logo" class="app-logo">${this.logoName}</a>
+            <button 
+                class="toggle-dark-mode-mobile"
+                @click=${this.toggleDarkMode}
+                aria-label="toggle to ${this.darkMode ? 'light' : 'dark'} mode"
+            >
+                ${this.darkMode ? html`<i class="fas fa-sun"></i>` : html`<i class="fas fa-moon"></i>`}
+            </button>
             <button 
                 class="menu-btn" 
                 @click=${this.toggleDrawer} 

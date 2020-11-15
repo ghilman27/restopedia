@@ -22,7 +22,7 @@ export default class HeroElement extends connect(store)(LitElement) {
     user;
 
     stateChanged(state) {
-        this.user = state.shell.user;
+        this.user = state.global.user;
     }
 
     render() {

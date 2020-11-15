@@ -9,6 +9,6 @@ notfound-view {
         height: 90vh;
         color: $white;
         font-size: 2rem;
-        background: $dark-orange;
+        background: var(--color-app-background);
     }
 }

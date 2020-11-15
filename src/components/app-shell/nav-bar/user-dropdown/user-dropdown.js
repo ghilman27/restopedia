@@ -34,7 +34,7 @@ export default class UserDropdown extends connect(store)(LitElement) {
 
     stateChanged(state) {
         this.open = state.shell.dropdownOpen;
-        this.user = state.shell.user;
+        this.user = state.global.user;
         this.accountMenus = state.shell.accountMenus;
     }
 

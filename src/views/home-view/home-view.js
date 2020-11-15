@@ -4,7 +4,7 @@ import {
 } from 'lit-element';
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
-import { setSelectedPage } from 'src/store/shell/actions';
+import { setSelectedPage } from 'src/store/global/actions';
 import renderErrorToast from 'src/utils/notifications';
 import './home-view.scss';
 

@@ -6,9 +6,8 @@ favorite-view {
     grid-template-rows: 50vh auto;
     
     .content {
-        @include center-text;
         margin-top: -3rem;
-        background: $color-page-background;
+        background: var(--color-page-background);
         border-top-left-radius: 2rem;
         border-top-right-radius: 2rem;
         padding: 6rem 1.5rem;
@@ -20,7 +19,8 @@ favorite-view {
     
     .not-found {
         @include flex-center(column);
-        color: $medium-black;
+        @include center-text;
+        color: var(--color-text-subtle);
         font-size: 1.25rem;
         
         i {

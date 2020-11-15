@@ -4,6 +4,24 @@
 nav-bar {
     margin-right: $app-bar-margin;
 
+    .toggle-dark-mode-desktop {
+        min-width: 44px;
+        min-height: 44px;
+        background: transparent;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+
+        i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        &:hover {
+            background: rgba(white, 0.3);
+        }
+    }
+
     .nav-desktop {
         @include flex-center-vertical(row);
         justify-content: flex-start;
@@ -14,10 +32,10 @@ nav-bar {
             border-radius: 4px;
 
             &.selected {
-                box-shadow: inset 0px -10px 10px -10px $medium-grey;
+                box-shadow: inset 0px -10px 10px -10px $color-app-bar-selected;
                 background: linear-gradient(
                     to top,
-                    rgba($white, 0.2),
+                    rgba($color-app-bar-selected, 0.2),
                     transparent
                 );
             }
@@ -50,7 +68,7 @@ nav-bar {
             }
 
             &.open {
-                background: $color-nav-drawer-background;
+                background: var(--color-nav-dropdown-background);
             }
         }
 

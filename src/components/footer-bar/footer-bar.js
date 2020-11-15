@@ -11,7 +11,7 @@ export default class FooterBar extends connect(store)(LitElement) {
     appName;
 
     stateChanged(state) {
-        this.appName = state.shell.logoName;
+        this.appName = state.global.appName;
     }
 
     render() {

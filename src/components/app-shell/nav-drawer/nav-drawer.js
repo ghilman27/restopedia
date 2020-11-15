@@ -40,10 +40,10 @@ export default class NavDrawer extends connect(store)(LitElement) {
 
     stateChanged(state) {
         this.drawerOpen = state.shell.drawerOpen;
-        this.user = state.shell.user;
         this.navMenus = state.shell.navMenus;
         this.accountMenus = state.shell.accountMenus;
-        this.selectedPage = state.shell.selectedPage;
+        this.user = state.global.user;
+        this.selectedPage = state.global.selectedPage;
     }
 
     closeOnOutsideClick(event) {

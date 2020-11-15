@@ -3,8 +3,8 @@
 
 footer-bar {
     @include flex-center(row);
-    background: $color-footer-background;
-    color: $color-text-light;
+    background: var(--color-footer-background);
+    color: $color-text-white;
     font-family: $main-font-family;
     height: 10vh;
     text-transform: capitalize;

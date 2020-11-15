@@ -35,7 +35,7 @@ restaurant-reviews {
             border-bottom: 1px solid $medium-grey;
 
             &:focus {
-                border-bottom: 2px solid $black;
+                border-bottom: 2px solid var(--color-form-focus);
             }
         }
 
@@ -70,22 +70,22 @@ restaurant-reviews {
 
             
             &.submit {
-                background: $color-rating-star;
+                background: $color-regular-button;
                 &:hover {
                     background: 
                         lighten(
-                            $color:$color-rating-star, 
+                            $color: $color-regular-button, 
                             $amount: 5%
                         );
                 }
             }
 
             &.cancel {
-                background: $color-rating-base;
+                background: $color-disabled-button;
                 &:hover {
                     background: 
                         lighten(
-                            $color:$color-rating-base, 
+                            $color: $color-disabled-button, 
                             $amount: 5%
                         );
                 }
@@ -94,7 +94,7 @@ restaurant-reviews {
     }
 
     .divider {
-        border: 0.5px solid $color-rating-star;
+        border: 0.5px solid $color-section-divider;
         margin: 0.5rem 0;
     }
 }

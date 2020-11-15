@@ -4,7 +4,7 @@ import {
 import _ from 'lodash';
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
-import { setSelectedPage } from 'src/store/shell/actions';
+import { setSelectedPage } from 'src/store/global/actions';
 import './favorite-view.scss';
 
 @customElement('favorite-view')

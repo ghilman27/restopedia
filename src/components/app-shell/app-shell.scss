@@ -15,11 +15,11 @@ app-shell {
         justify-content: space-between;
 
         &.open {
-            background: $color-app-bar-background;
+            background: var(--color-app-bar-background);
             box-shadow: 
-                0 2px 2px 0 rgba($black,0.14), 
-                0 3px 1px -2px rgba($black,0.12), 
-                0 1px 5px 0 rgba($black,0.2);
+                0 2px 2px 0 rgba($color-app-bar-shadow, 0.14), 
+                0 3px 1px -2px rgba($color-app-bar-shadow, 0.12), 
+                0 1px 5px 0 rgba($color-app-bar-shadow, 0.2);
         }
     }
 
@@ -29,6 +29,26 @@ app-shell {
         color: $color-app-bar-text;
         text-decoration: none;
         font-size: 2rem;
+    }
+
+    .toggle-dark-mode-mobile {
+        position: absolute;
+        right: 5rem;
+        min-width: 44px;
+        min-height: 44px;
+        background: transparent;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+
+        i {
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        &:hover {
+            background: rgba(white, 0.3);
+        }
     }
 
     .menu-btn {

@@ -4,6 +4,7 @@ import {
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import { setDropdownOpen } from 'src/store/shell/actions';
+import { setDarkMode } from 'src/store/global/actions';
 import './user-dropdown/user-dropdown';
 import './nav-bar.scss';
 import './nav-bar_responsive.scss';
@@ -22,11 +23,15 @@ export default class NavBar extends connect(store)(LitElement) {
     @property({ type: String })
     selectedPage;
 
+    @property({ type: Boolean })
+    darkMode;
+
     stateChanged(state) {
         this.dropdownOpen = state.shell.dropdownOpen;
-        this.user = state.shell.user;
         this.navMenus = state.shell.navMenus;
-        this.selectedPage = state.shell.selectedPage;
+        this.user = state.global.user;
+        this.selectedPage = state.global.selectedPage;
+        this.darkMode = state.global.darkMode;
     }
 
     toggleDropdown(e) {
@@ -36,6 +41,14 @@ export default class NavBar extends connect(store)(LitElement) {
             store.dispatch(setDropdownOpen(false));
         } else {
             store.dispatch(setDropdownOpen(true));
+        }
+    }
+
+    toggleDarkMode() {
+        if (this.darkMode) {
+            store.dispatch(setDarkMode(false));
+        } else {
+            store.dispatch(setDarkMode(true));
         }
     }
 
@@ -51,6 +64,16 @@ export default class NavBar extends connect(store)(LitElement) {
                         </a>
                     </li>
                     `)}
+
+                    <li class="nav-desktop__item">
+                        <button 
+                            class="toggle-dark-mode-desktop"
+                            @click=${this.toggleDarkMode}
+                            aria-label="toggle to ${this.darkMode ? 'light' : 'dark'} mode"
+                        >
+                            ${this.darkMode ? html`<i class="fas fa-sun"></i>` : html`<i class="fas fa-moon"></i>`}
+                        </button>
+                    </li>
 
                     <li class="nav-desktop__item">
                         <button 

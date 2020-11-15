@@ -22,7 +22,7 @@ restaurant-info {
             height: 44px;
             width: 44px;
             border: none;
-            background: $color-rating-star;
+            background: $color-regular-button;
             
             i.favorite {
                 color: $white;
@@ -38,7 +38,7 @@ restaurant-info {
 
         &__address {
             margin: 0.25rem 0;
-            color: $color-text-subtle;
+            color: var(--color-text-subtle);
             text-transform: capitalize;
         }
 
@@ -49,7 +49,7 @@ restaurant-info {
         &__category {
             border-radius: 0.25rem;
             padding: 0.25rem 0.5rem;
-            background: $color-rating-star;
+            background: $light-orange;
         }
 
         &__desc {
