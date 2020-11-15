@@ -3,7 +3,7 @@
     "short_name": "Restopedia",
     "lang": "en",
     "description": "Find your favorite restaurants!",
-    "start_url": "/index.html",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#cf7500",
     "theme_color": "#cf7500",
