@@ -4,10 +4,14 @@
 review-list {
     display: grid;
     gap: 2rem;
+    min-height: 0;
+    min-width: 0; 
     
     .review {
         display: grid;
         grid-template-columns: 3.5rem auto;
+        min-height: 0;
+        min-width: 0; 
 
         &__author-thumbnail {
             i {
@@ -18,20 +22,29 @@ review-list {
         &__main {
             display: grid;
             gap: 1rem;
+            min-height: 0;
+            min-width: 0; 
+            overflow: hidden;
         }
 
         &__header {
-            @include flex-center-vertical(row);
+            @include flex-center-vertical(column);
+        }
+
+        &__content {
+            word-break: break-word;
         }
         
         &__author {
             font-weight: 700;
             margin-right: 0.5rem;
+            word-break: break-word;
         }
 
         &__date {
             font-size: 0.875rem;
             color: var(--color-text-subtle);
+            margin-top: 0.25rem;
         }
 
     }

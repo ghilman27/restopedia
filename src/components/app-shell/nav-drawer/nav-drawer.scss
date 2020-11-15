@@ -28,12 +28,12 @@ nav-drawer {
         height: calc(100vh - #{$app-bar-height});
         margin: 0;
         display: grid;
-        grid-template-rows: 25vh auto;
-        row-gap: 1.5rem;
+        grid-template-rows: 225px auto;
         background: var(--color-nav-drawer-background);
         transform: translateX(100%);
         opacity: 0;
         visibility: hidden;
+        overflow-y: auto;
         @include transition-ease;
 
         &.open {
@@ -46,6 +46,7 @@ nav-drawer {
     .nav-mobile {
         @include flex-center-horizontal(column);
         justify-content: flex-start;
+        margin-bottom: 1.5rem;
 
         &__item {
             @include full-width;
@@ -76,7 +77,7 @@ nav-drawer {
 
     .user-view {
         @include flex-center-vertical(column);
-        padding: 2rem;
+        padding: 0 2rem;
 
         &__photo {
             width: 100px;
@@ -87,12 +88,24 @@ nav-drawer {
             margin-top: 1rem;
             font-size: 1.13rem;
             font-weight: bold;
+            word-break: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            -webkit-box-orient: vertical; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 1;
         }
 
         &__email {
             margin-top: 0.5rem;
             color: var(--color-text-subtle);
             font-weight: 400;
+            word-break: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            -webkit-box-orient: vertical; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 1;
         }
     }
 

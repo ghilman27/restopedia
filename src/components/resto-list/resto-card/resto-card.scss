@@ -101,10 +101,22 @@ resto-card {
 
     .resto__title {
         margin: 0.25rem 0;
+        word-break: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        -webkit-box-orient: vertical; 
+        display: -webkit-box; 
+        -webkit-line-clamp: 1;
     }
 
     .resto__city {
         color: --var(--color-text-subtle);
+        word-break: break-word;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+        -webkit-box-orient: vertical; 
+        display: -webkit-box; 
+        -webkit-line-clamp: 1;
     }
 
     .resto__description {

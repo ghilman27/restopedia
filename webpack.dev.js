@@ -7,5 +7,9 @@ module.exports = merge(common, {
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
         historyApiFallback: true,
+        // uncomment this to view webpack-dev-server on devices with the same network
+        // host: 'your-ip-address',
+        // port: 8080,
+        // disableHostCheck: true,
     },
 });

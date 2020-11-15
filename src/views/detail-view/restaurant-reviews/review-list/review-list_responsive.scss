@@ -1,7 +1,23 @@
 @import 'src/styles/config';
+@import 'src/styles/helpers';
 
 review-list {
     @include responsive-min($medium) {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .review {
+        &__header {
+            @include responsive-min($medium) {
+                @include flex-center-vertical(row);
+                justify-content: flex-start;
+            }
+        }
+
+        &__author {
+            @include responsive-min($medium) {
+                margin-top: 0;
+            }
+        }
     }
 }

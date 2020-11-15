@@ -9,6 +9,7 @@ restaurant-info {
             margin-right: 1.5rem;
             margin-bottom: 0.5rem;
             display: inline-block;
+            word-break: break-word;
         }
 
         &__fav-button {
@@ -40,9 +41,13 @@ restaurant-info {
             margin: 0.25rem 0;
             color: var(--color-text-subtle);
             text-transform: capitalize;
+            word-break: break-word;
         }
 
         &__categories {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
             margin: 1rem 0;
         }
 
@@ -50,6 +55,9 @@ restaurant-info {
             border-radius: 0.25rem;
             padding: 0.25rem 0.5rem;
             background: $light-orange;
+            margin: 0.25rem 0.25rem 0 0;
+            display: inline-block;
+            word-break: break-word;
         }
 
         &__desc {
@@ -59,6 +67,7 @@ restaurant-info {
             text-overflow: ellipsis; 
             -webkit-box-orient: vertical; 
             display: -webkit-box; 
+            word-break: break-word;
             
             &.clipped {
                 -webkit-line-clamp: 3;
