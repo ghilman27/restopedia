@@ -5,6 +5,7 @@ import _ from 'lodash';
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import { setSelectedPage } from 'src/store/global/actions';
+import setSkipToContentHref from 'src/utils/skipToContent';
 import './favorite-view.scss';
 
 @customElement('favorite-view')
@@ -21,10 +22,15 @@ export default class FavoriteView extends connect(store)(LitElement) {
     connectedCallback() {
         super.connectedCallback();
         this.setSelectedPage();
+        this.setSkipToContentHref();
     }
 
     stateChanged(state) {
         this.restaurants = _.values(state.restaurant);
+    }
+
+    setSkipToContentHref() {
+        setSkipToContentHref(this.location.pathname);
     }
 
     setSelectedPage() {

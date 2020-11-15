@@ -6,6 +6,7 @@ import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import { setSelectedPage } from 'src/store/global/actions';
 import renderErrorToast from 'src/utils/notifications';
+import setSkipToContentHref from 'src/utils/skipToContent';
 import './home-view.scss';
 
 @customElement('home-view')
@@ -20,10 +21,15 @@ export default class HomeView extends connect(store)(LitElement) {
         super.connectedCallback();
         this.setSelectedPage();
         this.fetchData();
+        this.setSkipToContentHref();
     }
 
     setSelectedPage() {
         store.dispatch(setSelectedPage(this.pageTitle));
+    }
+
+    setSkipToContentHref() {
+        setSkipToContentHref(this.location.pathname);
     }
 
     async fetchData() {

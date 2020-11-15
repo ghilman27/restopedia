@@ -6,6 +6,7 @@ import { connect } from 'pwa-helpers';
 import store from 'src/store';
 import { setSelectedPage } from 'src/store/global/actions';
 import renderToast from 'src/utils/notifications';
+import setSkipToContentHref from 'src/utils/skipToContent';
 import './restaurant-info/restaurant-info';
 import './restaurant-menus/restaurant-menus';
 import './restaurant-reviews/restaurant-reviews';
@@ -26,6 +27,11 @@ export default class DetailView extends connect(store)(LitElement) {
         super.connectedCallback();
         this.setSelectedPage();
         this.fetchData();
+        this.setSkipToContentHref();
+    }
+
+    setSkipToContentHref() {
+        setSkipToContentHref(this.location.pathname);
     }
 
     setSelectedPage() {
