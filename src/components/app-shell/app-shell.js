@@ -3,7 +3,7 @@ import {
 } from 'lit-element';
 import { connect } from 'pwa-helpers';
 import store from 'src/store';
-import { setDrawerOpen, setDropdownOpen } from 'src/store/shell/actions';
+import { setDrawerOpen } from 'src/store/shell/actions';
 import { setDarkMode } from 'src/store/global/actions';
 import './nav-bar/nav-bar';
 import './nav-drawer/nav-drawer';
@@ -30,13 +30,11 @@ export default class AppShell extends connect(store)(LitElement) {
     connectedCallback() {
         super.connectedCallback();
         document.addEventListener('scroll', this.handleScroll);
-        window.addEventListener('resize', this.handleResize);
     }
 
     disconnectedCallback() {
         super.disconnectedCallback();
         document.removeEventListener('scroll', this.handleScroll);
-        window.removeEventListener('resize', this.handleResize);
     }
 
     stateChanged(state) {
@@ -55,11 +53,6 @@ export default class AppShell extends connect(store)(LitElement) {
         } else {
             body.classList.remove('dark');
         }
-    }
-
-    handleResize = () => {
-        store.dispatch(setDrawerOpen(false));
-        store.dispatch(setDropdownOpen(false));
     }
 
     handleScroll = () => {
