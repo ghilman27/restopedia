@@ -1,0 +1,1 @@
+put static asset here

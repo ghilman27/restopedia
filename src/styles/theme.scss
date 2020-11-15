@@ -1,0 +1,67 @@
+@import 'config';
+
+:root {
+    // Page Background
+    --color-page-background: #{$white};
+    --color-app-background: #{$dark-orange};
+
+    // App bar and Footer
+    --color-footer-background: #{$dark-orange};
+    --color-app-bar-background: #{$dark-orange};
+
+    // Card
+    --color-card-shadow: 42, 42, 42;
+
+    // Rating System
+    --color-rating-base: #{$medium-grey};
+    --color-rating-star: #{$light-orange};
+
+    // Navigations
+    --color-nav-bar-menu-hover: linear-gradient(
+        to top,
+        rgba(#{$white}, 0.2),
+        transparent
+        );
+    --color-nav-drawer-divider: #{$medium-grey};
+    --color-nav-drawer-background: #{$white};
+    --color-nav-drawer-menu-hover: #{$medium-grey};
+    --color-nav-dropdown-background: #{$white};
+    --color-nav-dropdown-shadow: 42, 42, 42;
+    --color-nav-dropdown-menu-hover: #{$medium-grey};
+
+    // Text System
+    --color-text-base: #{$black};
+    --color-text-complement: #{$white};
+    --color-text-subtle: rgba(0, 0, 0, 0.5);
+
+    // Form
+    --color-form-focus: #{$black};
+}
+
+.dark {
+    // Page Background
+    --color-page-background: #{$black};
+    --color-app-background: #{$black};
+
+    // App bar and Footer
+    --color-footer-background: #{$medium-black};
+    --color-app-bar-background: #{$medium-black};
+
+    // Card
+    --color-card-shadow: 255, 255, 255;
+
+    // Navigations
+    --color-nav-drawer-background: #{$medium-black};
+    --color-nav-drawer-menu-hover: rgba(0, 0, 0, 0.5);
+    --color-nav-dropdown-background: #{$medium-black};
+    --color-nav-dropdown-shadow: 255, 255, 255;
+    --color-nav-dropdown-menu-hover: rgba(0, 0, 0, 0.5);
+
+    // Text System
+    --color-text-base: #{$white};
+    --color-text-complement: #{$black};
+    --color-text-subtle: #{$medium-grey};
+
+    // Form
+    --color-form-focus: #{$light-orange};
+}

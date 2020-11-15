@@ -1,5 +1,5 @@
-@import '../../styles/config';
-@import '../../styles/helpers';
+@import 'src/styles/config';
+@import 'src/styles/helpers';
 
 resto-list {
     @include display-block;

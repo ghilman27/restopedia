@@ -1,0 +1,104 @@
+@import 'src/styles/config';
+@import 'src/styles/helpers';
+
+nav-drawer {
+    position: fixed;
+    
+    .aria-close-popup-btn {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        opacity: 0;
+        background-color: var(--color-app-bar-background);
+        padding: 8px;
+        color: $white;
+        min-width: 44px;
+        min-height: 44px;
+
+        &:focus {
+            opacity: 1;
+        }
+    }
+    
+    .nav-drawer-mobile {
+        position: fixed;
+        right: 0;
+        top: $app-bar-height;
+        width: 300px;
+        height: calc(100vh - #{$app-bar-height});
+        margin: 0;
+        display: grid;
+        grid-template-rows: 25vh auto;
+        row-gap: 1.5rem;
+        background: var(--color-nav-drawer-background);
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+        @include transition-ease;
+
+        &.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+    }
+
+    .nav-mobile {
+        @include flex-center-horizontal(column);
+        justify-content: flex-start;
+
+        &__item {
+            @include full-width;
+            list-style-type: none;
+
+            &.selected {
+                background: var(--color-nav-drawer-menu-hover);
+            }
+        }
+
+        &__link {
+            @include full-width;
+            display: grid;
+            grid-template-columns: 2.5rem auto;
+            align-items: center;
+            text-decoration: none;
+            text-transform: capitalize;
+            min-height: 44px;
+            padding: 0 2rem;
+            font-size: 1.125rem;
+            color: var(--color-text-base);
+
+            &:hover {
+                background: var(--color-nav-drawer-menu-hover);
+            }
+        }
+    }
+
+    .user-view {
+        @include flex-center-vertical(column);
+        padding: 2rem;
+
+        &__photo {
+            width: 100px;
+            border-radius: 100%;
+        }
+
+        &__name {
+            margin-top: 1rem;
+            font-size: 1.13rem;
+            font-weight: bold;
+        }
+
+        &__email {
+            margin-top: 0.5rem;
+            color: var(--color-text-subtle);
+            font-weight: 400;
+        }
+    }
+
+    .divider {
+        @include full-width;
+        border-top: 0.5px solid var(--color-nav-drawer-divider);
+        margin: 1rem 0;
+    }
+}

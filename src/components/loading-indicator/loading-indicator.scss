@@ -1,0 +1,47 @@
+@import 'src/styles/helpers';
+@import 'src/styles/config';
+
+loading-indicator {
+    .container {
+        @include flex-center(column);
+        position: fixed;
+        background: transparent;
+        width: 100%;
+        height: 90vh;
+        top: 0;
+        left: 0;
+        background: var(--color-app-background);
+        color: $white;
+        font-size: 1.5rem;
+    }
+
+    .loader {
+        border: 16px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 16px solid $light-orange;
+        width: 120px;
+        height: 120px;
+        margin-bottom: 1rem;
+        animation: spin 2s linear infinite;
+        -webkit-animation: spin 2s linear infinite; /* Safari */
+    }
+
+    /* Safari */
+    @-webkit-keyframes spin {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}

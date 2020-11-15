@@ -6,29 +6,19 @@ $light-grey: #f4f4f4;
 $medium-grey: #dedede;
 $light-orange: #F0A500;
 $dark-orange: #cf7500;
-$tokopedia-color: #42b549;
 
-// background color
-$color-page-background: $white;
-$color-footer-background: $dark-orange;
-$color-app-bar-background: $dark-orange;
-$color-search-bar: $white;
-$color-hero-shadow: rgba($black, 0.4);
-$color-nav-drawer-background: $white;
-$color-nav-menu-hover: $medium-grey;
-$color-card-shadow: $medium-black;
-$color-rating-star: $light-orange;
-$color-rating-base: $medium-grey;
-
-// text color
+// fixed colors
+$color-card-indicator: $light-orange;
 $color-app-bar-text: $white;
-$color-text-light: $white;
-$color-text-dark: $black;
+$color-app-bar-selected: $medium-grey;
+$color-app-bar-shadow: $black;
+$color-text-white: $white;
 $color-hero-text: $light-grey;
-$color-text-subtle: rgba($black, 0.5);
-
-// divider
-$color-nav-drawer-divider: $medium-grey;
+$color-hero-shadow: rgba($black, 0.4);
+$color-regular-button: $light-orange;
+$color-disabled-button: $medium-grey;
+$color-section-divider: $light-orange;
+$color-notification-toast: $medium-black;
 
 // font library
 $main-font-family: 'Roboto', sans-serif;

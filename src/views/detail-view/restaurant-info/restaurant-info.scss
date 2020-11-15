@@ -1,0 +1,78 @@
+@import 'src/styles/config';
+@import 'src/styles/helpers';
+
+restaurant-info {
+    .detail {
+        &__restaurant-name {
+            font-size: 1.75rem;
+            max-width: 1280px;
+            margin-right: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        &__fav-button {
+            @include flex-center(row);
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            height: 44px;
+            width: 44px;
+            border: none;
+            background: $color-regular-button;
+            
+            i.favorite {
+                color: $white;
+            }
+    
+            @include responsive-min($medium) {
+                position: relative;
+                display: inline;
+                bottom: initial;
+                right: initial;
+            }
+        }
+
+        &__address {
+            margin: 0.25rem 0;
+            color: var(--color-text-subtle);
+            text-transform: capitalize;
+        }
+
+        &__categories {
+            margin: 1rem 0;
+        }
+
+        &__category {
+            border-radius: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            background: $light-orange;
+        }
+
+        &__desc {
+            margin-top: 2rem;
+            overflow: hidden;
+            line-height: 1.6;
+            text-overflow: ellipsis; 
+            -webkit-box-orient: vertical; 
+            display: -webkit-box; 
+            
+            &.clipped {
+                -webkit-line-clamp: 3;
+            }
+        }
+
+        &__toggle-desc {
+            border: none;
+            background: none;
+            color: $dark-orange;
+            font-size: 1rem;
+            padding: 0.25rem 0;
+            min-height: 44px;
+            cursor: pointer;
+        }
+    }
+}

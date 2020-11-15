@@ -1,62 +1,31 @@
-import { LitElement, html, customElement, property} from 'lit-element';
+import {
+    LitElement, html, customElement, property,
+} from 'lit-element';
+import { connect } from 'pwa-helpers';
+import store from 'src/store';
+import { setDrawerOpen, setDropdownOpen } from 'src/store/shell/actions';
+import { setDarkMode } from 'src/store/global/actions';
+import './nav-bar/nav-bar';
+import './nav-drawer/nav-drawer';
 import './app-shell.scss';
 import './app-shell_responsive.scss';
 
 @customElement('app-shell')
-export default class AppShell extends LitElement {
-    @property({type: Boolean})
-    drawerOpen = false;
+export default class AppShell extends connect(store)(LitElement) {
+    @property({ type: Boolean })
+    drawerOpen;
 
-    @property({type: Boolean})
-    dropdownOpen = false;
+    @property({ type: Boolean })
+    dropdownOpen;
 
-    @property({type: Boolean})
+    @property({ type: Boolean })
     positionTop = true;
 
-    @property({type: String})
-    logoName = 'restopedia';
+    @property({ type: String })
+    logoName;
 
-    @property({type: Object})
-    user = {
-        firstname: 'Ghilman',
-        lastname: 'Al Fatih',
-        email: 'ghilman27@gmail.com',
-        photo: '/images/profile.jpg',
-    }
-
-    @property({type: Array})
-    navMenus = [
-        {
-            name: 'home',
-            link: '#',
-            icon: 'fa fa-home',
-        },
-        {
-            name: 'favourite',
-            link: '#!',
-            icon: 'fa fa-heart',
-        },
-        {
-            name: 'about us',
-            link: 'https://github.com/ghilman27',
-            newtab: true,
-            icon: 'fab fa-github',
-        },
-    ];
-
-    @property({type: Array})
-    accountMenus = [
-        {
-            name: 'settings',
-            link: '#!',
-            icon: 'fa fa-cog',
-        },
-        {
-            name: 'sign out',
-            link: '#!',
-            icon: 'fas fa-sign-out-alt',
-        },
-    ]
+    @property({ type: Boolean })
+    darkMode;
 
     connectedCallback() {
         super.connectedCallback();
@@ -65,33 +34,67 @@ export default class AppShell extends LitElement {
     }
 
     disconnectedCallback() {
+        super.disconnectedCallback();
         document.removeEventListener('scroll', this.handleScroll);
         window.removeEventListener('resize', this.handleResize);
     }
 
+    stateChanged(state) {
+        this.drawerOpen = state.shell.drawerOpen;
+        this.dropdownOpen = state.shell.dropdownOpen;
+        this.logoName = state.global.appName;
+        this.darkMode = state.global.darkMode;
+
+        this.decideDarkMode();
+    }
+
+    decideDarkMode() {
+        const body = document.querySelector('body');
+        if (this.darkMode) {
+            body.classList.add('dark');
+        } else {
+            body.classList.remove('dark');
+        }
+    }
+
     handleResize = () => {
-        this.dropdownOpen = false;
-        this.drawerOpen = false;
+        store.dispatch(setDrawerOpen(false));
+        store.dispatch(setDropdownOpen(false));
     }
 
     handleScroll = () => {
-        this.positionTop = !window.pageYOffset
+        this.positionTop = !window.pageYOffset;
     }
 
-    toggleDrawer() {
-        this.drawerOpen = !this.drawerOpen
+    toggleDrawer = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (this.drawerOpen) {
+            store.dispatch(setDrawerOpen(false));
+        } else {
+            store.dispatch(setDrawerOpen(true));
+        }
     }
 
-    toggleDropdown(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.dropdownOpen = !this.dropdownOpen
+    toggleDarkMode() {
+        if (this.darkMode) {
+            store.dispatch(setDarkMode(false));
+        } else {
+            store.dispatch(setDarkMode(true));
+        }
     }
 
     render() {
         return html`
-        <div class="wrapper ${this.drawerOpen || this.dropdownOpen || !this.positionTop ? "open" : ""}">
+        <div class="wrapper ${this.drawerOpen || this.dropdownOpen || !this.positionTop ? 'open' : ''}">
             <a href="#!" aria-label="app-logo" class="app-logo">${this.logoName}</a>
+            <button 
+                class="toggle-dark-mode-mobile"
+                @click=${this.toggleDarkMode}
+                aria-label="toggle to ${this.darkMode ? 'light' : 'dark'} mode"
+            >
+                ${this.darkMode ? html`<i class="fas fa-sun"></i>` : html`<i class="fas fa-moon"></i>`}
+            </button>
             <button 
                 class="menu-btn" 
                 @click=${this.toggleDrawer} 
@@ -101,108 +104,11 @@ export default class AppShell extends LitElement {
             >
                 <span class="menu-btn__burger ${this.drawerOpen ? 'open' : ''}"></span>
             </button>
-
-            <nav class="nav-drawer-desktop">
-                <ul class="nav-desktop">
-                    ${this.navMenus.map(item => html`
-                    <li class="nav-desktop__item">
-                        <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-desktop__link">
-                            <i class=${item.icon}></i>
-                            <span>${item.name}</span>
-                        </a>
-                    </li>
-                    `)}
-
-                    <li class="nav-desktop__item">
-                        <button 
-                            @click=${this.toggleDropdown} 
-                            class="nav-desktop__link ${this.dropdownOpen ? 'open' : ''}"
-                            aria-haspopup="true" 
-                            aria-expanded=${this.dropdownOpen ? 'true' : 'false'}
-                        >
-                            <img 
-                                @click=${this.toggleDropdown} 
-                                src=${this.user.photo} 
-                                alt="${this.user.firstname} ${this.user.lastname} profile" 
-                                class="nav-desktop__photo"
-                            >
-                        </button>
-
-                        <div id="user-dropdown" class="user-dropdown ${this.dropdownOpen ? 'open' : ''}">
-                            <div class="user-dropdown__info">
-                                <img 
-                                    src=${this.user.photo} 
-                                    alt="profile picture" 
-                                    class="user-dropdown__photo"
-                                    tabindex="0"
-                                >
-                                <span class="user-dropdown__name" tabindex="0">
-                                    ${`${this.user.firstname} ${this.user.lastname}`}
-                                </span>
-                                <span class="user-dropdown__email" tabindex="0">${this.user.email}</span>
-                            </div>
-                            <ul>
-                                ${this.accountMenus.map(item => html`
-                                <li class="user-dropdown__item">
-                                    <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="user-dropdown__link">
-                                        <i class=${item.icon}></i>
-                                        <span>${item.name}</span>
-                                    </a>
-                                </li>
-                                `)}
-                            </ul>
-                            <button
-                                @click=${this.toggleDropdown} 
-                                class="aria-close-popup-btn"
-                                aria-haspopup="true" 
-                                aria-expanded="${this.dropdownOpen ? 'true' : 'false'}"
-                            >
-                                Close ${this.user.firstname} ${this.user.lastname} Profile
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-
-            <nav class="nav-drawer-mobile ${this.drawerOpen ? 'open' : ''}">
-                <div class="user-view">
-                    <img src=${this.user.photo} alt="profile picture" class="user-view__photo" tabindex="0">
-                    <span class="user-view__name" tabindex="0">${`${this.user.firstname} ${this.user.lastname}`}</span>
-                    <span class="user-view__email" tabindex="0">${this.user.email}</span>
-                </div>
-                <ul class="nav-mobile">
-                    ${this.navMenus.map(item => html`
-                    <li class="nav-mobile__item">
-                        <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
-                            <i class="${item.icon}"></i>
-                            <span>${item.name}</span>
-                        </a>
-                    </li>
-                    `)}
-
-                    <hr class="divider">
-
-                    ${this.accountMenus.map(item => html`
-                    <li class="nav-mobile__item">
-                        <a href=${item.link} target=${item.newtab ? "_blank" : '_self'} class="nav-mobile__link">
-                            <i class=${item.icon}></i>
-                            <span>${item.name}</span>
-                        </a>
-                    </li>
-                    `)}
-                </ul>
-                <button
-                    @click=${this.toggleDrawer} 
-                    class="aria-close-popup-btn"
-                    aria-haspopup="true" 
-                    aria-expanded=${this.drawerOpen ? 'true' : 'false'}
-                >
-                    Close Navigation Drawer
-                </button>
-            </nav>
+            <nav-bar></nav-bar>
+            <nav-drawer></nav-drawer>
         </div>
         `;
     }
 
-    createRenderRoot() {return this};
+    createRenderRoot() { return this; }
 }

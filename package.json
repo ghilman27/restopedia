@@ -17,13 +17,17 @@
     "@babel/plugin-proposal-decorators": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "autoprefixer": "^9.8.6",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.0.3",
     "css-loader": "^3.6.0",
     "cssnano": "^4.1.10",
     "cssnano-webpack-plugin": "^1.0.3",
     "dotenv-webpack": "^3.0.0",
-    "eslint": "^7.4.0",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.22.1",
     "html-webpack-plugin": "^4.3.0",
     "jasmine-ajax": "^4.0.0",
     "jasmine-core": "^3.5.0",
@@ -42,10 +46,18 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^5.0.9",
-    "whatwg-fetch": "^3.2.0"
+    "whatwg-fetch": "^3.2.0",
+    "workbox-webpack-plugin": "^5.1.4"
   },
   "dependencies": {
+    "@vaadin/router": "^1.7.2",
+    "idb": "^5.0.7",
     "lit-element": "^2.4.0",
+    "lodash": "^4.17.20",
+    "pwa-helpers": "^0.9.1",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
     "regenerator-runtime": "^0.13.5"
   }
 }

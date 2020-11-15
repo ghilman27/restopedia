@@ -1,0 +1,22 @@
+@import 'src/styles/config';
+
+detail-view {
+    display: grid;
+    grid-template-rows: 50vh auto;
+    
+    .content {
+        margin-top: -3rem;
+        background: var(--color-page-background);
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        padding: 3rem 7.5%;
+        position: relative;
+    }
+
+    .wrapper {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: grid;
+        gap: 3rem;
+    }
+}

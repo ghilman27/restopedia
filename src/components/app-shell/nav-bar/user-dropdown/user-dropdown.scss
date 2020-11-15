@@ -1,0 +1,84 @@
+@import 'src/styles/config';
+@import 'src/styles/helpers';
+
+user-dropdown {
+    .user-dropdown {
+        position: fixed;
+        right: $app-bar-margin;
+        top: $app-bar-height;
+        background: var(--color-nav-dropdown-background);
+        color: var(--color-text-base);
+        box-shadow: 0 1px 1px 0 rgba(var(--color-nav-dropdown-shadow), 0.08),
+            0 1px 3px 1px rgba(var(--color-nav-dropdown-shadow), 0.16);
+        opacity: 0;
+        visibility: hidden;
+        padding-bottom: 2rem;
+        @include transition-ease;
+
+        &.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        &__item {
+            @include full-width;
+            list-style-type: none;
+        }
+
+        &__link {
+            @include full-width;
+            display: grid;
+            grid-template-columns: 2.5rem auto;
+            align-items: center;
+            text-decoration: none;
+            text-transform: capitalize;
+            min-height: 44px;
+            padding: 0 2rem;
+            font-size: 1.125rem;
+            color: var(--color-text-base);
+
+            &:hover {
+                background: var(--color-nav-dropdown-menu-hover);
+            }
+        }
+
+        &__info {
+            @include flex-center-vertical(column);
+            padding: 2rem;
+        }
+
+        &__photo {
+            width: 100px;
+            border-radius: 100%;
+        }
+
+        &__name {
+            margin-top: 1rem;
+            font-size: 1.13rem;
+            font-weight: bold;
+        }
+
+        &__email {
+            margin-top: 0.5rem;
+            color: var(--color-text-subtle);
+            font-weight: 400;
+            text-transform: none;
+        }
+    }
+
+    .aria-close-popup-btn {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        opacity: 0;
+        background-color: var(--color-app-bar-background);
+        padding: 8px;
+        color: $color-text-white;
+        min-width: 44px;
+        min-height: 44px;
+
+        &:focus {
+            opacity: 1;
+        }
+    }
+}

@@ -1,0 +1,32 @@
+@import 'src/styles/config';
+@import 'src/styles/helpers';
+
+favorite-view {
+    display: grid;
+    grid-template-rows: 50vh auto;
+    
+    .content {
+        margin-top: -3rem;
+        background: var(--color-page-background);
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        padding: 6rem 1.5rem;
+        position: relative;
+
+        display: grid;
+        gap: 3rem;
+    }
+    
+    .not-found {
+        @include flex-center(column);
+        @include center-text;
+        color: var(--color-text-subtle);
+        font-size: 1.25rem;
+        
+        i {
+            font-size: 7rem;
+            margin-bottom: 2rem;
+            color: $medium-grey;
+        }
+    }
+}

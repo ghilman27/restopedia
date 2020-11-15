@@ -1,10 +1,11 @@
-@import '../../styles/config';
-@import '../../styles/helpers';
+@import 'src/styles/config';
+@import 'src/styles/helpers';
 
 footer-bar {
     @include flex-center(row);
-    background: $color-footer-background;
-    color: $color-text-light;
+    background: var(--color-footer-background);
+    color: $color-text-white;
     font-family: $main-font-family;
     height: 10vh;
+    text-transform: capitalize;
 }

@@ -1,24 +1,57 @@
-@import '../../styles/config';
-@import '../../styles/helpers';
+@import 'src/styles/config';
+@import 'src/styles/helpers';
 
 resto-card {
     @include display-block;
-    
-    
+
     .card {
         @include display-block;
+        position: relative;
         text-decoration: none;
         color: unset;
         border-radius: 1rem;
-        box-shadow: 0 1px 1px 0 rgba($color-card-shadow, 0.08), 0 1px 3px 1px rgba($color-card-shadow, 0.16);
+        box-shadow: 0 1px 1px 0 rgba(var(--color-card-shadow), 0.08),
+            0 1px 3px 1px rgba(var(--color-card-shadow), 0.16);
         overflow: hidden;
         transition: all 0.3s ease-in-out;
-        
+
         &.hover {
             transform: scale(1.02);
         }
     }
-    
+
+    .indicator {
+        &__delete-btn,
+        &__favorite {
+            @include flex-center(row);
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1.25rem;
+            width: 44px;
+            height: 44px;
+            border: none;
+            border-top-right-radius: 1rem;
+            border-bottom-left-radius: 0.5rem;
+            background: $color-card-indicator;
+        }
+
+        &__favorite {
+            color: $white;
+        }
+
+        &__delete-btn {
+            cursor: pointer;
+            &:hover {
+                background: 
+                    lighten(
+                        $color: $color-card-indicator, 
+                        $amount: 5%
+                    );
+            }
+        }
+    }
+
     .card__media {
         position: relative;
 
@@ -36,13 +69,15 @@ resto-card {
             @include flex-center(column);
             @include transition-ease;
             position: absolute;
-            width: 100%; height:100%;
-            top:0; left:0;
-            background:rgba(0,0,0,0.4);
-            color: $color-text-light;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.4);
+            color: $white;
             opacity: 0;
             visibility: hidden;
-            
+
             &.hover {
                 opacity: 1;
                 visibility: visible;
@@ -64,31 +99,20 @@ resto-card {
         position: relative;
     }
 
-    .resto__distance {
-        position: absolute;
-        right: 0.825rem;
-        top: -0.825rem;
-        padding: 0.37rem;
-        background: $color-rating-star;
-        border-radius: 10%;
-        font-size: 0.9rem;
-        font-weight: bold;
-    }
-
     .resto__title {
         margin: 0.25rem 0;
     }
 
     .resto__city {
-        color: $color-text-subtle;
+        color: --var(--color-text-subtle);
     }
 
     .resto__description {
         margin: 0.75rem 0;
-        overflow: hidden; 
-        text-overflow: ellipsis; 
-        -webkit-box-orient: vertical; 
-        display: -webkit-box; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
         -webkit-line-clamp: 4;
         font-size: 1rem;
     }

@@ -1,0 +1,9 @@
+@import 'src/styles/config';
+
+nav-bar {
+    .nav-desktop {
+        @include responsive-min($large) {
+            display: flex;
+        }
+    }
+}

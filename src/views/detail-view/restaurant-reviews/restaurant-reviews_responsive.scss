@@ -1,0 +1,19 @@
+@import 'src/styles/config';
+
+restaurant-reviews {
+    .reviews {
+        &__title {
+            @include responsive-min($medium) {
+                text-align: center;
+            }
+        }
+    }
+
+    .form {
+        &__footer {
+            @include responsive-min($medium) {
+                flex-direction: row;
+            }
+        }
+    }
+}
