@@ -71,6 +71,13 @@ hero-element {
             font-weight: 500;
             margin-bottom: 1rem;
             font-size: 2rem;
+            word-break: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            -webkit-box-orient: vertical; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 1;
+            max-width: 300px;
         }
     }
 }

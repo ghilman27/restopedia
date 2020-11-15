@@ -13,6 +13,7 @@ user-dropdown {
         opacity: 0;
         visibility: hidden;
         padding-bottom: 2rem;
+        max-width: 300px;
         @include transition-ease;
 
         &.open {
@@ -56,6 +57,12 @@ user-dropdown {
             margin-top: 1rem;
             font-size: 1.13rem;
             font-weight: bold;
+            word-break: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            -webkit-box-orient: vertical; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 1;
         }
 
         &__email {
@@ -63,6 +70,12 @@ user-dropdown {
             color: var(--color-text-subtle);
             font-weight: 400;
             text-transform: none;
+            word-break: break-word;
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            -webkit-box-orient: vertical; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 1;
         }
     }
 
