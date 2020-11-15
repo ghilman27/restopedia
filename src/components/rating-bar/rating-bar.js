@@ -3,13 +3,15 @@ import {
 } from 'lit-element';
 import './rating-bar.scss';
 
+const STAR_SCALES_ARRAY = [0, 1, 2, 3, 4];
+
 @customElement('rating-bar')
 export default class RatingBar extends LitElement {
     @property({ type: Number }) rating = 4;
 
     constructor() {
         super();
-        this.starScales = [0, 1, 2, 3, 4];
+        this.starScales = STAR_SCALES_ARRAY;
     }
 
     render() {

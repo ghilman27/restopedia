@@ -1,11 +1,14 @@
 import {
     LitElement, html, customElement, property,
 } from 'lit-element';
+import { connect } from 'pwa-helpers';
+import store from 'src/store';
+import decideGreeting from 'src/utils/greetings';
 import './hero-element.scss';
 import './hero-element_responsive.scss';
 
 @customElement('hero-element')
-export default class HeroElement extends LitElement {
+export default class HeroElement extends connect(store)(LitElement) {
     @property({ type: String })
     imageSrc = '/images/heros/hero-image_2.jpg';
 
@@ -14,6 +17,13 @@ export default class HeroElement extends LitElement {
 
     @property({ type: String })
     heading = '';
+
+    @property({ type: Object })
+    user;
+
+    stateChanged(state) {
+        this.user = state.shell.user;
+    }
 
     render() {
         return html`
@@ -24,8 +34,8 @@ export default class HeroElement extends LitElement {
 
             ${this.greeting ? html`
             <div class="greeting">
-                <p class="greeting__say" tabindex="0">Good night,</p>
-                <p class="greeting__name" tabindex="0">Ghilman</p>
+                <p class="greeting__say" tabindex="0">${decideGreeting()},</p>
+                <p class="greeting__name" tabindex="0">${this.user.firstname}</p>
             </div>
             ` : ''}
 

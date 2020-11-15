@@ -7,6 +7,8 @@ import './review-list/review-list';
 import './restaurant-reviews.scss';
 import './restaurant-reviews_responsive.scss';
 
+const SUBMIT_REVIEW_SUCCESS_MESSAGE = 'Submit Review Success';
+
 @customElement('restaurant-reviews')
 export default class RestaurantReviews extends LitElement {
     @property({ type: String })
@@ -51,7 +53,7 @@ export default class RestaurantReviews extends LitElement {
         event.preventDefault();
         try {
             await this.updateReviews();
-            this.renderToast({ message: 'Submit Review Success' });
+            this.renderToast({ message: SUBMIT_REVIEW_SUCCESS_MESSAGE });
             this.resetForm();
         } catch (error) {
             this.renderToast(error);

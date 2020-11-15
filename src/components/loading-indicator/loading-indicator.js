@@ -3,10 +3,12 @@ import {
 } from 'lit-element';
 import './loading-indicator.scss';
 
+const LOADING_TEXT = 'Loading Content';
+
 @customElement('loading-indicator')
 export default class LoadingIndicator extends LitElement {
     @property({ type: String })
-    loadingText = 'Loading Content';
+    loadingText = LOADING_TEXT;
 
     render() {
         return html`
