@@ -1,57 +1,11 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { setDropdownOpen } from 'src/store/shell/actions';
-import { setDarkMode } from 'src/store/global/actions';
+import { html, customElement } from 'lit-element';
+import BaseShell from 'src/components/app-shell/base-shell';
 import './user-dropdown/user-dropdown';
 import './nav-bar.scss';
 import './nav-bar_responsive.scss';
 
 @customElement('nav-bar')
-export default class NavBar extends connect(store)(LitElement) {
-    @property({ type: Boolean })
-    dropdownOpen;
-
-    @property({ type: Object })
-    user;
-
-    @property({ type: Array })
-    navMenus;
-
-    @property({ type: String })
-    selectedPage;
-
-    @property({ type: Boolean })
-    darkMode;
-
-    stateChanged(state) {
-        this.dropdownOpen = state.shell.dropdownOpen;
-        this.navMenus = state.shell.navMenus;
-        this.user = state.global.user;
-        this.selectedPage = state.global.selectedPage;
-        this.darkMode = state.global.darkMode;
-    }
-
-    toggleDropdown(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        if (this.dropdownOpen) {
-            store.dispatch(setDropdownOpen(false));
-        } else {
-            store.dispatch(setDropdownOpen(true));
-        }
-    }
-
-    toggleDarkMode() {
-        if (this.darkMode) {
-            store.dispatch(setDarkMode(false));
-        } else {
-            store.dispatch(setDarkMode(true));
-        }
-    }
-
+export default class NavBar extends BaseShell {
     render() {
         return html`
             <nav class="nav-drawer-desktop">
@@ -96,6 +50,4 @@ export default class NavBar extends connect(store)(LitElement) {
             </nav>
         `;
     }
-
-    createRenderRoot() { return this; }
 }

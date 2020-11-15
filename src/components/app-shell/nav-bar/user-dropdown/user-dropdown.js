@@ -1,22 +1,9 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { setDropdownOpen } from 'src/store/shell/actions';
+import { html, customElement } from 'lit-element';
+import BaseShell from 'src/components/app-shell/base-shell';
 import './user-dropdown.scss';
 
 @customElement('user-dropdown')
-export default class UserDropdown extends connect(store)(LitElement) {
-    @property({ type: Boolean })
-    open;
-
-    @property({ type: Object })
-    user;
-
-    @property({ type: Array })
-    accountMenus;
-
+export default class UserDropdown extends BaseShell {
     constructor() {
         super();
         this.closeOnOutsideClick = this.closeOnOutsideClick.bind(this);
@@ -32,20 +19,10 @@ export default class UserDropdown extends connect(store)(LitElement) {
         document.removeEventListener('click', this.closeOnOutsideClick);
     }
 
-    stateChanged(state) {
-        this.open = state.shell.dropdownOpen;
-        this.user = state.global.user;
-        this.accountMenus = state.shell.accountMenus;
-    }
-
     closeOnOutsideClick(event) {
         if (!this.contains(event.target)) {
             this.closeDropdown();
         }
-    }
-
-    closeDropdown = () => {
-        store.dispatch(setDropdownOpen(false));
     }
 
     render() {
@@ -54,7 +31,7 @@ export default class UserDropdown extends connect(store)(LitElement) {
         } = this.user;
 
         return html`
-            <div class="user-dropdown ${this.open ? 'open' : ''}">
+            <div class="user-dropdown ${this.dropdownOpen ? 'open' : ''}">
                 <div class="user-dropdown__info">
                     <img 
                         src=${photo} 
@@ -82,13 +59,11 @@ export default class UserDropdown extends connect(store)(LitElement) {
                     @click=${this.closeDropdown} 
                     class="aria-close-popup-btn"
                     aria-haspopup="true" 
-                    aria-expanded="${this.open ? 'true' : 'false'}"
+                    aria-expanded="${this.dropdownOpen ? 'true' : 'false'}"
                 >
                     Close ${firstname} ${lastname} Profile
                 </button>
             </div>
         `;
     }
-
-    createRenderRoot() { return this; }
 }
