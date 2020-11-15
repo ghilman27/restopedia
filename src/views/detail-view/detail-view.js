@@ -1,21 +1,16 @@
 import API from 'src/data/api';
 import {
-    LitElement, html, customElement, property,
+    html, customElement, property,
 } from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { setSelectedPage } from 'src/store/global/actions';
 import renderToast from 'src/utils/notifications';
+import BaseView from 'src/views/base-view';
 import './restaurant-info/restaurant-info';
 import './restaurant-menus/restaurant-menus';
 import './restaurant-reviews/restaurant-reviews';
 import './detail-view.scss';
 
 @customElement('detail-view')
-export default class DetailView extends connect(store)(LitElement) {
-    @property({ type: Object })
-    location;
-
+export default class DetailView extends BaseView {
     @property({ type: Object })
     restaurant;
 
@@ -24,12 +19,7 @@ export default class DetailView extends connect(store)(LitElement) {
 
     connectedCallback() {
         super.connectedCallback();
-        this.setSelectedPage();
         this.fetchData();
-    }
-
-    setSelectedPage() {
-        store.dispatch(setSelectedPage(this.pageTitle));
     }
 
     renderToast = (message) => {
@@ -77,9 +67,5 @@ export default class DetailView extends connect(store)(LitElement) {
                 </div>
             ` : html`<loading-indicator></loading-indicator>`}
         `;
-    }
-
-    createRenderRoot() {
-        return this;
     }
 }

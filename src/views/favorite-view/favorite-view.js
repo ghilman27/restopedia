@@ -1,34 +1,20 @@
 import {
-    LitElement, html, customElement, property,
+    html, customElement, property,
 } from 'lit-element';
 import _ from 'lodash';
-import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { setSelectedPage } from 'src/store/global/actions';
+import BaseView from 'src/views/base-view';
 import './favorite-view.scss';
 
 @customElement('favorite-view')
-export default class FavoriteView extends connect(store)(LitElement) {
+export default class FavoriteView extends BaseView {
     @property({ type: Array })
     restaurants = [];
-
-    @property({ type: Boolean })
-    requested = false;
 
     @property({ type: String })
     pageTitle = 'favorites';
 
-    connectedCallback() {
-        super.connectedCallback();
-        this.setSelectedPage();
-    }
-
     stateChanged(state) {
         this.restaurants = _.values(state.restaurant);
-    }
-
-    setSelectedPage() {
-        store.dispatch(setSelectedPage(this.pageTitle));
     }
 
     render() {
@@ -55,10 +41,6 @@ export default class FavoriteView extends connect(store)(LitElement) {
                 </div>
                 `}
             </div>
-            `;
-    }
-
-    createRenderRoot() {
-        return this;
+        `;
     }
 }

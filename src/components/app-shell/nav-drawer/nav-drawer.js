@@ -1,28 +1,9 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { setDrawerOpen } from 'src/store/shell/actions';
+import { html, customElement } from 'lit-element';
+import BaseShell from 'src/components/app-shell/base-shell';
 import './nav-drawer.scss';
 
 @customElement('nav-drawer')
-export default class NavDrawer extends connect(store)(LitElement) {
-    @property({ type: Boolean })
-    drawerOpen;
-
-    @property({ type: Object })
-    user;
-
-    @property({ type: Array })
-    navMenus;
-
-    @property({ type: Array })
-    accountMenus;
-
-    @property({ type: String })
-    selectedPage;
-
+export default class NavDrawer extends BaseShell {
     constructor() {
         super();
         this.closeOnOutsideClick = this.closeOnOutsideClick.bind(this);
@@ -38,29 +19,9 @@ export default class NavDrawer extends connect(store)(LitElement) {
         document.removeEventListener('click', this.closeOnOutsideClick);
     }
 
-    stateChanged(state) {
-        this.drawerOpen = state.shell.drawerOpen;
-        this.navMenus = state.shell.navMenus;
-        this.accountMenus = state.shell.accountMenus;
-        this.user = state.global.user;
-        this.selectedPage = state.global.selectedPage;
-    }
-
     closeOnOutsideClick(event) {
         if (!this.contains(event.target)) {
             this.closeDrawer();
-        }
-    }
-
-    closeDrawer = () => {
-        store.dispatch(setDrawerOpen(false));
-    }
-
-    toggleDrawer() {
-        if (this.drawerOpen) {
-            store.dispatch(setDrawerOpen(false));
-        } else {
-            store.dispatch(setDrawerOpen(true));
         }
     }
 
@@ -109,6 +70,4 @@ export default class NavDrawer extends connect(store)(LitElement) {
             </nav>
         `;
     }
-
-    createRenderRoot() { return this; }
 }

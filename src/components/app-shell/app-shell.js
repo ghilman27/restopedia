@@ -1,32 +1,12 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { setDrawerOpen } from 'src/store/shell/actions';
-import { setDarkMode } from 'src/store/global/actions';
+import { html, customElement } from 'lit-element';
+import BaseShell from 'src/components/app-shell/base-shell';
 import './nav-bar/nav-bar';
 import './nav-drawer/nav-drawer';
 import './app-shell.scss';
 import './app-shell_responsive.scss';
 
 @customElement('app-shell')
-export default class AppShell extends connect(store)(LitElement) {
-    @property({ type: Boolean })
-    drawerOpen;
-
-    @property({ type: Boolean })
-    dropdownOpen;
-
-    @property({ type: Boolean })
-    positionTop = true;
-
-    @property({ type: String })
-    logoName;
-
-    @property({ type: Boolean })
-    darkMode;
-
+export default class AppShell extends BaseShell {
     connectedCallback() {
         super.connectedCallback();
         document.addEventListener('scroll', this.handleScroll);
@@ -38,11 +18,7 @@ export default class AppShell extends connect(store)(LitElement) {
     }
 
     stateChanged(state) {
-        this.drawerOpen = state.shell.drawerOpen;
-        this.dropdownOpen = state.shell.dropdownOpen;
-        this.logoName = state.global.appName;
-        this.darkMode = state.global.darkMode;
-
+        super.stateChanged(state);
         this.decideDarkMode();
     }
 
@@ -57,24 +33,6 @@ export default class AppShell extends connect(store)(LitElement) {
 
     handleScroll = () => {
         this.positionTop = !window.pageYOffset;
-    }
-
-    toggleDrawer = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        if (this.drawerOpen) {
-            store.dispatch(setDrawerOpen(false));
-        } else {
-            store.dispatch(setDrawerOpen(true));
-        }
-    }
-
-    toggleDarkMode() {
-        if (this.darkMode) {
-            store.dispatch(setDarkMode(false));
-        } else {
-            store.dispatch(setDarkMode(true));
-        }
     }
 
     render() {
@@ -102,6 +60,4 @@ export default class AppShell extends connect(store)(LitElement) {
         </div>
         `;
     }
-
-    createRenderRoot() { return this; }
 }
