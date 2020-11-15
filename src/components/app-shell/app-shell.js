@@ -1,4 +1,4 @@
-import { html, customElement } from 'lit-element';
+import { html, customElement, property } from 'lit-element';
 import BaseShell from 'src/components/app-shell/base-shell';
 import './nav-bar/nav-bar';
 import './nav-drawer/nav-drawer';
@@ -7,6 +7,9 @@ import './app-shell_responsive.scss';
 
 @customElement('app-shell')
 export default class AppShell extends BaseShell {
+    @property({ type: Boolean })
+    positionTop = true;
+
     connectedCallback() {
         super.connectedCallback();
         document.addEventListener('scroll', this.handleScroll);
