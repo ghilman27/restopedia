@@ -1,5 +1,5 @@
 import { html, customElement, property } from 'lit-element';
-import BaseShell from 'src/components/app-shell/base-shell';
+import BaseShell from './base-shell';
 import './nav-bar/nav-bar';
 import './nav-drawer/nav-drawer';
 import './app-shell.scss';

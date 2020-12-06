@@ -1,7 +1,7 @@
 import {
     html, customElement, property,
 } from 'lit-element';
-import BaseView from 'src/views/base-view';
+import BaseView from '../base-view';
 import './notfound-view.scss';
 
 @customElement('notfound-view')

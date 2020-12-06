@@ -2,7 +2,7 @@ import {
     LitElement, html, customElement, property,
 } from 'lit-element';
 import { connect } from 'pwa-helpers';
-import store from 'src/store';
+import store from '../../store';
 import './footer-bar.scss';
 
 @customElement('footer-bar')

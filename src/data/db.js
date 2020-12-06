@@ -1,5 +1,5 @@
-import { IdbWriteError, IdbGetError } from 'src/utils/errors';
 import { openDB } from 'idb';
+import { IdbWriteError, IdbGetError } from '../utils/errors';
 
 const { DATABASE_NAME } = process.env;
 const { DATABASE_VERSION } = process.env;

@@ -1,4 +1,4 @@
-import { HttpGetError, HttpPostError } from 'src/utils/errors';
+import { HttpGetError, HttpPostError } from '../utils/errors';
 
 const { API_BASE_URL } = process.env;
 const DEFAULT_POST_HEADERS = {

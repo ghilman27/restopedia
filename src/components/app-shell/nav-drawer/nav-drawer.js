@@ -1,5 +1,5 @@
 import { html, customElement } from 'lit-element';
-import BaseShell from 'src/components/app-shell/base-shell';
+import BaseShell from '../base-shell';
 import './nav-drawer.scss';
 
 @customElement('nav-drawer')

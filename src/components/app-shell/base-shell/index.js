@@ -1,8 +1,8 @@
 import { LitElement, property } from 'lit-element';
 import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { setDrawerOpen, setDropdownOpen } from 'src/store/shell/actions';
-import { setDarkMode } from 'src/store/global/actions';
+import store from '../../../store';
+import { setDrawerOpen, setDropdownOpen } from '../../../store/shell/actions';
+import { setDarkMode } from '../../../store/global/actions';
 
 export default class BaseShell extends connect(store)(LitElement) {
     @property({ type: Boolean })

@@ -1,8 +1,8 @@
 import { LitElement, property } from 'lit-element';
 import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { setSelectedPage } from 'src/store/global/actions';
-import setSkipToContentHref from 'src/utils/skipToContent';
+import store from '../../store';
+import { setSelectedPage } from '../../store/global/actions';
+import setSkipToContentHref from '../../utils/skipToContent';
 
 export default class BaseView extends connect(store)(LitElement) {
     @property({ type: String })

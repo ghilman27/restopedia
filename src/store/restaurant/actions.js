@@ -1,6 +1,6 @@
-import RestaurantDB from 'src/data/db';
 import _ from 'lodash';
-import { IdbWriteError, IdbGetError } from 'src/utils/errors';
+import RestaurantDB from '../../data/db';
+import { IdbWriteError, IdbGetError } from '../../utils/errors';
 import { SAVE_RESTAURANT, DELETE_RESTAURANT, SET_INITIAL_STATE } from './types';
 
 export const saveRestaurant = (restaurant) => async (dispatch) => {

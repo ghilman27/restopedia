@@ -2,9 +2,9 @@ import {
     LitElement, html, customElement, property,
 } from 'lit-element';
 import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { saveRestaurant, deleteRestaurant } from 'src/store/restaurant/actions';
-import renderToast from 'src/utils/notifications';
+import store from '../../store';
+import { saveRestaurant, deleteRestaurant } from '../../store/restaurant/actions';
+import renderToast from '../../utils/notifications';
 import './like-button.scss';
 
 @customElement('like-button')

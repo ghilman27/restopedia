@@ -2,7 +2,7 @@ import {
     html, customElement, property,
 } from 'lit-element';
 import _ from 'lodash';
-import BaseView from 'src/views/base-view';
+import BaseView from '../base-view';
 import './favorite-view.scss';
 
 @customElement('favorite-view')

@@ -1,8 +1,8 @@
-import API from 'src/data/api';
 import {
     LitElement, html, customElement, property,
 } from 'lit-element';
-import renderToast from 'src/utils/notifications';
+import API from '../../../data/api';
+import renderToast from '../../../utils/notifications';
 import './review-list/review-list';
 import './restaurant-reviews.scss';
 import './restaurant-reviews_responsive.scss';

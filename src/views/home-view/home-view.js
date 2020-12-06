@@ -1,9 +1,9 @@
-import API from 'src/data/api';
 import {
     html, customElement, property,
 } from 'lit-element';
-import renderErrorToast from 'src/utils/notifications';
-import BaseView from 'src/views/base-view';
+import API from '../../data/api';
+import renderErrorToast from '../../utils/notifications';
+import BaseView from '../base-view';
 import './home-view.scss';
 
 @customElement('home-view')

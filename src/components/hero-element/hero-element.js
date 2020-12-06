@@ -2,8 +2,8 @@ import {
     LitElement, html, customElement, property,
 } from 'lit-element';
 import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import decideGreeting from 'src/utils/greetings';
+import store from '../../store';
+import decideGreeting from '../../utils/greetings';
 import './hero-element.scss';
 import './hero-element_responsive.scss';
 

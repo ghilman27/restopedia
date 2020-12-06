@@ -2,9 +2,9 @@ import {
     LitElement, html, customElement, property,
 } from 'lit-element';
 import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { deleteRestaurant } from 'src/store/restaurant/actions';
-import renderToast from 'src/utils/notifications';
+import store from '../../../store';
+import { deleteRestaurant } from '../../../store/restaurant/actions';
+import renderToast from '../../../utils/notifications';
 import './resto-card.scss';
 
 const IMAGE_BASE_URL = process.env.API_URL_IMAGE_SMALL;

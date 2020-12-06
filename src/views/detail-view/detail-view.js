@@ -1,9 +1,9 @@
-import API from 'src/data/api';
 import {
     html, customElement, property,
 } from 'lit-element';
-import renderToast from 'src/utils/notifications';
-import BaseView from 'src/views/base-view';
+import API from '../../data/api';
+import renderToast from '../../utils/notifications';
+import BaseView from '../base-view';
 import './restaurant-info/restaurant-info';
 import './restaurant-menus/restaurant-menus';
 import './restaurant-reviews/restaurant-reviews';
