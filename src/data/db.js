@@ -1,9 +1,8 @@
 import { openDB } from 'idb';
 import { IdbWriteError, IdbGetError } from '../utils/errors';
+import ENV from '../global/env';
 
-const { DATABASE_NAME } = process.env;
-const { DATABASE_VERSION } = process.env;
-const { OBJECT_STORE_NAME } = process.env;
+const { DATABASE_NAME, DATABASE_VERSION, OBJECT_STORE_NAME } = ENV;
 
 const db = openDB(DATABASE_NAME, DATABASE_VERSION, {
     upgrade(database) {

@@ -3,8 +3,9 @@ import { deleteRestaurant } from '../../../store/restaurant/actions';
 import renderToast from '../../../utils/notifications';
 import './resto-card.scss';
 import BaseComponent from '../../../global/BaseComponent';
+import ENV from '../../../global/env';
 
-const IMAGE_BASE_URL = process.env.API_URL_IMAGE_SMALL;
+const IMAGE_BASE_URL = ENV.API_URL_IMAGE_SMALL;
 
 export default class RestoCard extends BaseComponent {
     static get properties() {

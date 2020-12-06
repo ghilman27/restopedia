@@ -6,6 +6,7 @@ import './restaurant-info/restaurant-info';
 import './restaurant-menus/restaurant-menus';
 import './restaurant-reviews/restaurant-reviews';
 import './detail-view.scss';
+import ENV from '../../global/env';
 
 export default class DetailView extends BaseView {
     static get properties() {
@@ -34,7 +35,7 @@ export default class DetailView extends BaseView {
         const restaurantId = this.location.params.id;
         try {
             this.restaurant = await API.getRestaurant(restaurantId);
-            this.restaurant.imageUrl = `${process.env.API_URL_IMAGE_LARGE}/${this.restaurant.pictureId}`;
+            this.restaurant.imageUrl = `${ENV.API_URL_IMAGE_LARGE}/${this.restaurant.pictureId}`;
         } catch (error) {
             this.renderToast(error);
         }

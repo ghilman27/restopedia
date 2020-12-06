@@ -1,11 +1,12 @@
 import { HttpGetError, HttpPostError } from '../utils/errors';
+import ENV from '../global/env';
 
-const { API_BASE_URL } = process.env;
+const { API_BASE_URL } = ENV;
 const DEFAULT_POST_HEADERS = {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
-        'X-Auth-Token': process.env.API_KEY,
+        'X-Auth-Token': ENV.API_KEY,
     },
 };
 
