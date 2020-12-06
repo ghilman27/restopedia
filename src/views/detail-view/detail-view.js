@@ -1,6 +1,4 @@
-import {
-    html, customElement, property,
-} from 'lit-element';
+import { html } from 'lit-element';
 import API from '../../data/api';
 import renderToast from '../../utils/notifications';
 import BaseView from '../base-view';
@@ -9,21 +7,27 @@ import './restaurant-menus/restaurant-menus';
 import './restaurant-reviews/restaurant-reviews';
 import './detail-view.scss';
 
-@customElement('detail-view')
 export default class DetailView extends BaseView {
-    @property({ type: Object })
-    restaurant;
+    static get properties() {
+        return {
+            restaurant: { type: Object },
+            pageTitle: { type: String },
+        };
+    }
 
-    @property({ type: String })
-    pageTitle = 'detail';
+    constructor() {
+        super();
+        this.pageTitle = 'detail';
+    }
 
     connectedCallback() {
         super.connectedCallback();
         this.fetchData();
     }
 
-    renderToast = (message) => {
+    renderToast(message) {
         renderToast(message);
+        return this;
     }
 
     async fetchData() {
@@ -69,3 +73,5 @@ export default class DetailView extends BaseView {
         `;
     }
 }
+
+customElements.define('detail-view', DetailView);

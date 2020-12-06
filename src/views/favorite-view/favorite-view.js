@@ -1,17 +1,21 @@
-import {
-    html, customElement, property,
-} from 'lit-element';
+import { html } from 'lit-element';
 import _ from 'lodash';
 import BaseView from '../base-view';
 import './favorite-view.scss';
 
-@customElement('favorite-view')
 export default class FavoriteView extends BaseView {
-    @property({ type: Array })
-    restaurants = [];
+    static get properties() {
+        return {
+            restaurants: { type: Array },
+            pageTitle: { type: String },
+        };
+    }
 
-    @property({ type: String })
-    pageTitle = 'favorites';
+    constructor() {
+        super();
+        this.pageTitle = 'favorites';
+        this.restaurants = [];
+    }
 
     stateChanged(state) {
         this.restaurants = _.values(state.restaurant);
@@ -44,3 +48,5 @@ export default class FavoriteView extends BaseView {
         `;
     }
 }
+
+customElements.define('favorite-view', FavoriteView);

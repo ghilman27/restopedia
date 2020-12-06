@@ -10,7 +10,7 @@ export default (state = initialState, action) => {
     case SAVE_RESTAURANT:
         return {
             ...state,
-            [payload.id]: payload,
+            [payload.id]: { ...payload, saved: true },
         };
     case DELETE_RESTAURANT:
         delete restaurants[payload];

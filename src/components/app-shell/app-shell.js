@@ -1,14 +1,22 @@
-import { html, customElement, property } from 'lit-element';
+import { html } from 'lit-element';
 import BaseShell from './base-shell';
 import './nav-bar/nav-bar';
 import './nav-drawer/nav-drawer';
 import './app-shell.scss';
 import './app-shell_responsive.scss';
 
-@customElement('app-shell')
 export default class AppShell extends BaseShell {
-    @property({ type: Boolean })
-    positionTop = true;
+    static get properties() {
+        return {
+            positionTop: { type: Boolean },
+        };
+    }
+
+    constructor() {
+        super();
+        this.positionTop = true;
+        this.handleScroll = this.handleScroll.bind(this);
+    }
 
     connectedCallback() {
         super.connectedCallback();
@@ -34,7 +42,7 @@ export default class AppShell extends BaseShell {
         }
     }
 
-    handleScroll = () => {
+    handleScroll() {
         this.positionTop = !window.pageYOffset;
     }
 
@@ -64,3 +72,5 @@ export default class AppShell extends BaseShell {
         `;
     }
 }
+
+customElements.define('app-shell', AppShell);

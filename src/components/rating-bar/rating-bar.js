@@ -1,16 +1,19 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
+import { html } from 'lit-element';
 import './rating-bar.scss';
+import BaseComponent from '../../global/BaseComponent';
 
 const STAR_SCALES_ARRAY = [0, 1, 2, 3, 4];
 
-@customElement('rating-bar')
-export default class RatingBar extends LitElement {
-    @property({ type: Number }) rating = 4;
+export default class RatingBar extends BaseComponent {
+    static get properties() {
+        return {
+            rating: { type: Number },
+        };
+    }
 
     constructor() {
         super();
+        this.rating = 4;
         this.starScales = STAR_SCALES_ARRAY;
     }
 
@@ -34,6 +37,6 @@ export default class RatingBar extends LitElement {
         </div>
         `;
     }
-
-    createRenderRoot() { return this; }
 }
+
+customElements.define('rating-bar', RatingBar);

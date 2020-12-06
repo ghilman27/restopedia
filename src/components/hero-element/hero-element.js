@@ -1,25 +1,25 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from '../../store';
+import { html } from 'lit-element';
 import decideGreeting from '../../utils/greetings';
 import './hero-element.scss';
 import './hero-element_responsive.scss';
+import BaseComponent from '../../global/BaseComponent';
 
-@customElement('hero-element')
-export default class HeroElement extends connect(store)(LitElement) {
-    @property({ type: String })
-    imageSrc = '/images/heros/hero-image_2.jpg';
+export default class HeroElement extends BaseComponent {
+    static get properties() {
+        return {
+            greeting: { type: Boolean },
+            heading: { type: String },
+            imageSrc: { type: String },
+            user: { type: Object },
+        };
+    }
 
-    @property({ type: Boolean })
-    greeting = false;
-
-    @property({ type: String })
-    heading = '';
-
-    @property({ type: Object })
-    user;
+    constructor() {
+        super();
+        this.greeting = false;
+        this.heading = '';
+        this.imageSrc = '/images/heros/hero-image_2.jpg';
+    }
 
     stateChanged(state) {
         this.user = state.global.user;
@@ -46,6 +46,6 @@ export default class HeroElement extends connect(store)(LitElement) {
         </div>
         `;
     }
-
-    createRenderRoot() { return this; }
 }
+
+customElements.define('hero-element', HeroElement);

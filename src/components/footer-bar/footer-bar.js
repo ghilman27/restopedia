@@ -1,24 +1,23 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from '../../store';
+import { html } from 'lit-element';
 import './footer-bar.scss';
+import BaseComponent from '../../global/BaseComponent';
 
-@customElement('footer-bar')
-export default class FooterBar extends connect(store)(LitElement) {
-    @property({ type: String })
-    appName;
+export default class FooterBar extends BaseComponent {
+    static get properties() {
+        return {
+            appName: { type: String },
+        };
+    }
 
     stateChanged(state) {
         this.appName = state.global.appName;
     }
 
     render() {
-        return html` <p tabindex="0">Copyright &#169; 2020 ${this.appName}</p> `;
-    }
-
-    createRenderRoot() {
-        return this;
+        return html`
+            <p tabindex="0">Copyright &#169; 2020 ${this.appName}</p>
+        `;
     }
 }
+
+customElements.define('footer-bar', FooterBar);

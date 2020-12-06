@@ -1,15 +1,14 @@
-import { LitElement, property } from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from '../../store';
 import { setSelectedPage } from '../../store/global/actions';
 import setSkipToContentHref from '../../utils/skipToContent';
+import BaseComponent from '../../global/BaseComponent';
 
-export default class BaseView extends connect(store)(LitElement) {
-    @property({ type: String })
-    pageTitle;
-
-    @property({ type: Object })
-    location;
+export default class BaseView extends BaseComponent {
+    static get properties() {
+        return {
+            pageTitle: { type: String },
+            location: { type: Object },
+        };
+    }
 
     connectedCallback() {
         super.connectedCallback();
@@ -18,14 +17,10 @@ export default class BaseView extends connect(store)(LitElement) {
     }
 
     setSelectedPage() {
-        store.dispatch(setSelectedPage(this.pageTitle));
+        this.dispatchAction(setSelectedPage(this.pageTitle));
     }
 
     setSkipToContentHref() {
         setSkipToContentHref(this.location.pathname);
-    }
-
-    createRenderRoot() {
-        return this;
     }
 }

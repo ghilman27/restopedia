@@ -1,15 +1,14 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from '../../../../store';
+import { html } from 'lit-element';
 import './review-list.scss';
 import './review-list_responsive.scss';
+import BaseComponent from '../../../../global/BaseComponent';
 
-@customElement('review-list')
-export default class ReviewList extends connect(store)(LitElement) {
-    @property({ type: Array })
-    reviews;
+export default class ReviewList extends BaseComponent {
+    static get properties() {
+        return {
+            reviews: { type: Array },
+        };
+    }
 
     render() {
         return html`
@@ -31,8 +30,6 @@ export default class ReviewList extends connect(store)(LitElement) {
             `)}
         `;
     }
-
-    createRenderRoot() {
-        return this;
-    }
 }
+
+customElements.define('review-list', ReviewList);

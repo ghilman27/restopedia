@@ -1,30 +1,33 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from '../../store';
+import { html } from 'lit-element';
 import { saveRestaurant, deleteRestaurant } from '../../store/restaurant/actions';
 import renderToast from '../../utils/notifications';
 import './like-button.scss';
+import BaseComponent from '../../global/BaseComponent';
 
-@customElement('like-button')
-export default class LikeButton extends connect(store)(LitElement) {
-    @property({ type: Boolean })
-    favorite = false;
+export default class LikeButton extends BaseComponent {
+    static get properties() {
+        return {
+            favorite: { type: Boolean },
+            restaurant: { type: Object },
+        };
+    }
 
-    @property({ type: Object })
-    restaurant;
+    constructor() {
+        super();
+        this.favorite = false;
+    }
 
     stateChanged(state) {
-        this.favorite = !!state.restaurant[this.restaurant.id];
+        const restaurant = state.restaurant[this.restaurant.id] || {};
+        this.favorite = restaurant.saved || false;
     }
 
     async handleFavorite() {
         try {
             if (this.favorite) {
-                await store.dispatch(deleteRestaurant(this.restaurant.id));
+                await this.dispatchAction(deleteRestaurant(this.restaurant.id));
             } else {
-                await store.dispatch(saveRestaurant(this.restaurant));
+                await this.dispatchAction(saveRestaurant(this.restaurant));
             }
             this.renderFavoriteNotification(this.restaurant.name);
         } catch (error) {
@@ -32,8 +35,9 @@ export default class LikeButton extends connect(store)(LitElement) {
         }
     }
 
-    renderToast = (message) => {
+    renderToast(message) {
         renderToast(message);
+        return this;
     }
 
     renderFavoriteNotification(restaurantName) {
@@ -54,8 +58,6 @@ export default class LikeButton extends connect(store)(LitElement) {
             </button>
         `;
     }
-
-    createRenderRoot() {
-        return this;
-    }
 }
+
+customElements.define('like-button', LikeButton);

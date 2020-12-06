@@ -1,10 +1,9 @@
-import { html, customElement } from 'lit-element';
+import { html } from 'lit-element';
 import BaseShell from '../base-shell';
 import './user-dropdown/user-dropdown';
 import './nav-bar.scss';
 import './nav-bar_responsive.scss';
 
-@customElement('nav-bar')
 export default class NavBar extends BaseShell {
     render() {
         return html`
@@ -51,3 +50,5 @@ export default class NavBar extends BaseShell {
         `;
     }
 }
+
+customElements.define('nav-bar', NavBar);

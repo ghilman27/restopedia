@@ -1,13 +1,14 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
+import { html } from 'lit-element';
 import './restaurant-menus.scss';
 import './restaurant-menus_responsive.scss';
+import BaseComponent from '../../../global/BaseComponent';
 
-@customElement('restaurant-menus')
-export default class RestaurantMenus extends LitElement {
-    @property({ type: Object })
-    menus;
+export default class RestaurantMenus extends BaseComponent {
+    static get properties() {
+        return {
+            menus: { type: Object },
+        };
+    }
 
     render() {
         return html`
@@ -27,8 +28,6 @@ export default class RestaurantMenus extends LitElement {
             </div>
         `;
     }
-
-    createRenderRoot() {
-        return this;
-    }
 }
+
+customElements.define('restaurant-menus', RestaurantMenus);

@@ -1,18 +1,24 @@
-import {
-    html, customElement, property,
-} from 'lit-element';
+import { html } from 'lit-element';
 import BaseView from '../base-view';
 import './notfound-view.scss';
 
-@customElement('notfound-view')
 export default class NotFoundView extends BaseView {
-    @property({ type: String })
-    notFoundMessage = 'Page Not Found';
+    static get properties() {
+        return {
+            notFoundMessage: { type: String },
+            pageTitle: { type: String },
+        };
+    }
 
-    @property({ type: String })
-    pageTitle = 'notfound';
+    constructor() {
+        super();
+        this.pageTitle = 'notfound';
+        this.notFoundMessage = 'Page Not Found';
+    }
 
     render() {
         return html`<div class="not-found" id="content">${this.notFoundMessage}</div>`;
     }
 }
+
+customElements.define('notfound-view', NotFoundView);

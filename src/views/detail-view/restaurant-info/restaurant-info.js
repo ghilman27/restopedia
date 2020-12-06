@@ -1,15 +1,19 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
+import { html } from 'lit-element';
 import './restaurant-info.scss';
+import BaseComponent from '../../../global/BaseComponent';
 
-@customElement('restaurant-info')
-export default class RestaurantInfo extends LitElement {
-    @property({ type: Object })
-    restaurant;
+export default class RestaurantInfo extends BaseComponent {
+    static get properties() {
+        return {
+            restaurant: { type: Object },
+            descExtended: { type: Boolean },
+        };
+    }
 
-    @property({ type: Boolean })
-    descExtended = false;
+    constructor() {
+        super();
+        this.descExtended = false;
+    }
 
     toggleDesc() {
         this.descExtended = !this.descExtended;
@@ -41,8 +45,6 @@ export default class RestaurantInfo extends LitElement {
             </button>
         `;
     }
-
-    createRenderRoot() {
-        return this;
-    }
 }
+
+customElements.define('restaurant-info', RestaurantInfo);

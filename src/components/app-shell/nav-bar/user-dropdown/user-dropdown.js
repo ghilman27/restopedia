@@ -1,8 +1,7 @@
-import { html, customElement } from 'lit-element';
+import { html } from 'lit-element';
 import BaseShell from '../../base-shell';
 import './user-dropdown.scss';
 
-@customElement('user-dropdown')
 export default class UserDropdown extends BaseShell {
     constructor() {
         super();
@@ -20,7 +19,7 @@ export default class UserDropdown extends BaseShell {
     }
 
     closeOnOutsideClick(event) {
-        if (!this.contains(event.target)) {
+        if (!this.contains(event.target) && this.dropdownOpen) {
             this.closeDropdown();
         }
     }
@@ -67,3 +66,5 @@ export default class UserDropdown extends BaseShell {
         `;
     }
 }
+
+customElements.define('user-dropdown', UserDropdown);

@@ -1,8 +1,7 @@
-import { html, customElement } from 'lit-element';
+import { html } from 'lit-element';
 import BaseShell from '../base-shell';
 import './nav-drawer.scss';
 
-@customElement('nav-drawer')
 export default class NavDrawer extends BaseShell {
     constructor() {
         super();
@@ -20,7 +19,7 @@ export default class NavDrawer extends BaseShell {
     }
 
     closeOnOutsideClick(event) {
-        if (!this.contains(event.target)) {
+        if (!this.contains(event.target) && this.drawerOpen) {
             this.closeDrawer();
         }
     }
@@ -71,3 +70,5 @@ export default class NavDrawer extends BaseShell {
         `;
     }
 }
+
+customElements.define('nav-drawer', NavDrawer);
