@@ -1,3 +1,4 @@
+import 'regenerator-runtime';
 import { html } from 'lit-element';
 import { saveRestaurant, deleteRestaurant } from '../../store/restaurant/actions';
 import renderToast from '../../utils/notifications';

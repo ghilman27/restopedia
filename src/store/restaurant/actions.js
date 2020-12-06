@@ -52,3 +52,10 @@ export const setSavedRestaurants = () => async (dispatch, getState) => {
         throw new IdbGetError(error);
     }
 };
+
+export const resetRestaurants = () => async (dispatch) => {
+    dispatch({
+        type: SET_INITIAL_STATE,
+        payload: {},
+    });
+};

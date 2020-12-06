@@ -16,10 +16,7 @@ export default (state = initialState, action) => {
         delete restaurants[payload];
         return restaurants;
     case SET_INITIAL_STATE:
-        return {
-            ...state,
-            ...payload,
-        };
+        return payload;
     default:
         return state;
     }
