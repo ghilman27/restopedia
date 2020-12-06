@@ -17,17 +17,6 @@ restaurant-info {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            cursor: pointer;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            height: 44px;
-            width: 44px;
-            border: none;
-            background: $color-regular-button;
-            
-            i.favorite {
-                color: $white;
-            }
     
             @include responsive-min($medium) {
                 position: relative;
