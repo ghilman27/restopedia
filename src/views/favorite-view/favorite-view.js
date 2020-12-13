@@ -39,7 +39,7 @@ export default class FavoriteView extends BaseView {
                     </resto-list>
                 </section>
                 ` : html`
-                <div class="not-found">
+                <div id="noFavoriteFound" class="not-found">
                     <i class="far fa-file"></i>
                     <p tabindex="0">You have no favorite restaurants</p>
                 </div>

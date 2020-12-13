@@ -29,17 +29,19 @@ export const deleteRestaurant = (restaurantId) => async (dispatch) => {
 
 export const setSavedRestaurants = () => async (dispatch, getState) => {
     const currentState = getState().restaurant;
+    if (!_.isEmpty(currentState)) {
+        return;
+    }
+
     try {
-        if (_.isEmpty(currentState)) {
-            const restaurants = await RestaurantDB.getRestaurants();
-            let savedRestaurants;
-            if (restaurants.length) {
-                savedRestaurants = Object.assign(
-                    ...restaurants.map((restaurant) => ({
-                        [restaurant.id]: restaurant,
-                    })),
-                );
-            }
+        const restaurants = await RestaurantDB.getRestaurants();
+        let savedRestaurants;
+        if (restaurants.length) {
+            savedRestaurants = Object.assign(
+                ...restaurants.map((restaurant) => ({
+                    [restaurant.id]: restaurant,
+                })),
+            );
             dispatch({
                 type: SET_INITIAL_STATE,
                 payload: savedRestaurants,

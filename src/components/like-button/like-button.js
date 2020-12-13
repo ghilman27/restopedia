@@ -19,8 +19,8 @@ export default class LikeButton extends BaseComponent {
     }
 
     stateChanged(state) {
-        const restaurant = state.restaurant[this.restaurant.id] || {};
-        this.favorite = restaurant.saved || false;
+        const restaurant = state.restaurant[this.restaurant.id];
+        this.favorite = !!restaurant;
     }
 
     async handleFavorite() {
