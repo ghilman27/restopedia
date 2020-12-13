@@ -1,5 +1,4 @@
 import { html } from 'lit-element';
-import _ from 'lodash';
 import BaseView from '../base-view';
 import './favorite-view.scss';
 
@@ -18,7 +17,8 @@ export default class FavoriteView extends BaseView {
     }
 
     stateChanged(state) {
-        this.restaurants = _.values(state.restaurant);
+        this.restaurants = Object.entries(state.restaurant)
+            .map(([, restaurant]) => ({ ...restaurant }));
     }
 
     render() {

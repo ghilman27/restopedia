@@ -1,5 +1,4 @@
 const assert = require('assert');
-const { first } = require('lodash');
 
 /* eslint-disable no-undef */
 Feature('Liking Restaurant');

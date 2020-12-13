@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import RestaurantDB from '../../data/db';
 import { IdbWriteError, IdbGetError } from '../../utils/errors';
 import { SAVE_RESTAURANT, DELETE_RESTAURANT, SET_INITIAL_STATE } from './types';
@@ -29,7 +28,7 @@ export const deleteRestaurant = (restaurantId) => async (dispatch) => {
 
 export const setSavedRestaurants = () => async (dispatch, getState) => {
     const currentState = getState().restaurant;
-    if (!_.isEmpty(currentState)) {
+    if (Object.keys(currentState).length > 0) {
         return;
     }
 
