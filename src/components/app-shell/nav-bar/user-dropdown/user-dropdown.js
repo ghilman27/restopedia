@@ -26,19 +26,35 @@ export default class UserDropdown extends BaseShell {
 
     render() {
         const {
-            firstname, lastname, email, photo,
+            firstname, lastname, email, photo, photoSmall, photoLarge,
         } = this.user;
 
         return html`
             <div class="user-dropdown ${this.dropdownOpen ? 'open' : ''}">
                 <div class="user-dropdown__info">
-                    <img 
-                        src=${photo} 
-                        alt="profile picture" 
-                        class="user-dropdown__photo"
-                        tabindex="0"
-                        crossorigin="anonymous"
-                    >
+                    <picture>
+                        <source 
+                            type="image/webp" 
+                            src=${photo} 
+                            srcset="${photoSmall}.webp 480w, ${photoLarge}.webp 800w"
+                            sizes="(max-width: 600px) 480px, 800px"
+                        >
+                        <source 
+                            type="image/jpeg" 
+                            src=${photo} 
+                            srcset="${photoSmall}.jpg 480w, ${photoLarge}.jpg 800w"
+                            sizes="(max-width: 600px) 480px, 800px"
+                        >
+                        <img 
+                            src=${photo} 
+                            srcset="${photoSmall}.jpg 480w, ${photoLarge}.jpg 800w"
+                            sizes="(max-width: 600px) 480px, 800px"
+                            alt="profile picture" 
+                            class="user-dropdown__photo"
+                            tabindex="0"
+                            crossorigin="anonymous"
+                        >
+                    </picture>
                     <span class="user-dropdown__name" tabindex="0">
                         ${`${firstname} ${lastname}`}
                     </span>

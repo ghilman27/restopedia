@@ -1,5 +1,7 @@
 import actionHandlers from './handlers';
 
+const userPhotoFilename = '/images/profile';
+
 const initialShellState = {
     appName: 'restopedia',
     selectedPage: 'home',
@@ -8,7 +10,9 @@ const initialShellState = {
         firstname: 'Ghilman',
         lastname: 'Al Fatih',
         email: 'ghilman27@gmail.com',
-        photo: '/images/profile.jpg',
+        photo: `${userPhotoFilename}`,
+        photoSmall: `${userPhotoFilename}-small`,
+        photoLarge: `${userPhotoFilename}-large`,
     },
 };
 

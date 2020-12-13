@@ -2,6 +2,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssnanoWebpackPlugin = require('cssnano-webpack-plugin');
+const ImageminWebpackPlugin = require('imagemin-webpack-plugin').default;
+const ImageminMozjpeg = require('imagemin-mozjpeg');
+const ImageminWebpWebpackPlugin = require('imagemin-webp-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const path = require('path');
@@ -51,21 +55,10 @@ module.exports = {
         ],
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'src/index.html'),
             filename: 'index.html',
-        }),
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: path.resolve(__dirname, 'src/public/'),
-                    to: path.resolve(__dirname, 'dist/'),
-                },
-                {
-                    from: './src/manifest.json',
-                    to: './manifest.json',
-                },
-            ],
         }),
         new MiniCssExtractPlugin({
             filename: 'index.css',
@@ -77,6 +70,43 @@ module.exports = {
         new WorkboxPlugin.InjectManifest({
             swSrc: './src/worker.js',
             swDest: 'worker.js',
+        }),
+        new ImageminWebpWebpackPlugin({
+            config: [
+                {
+                    test: /\.(jpe?g|png)/,
+                    options: {
+                        quality: 50,
+                    },
+                },
+            ],
+            plugins: [
+                ImageminMozjpeg({
+                    quality: 50,
+                    progressive: true,
+                }),
+            ],
+            overrideExtension: true,
+        }),
+        new ImageminWebpackPlugin({
+            plugins: [
+                ImageminMozjpeg({
+                    quality: 50,
+                    progressive: true,
+                }),
+            ],
+        }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: path.resolve(__dirname, 'src/public/icons'),
+                    to: path.resolve(__dirname, 'dist/icons'),
+                },
+                {
+                    from: './src/manifest.json',
+                    to: './manifest.json',
+                },
+            ],
         }),
     ],
 };

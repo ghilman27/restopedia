@@ -72,7 +72,7 @@ export default class RestoCard extends BaseComponent {
                 @mouseleave=${this.handleHover}
             >
                 <div class="card__media">
-                    <img src="${imageUrl}" alt="${name}" alt="card-media" crossorigin="anonymous"/>
+                    <img class="lazyload" src="${imageUrl}" alt="${name}" alt="card-media" crossorigin="anonymous"/>
                     <div class="overlay ${this.onHover ? 'hover' : ''}">
                         <div>Read More</div>
                     </div>

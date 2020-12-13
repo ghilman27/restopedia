@@ -18,7 +18,12 @@ export default class HeroElement extends BaseComponent {
         super();
         this.greeting = false;
         this.heading = '';
-        this.imageSrc = '/images/heros/hero-image_2.jpg';
+        this.imageSrc = '/images/hero-image_2.jpg';
+        this.imageSrcSmall = '/images/hero-image_2-small.jpg';
+        this.imageSrcLarge = '/images/hero-image_2-large.jpg';
+        this.imageSrcWebp = '/images/hero-image_2.webp';
+        this.imageSrcWebpSmall = '/images/hero-image_2-small.webp';
+        this.imageSrcWebpLarge = '/images/hero-image_2-large.webp';
     }
 
     stateChanged(state) {
@@ -29,7 +34,27 @@ export default class HeroElement extends BaseComponent {
         return html`
         <div class="hero">
             <div class="hero__background">
-                <img src="${this.imageSrc}" alt="hero-background" crossorigin="anonymous"/>
+                <picture>
+                    <source 
+                        type="image/webp"
+                        src=${this.imageSrcWebp}
+                        srcset="${this.imageSrcWebpSmall} 480w, ${this.imageSrcWebpLarge} 800w"
+                        sizes="(max-width: 600px) 480px, 800px"
+                    >
+                    <source 
+                        type="image/jpeg"
+                        src=${this.imageSrc}
+                        srcset="${this.imageSrcSmall} 480w, ${this.imageSrcLarge} 800w"
+                        sizes="(max-width: 600px) 480px, 800px"
+                    >
+                    <img 
+                        src=${this.imageSrc} 
+                        srcset="${this.imageSrcSmall} 480w, ${this.imageSrcLarge} 800w"
+                        sizes="(max-width: 600px) 480px, 800px"
+                        alt="hero-background" 
+                        crossorigin="anonymous"
+                    />
+                </picture>
             </div>
 
             ${this.greeting ? html`
