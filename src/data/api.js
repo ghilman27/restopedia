@@ -1,11 +1,12 @@
-import { HttpGetError, HttpPostError } from 'src/utils/errors';
+import { HttpGetError, HttpPostError } from '../utils/errors';
+import ENV from '../global/env';
 
-const { API_BASE_URL } = process.env;
+const { API_BASE_URL } = ENV;
 const DEFAULT_POST_HEADERS = {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
-        'X-Auth-Token': process.env.API_KEY,
+        'X-Auth-Token': ENV.API_KEY,
     },
 };
 
@@ -26,7 +27,7 @@ const handleError = (error, ErrorClass) => {
 };
 
 class RestaurantAPI {
-    static getRestaurants = async () => {
+    static async getRestaurants() {
         try {
             const url = `${API_BASE_URL}/list`;
             const { error, message, restaurants } = await fetchData(url);
@@ -35,9 +36,9 @@ class RestaurantAPI {
         } catch (error) {
             throw handleError(error, HttpGetError);
         }
-    };
+    }
 
-    static getRestaurant = async (restaurantId) => {
+    static async getRestaurant(restaurantId) {
         try {
             const url = `${API_BASE_URL}/detail/${restaurantId}`;
             const { error, message, restaurant } = await fetchData(url);
@@ -46,9 +47,9 @@ class RestaurantAPI {
         } catch (error) {
             throw handleError(error, HttpGetError);
         }
-    };
+    }
 
-    static searchRestaurants = async (query) => {
+    static async searchRestaurants(query) {
         try {
             const url = `${API_BASE_URL}/search?q=${query}`;
             const { error, message, restaurants } = await fetchData(url);
@@ -57,9 +58,9 @@ class RestaurantAPI {
         } catch (error) {
             throw handleError(error, HttpGetError);
         }
-    };
+    }
 
-    static postReview = async ({ id, name, review }) => {
+    static async postReview({ id, name, review }) {
         try {
             const url = `${API_BASE_URL}/review`;
             const body = JSON.stringify({ id, name, review });
@@ -73,7 +74,7 @@ class RestaurantAPI {
         } catch (error) {
             throw handleError(error, HttpPostError);
         }
-    };
+    }
 }
 
 export default RestaurantAPI;

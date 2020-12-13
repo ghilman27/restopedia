@@ -1,29 +1,30 @@
-import API from 'src/data/api';
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
-import renderToast from 'src/utils/notifications';
+import { html } from 'lit-element';
+import API from '../../../data/api';
+import renderToast from '../../../utils/notifications';
 import './review-list/review-list';
 import './restaurant-reviews.scss';
 import './restaurant-reviews_responsive.scss';
+import BaseComponent from '../../../global/BaseComponent';
 
 const SUBMIT_REVIEW_SUCCESS_MESSAGE = 'Submit Review Success';
 
-@customElement('restaurant-reviews')
-export default class RestaurantReviews extends LitElement {
-    @property({ type: String })
-    restaurantId;
+export default class RestaurantReviews extends BaseComponent {
+    static get properties() {
+        return {
+            reviews: { type: Array },
+            restaurantId: { type: String },
+            formOpen: { type: Boolean },
+            values: { type: Object },
+        };
+    }
 
-    @property({ type: Array })
-    reviews;
-
-    @property({ type: Boolean })
-    formOpen = false;
-
-    @property({ type: Object })
-    values = {
-        customerReview: '',
-        customerName: '',
+    constructor() {
+        super();
+        this.formOpen = false;
+        this.values = {
+            customerReview: '',
+            customerName: '',
+        };
     }
 
     handleChange(event) {
@@ -60,14 +61,16 @@ export default class RestaurantReviews extends LitElement {
         }
     }
 
-    renderToast = (message) => {
+    renderToast(message) {
         renderToast(message);
+        return this;
     }
 
-    adjustInputHeight = (event) => {
+    adjustInputHeight(event) {
         const textArea = event.target;
         textArea.style.height = 'auto';
         textArea.style.height = `${textArea.scrollHeight}px`;
+        return this;
     }
 
     handleFormFocus() {
@@ -131,8 +134,6 @@ export default class RestaurantReviews extends LitElement {
             </div>
         `;
     }
-
-    createRenderRoot() {
-        return this;
-    }
 }
+
+customElements.define('restaurant-reviews', RestaurantReviews);

@@ -1,5 +1,5 @@
 import thunk from 'redux-thunk';
-import throttle from 'lodash/throttle';
+import throttle from 'lodash.throttle';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 

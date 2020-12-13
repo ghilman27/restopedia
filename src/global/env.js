@@ -1,0 +1,17 @@
+export default {
+    API_BASE_URL: 'https://dicoding-restaurant-api.el.r.appspot.com',
+    API_IMAGE_BASE_URL: 'https://restaurant-api.dicoding.dev',
+    API_URL_IMAGE_SMALL: 'https://restaurant-api.dicoding.dev/images/small',
+    API_URL_IMAGE_MEDIUM: 'https://restaurant-api.dicoding.dev/images/medium',
+    API_URL_IMAGE_LARGE: 'https://restaurant-api.dicoding.dev/images/large',
+    API_KEY: '12345',
+    DATABASE_NAME: 'restaurant-database',
+    DATABASE_VERSION: '1',
+    OBJECT_STORE_NAME: 'restaurants',
+    CACHE_NAME: 'restaurant-content',
+    IMAGE_CACHE_NAME: 'restaurant-image',
+    GOOGLE_FONTS_URL: 'https://fonts.googleapis.com',
+    GOOGLE_FONTS_CACHE_NAME: 'google-fonts-stylesheets',
+    GOOGLE_WEBFONTS_URL: 'https://fonts.gstatic.com',
+    GOOGLE_WEBFONTS_CACHE_NAME: 'google-fonts-webfonts',
+};

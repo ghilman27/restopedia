@@ -1,6 +1,8 @@
+const body = document.querySelector('body');
+
 const renderNotificationToast = (
     content,
-    element = document.querySelector('main'),
+    element = body,
 ) => {
     const notificationTest = document.createElement('notification-toast');
     notificationTest.content = content;

@@ -1,27 +1,38 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { deleteRestaurant } from 'src/store/restaurant/actions';
-import renderToast from 'src/utils/notifications';
+import { html } from 'lit-element';
+import { deleteRestaurant } from '../../../store/restaurant/actions';
+import renderToast from '../../../utils/notifications';
 import './resto-card.scss';
+import BaseComponent from '../../../global/BaseComponent';
+import ENV from '../../../global/env';
 
-const IMAGE_BASE_URL = process.env.API_URL_IMAGE_SMALL;
+const IMAGE_BASE_URL = ENV.API_URL_IMAGE_SMALL;
 
-@customElement('resto-card')
-export default class RestoCard extends connect(store)(LitElement) {
-    @property({ type: Object })
-    data;
+export default class RestoCard extends BaseComponent {
+    static get properties() {
+        return {
+            data: { type: Object },
+            onHover: { type: Boolean },
+            isFavorite: { type: Boolean },
+            deleteButton: { type: Boolean },
+        };
+    }
 
-    @property({ type: Boolean })
-    onHover = false;
+    constructor() {
+        super();
+        this.onHover = false;
+        this.isFavorite = false;
+        this.deleteButton = false;
+    }
 
-    @property({ type: Boolean })
-    isFavorite = false;
+    connectedCallback() {
+        super.connectedCallback();
+        this.data.imageUrl = `${IMAGE_BASE_URL}/${this.data.pictureId}`;
+        this.data.restaurantUrl = `restaurant/${this.data.id}`;
+    }
 
-    @property({ type: Boolean })
-    deleteButton = false;
+    stateChanged(state) {
+        this.isFavorite = state.restaurant[this.data.id];
+    }
 
     handleHover(event) {
         event.stopPropagation();
@@ -29,25 +40,15 @@ export default class RestoCard extends connect(store)(LitElement) {
         this.onHover = !this.onHover;
     }
 
-    stateChanged(state) {
-        this.isFavorite = state.restaurant[this.data.id];
-    }
-
     async handleDelete(event) {
         event.preventDefault();
         const restaurant = this.data;
         try {
-            await store.dispatch(deleteRestaurant(restaurant.id));
+            await this.dispatchAction(deleteRestaurant(restaurant.id));
             renderToast({ message: `${restaurant.name} has been deleted from favorite` });
         } catch (error) {
             renderToast(error);
         }
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
-        this.data.imageUrl = `${IMAGE_BASE_URL}/${this.data.pictureId}`;
-        this.data.restaurantUrl = `restaurant/${this.data.id}`;
     }
 
     render() {
@@ -71,7 +72,7 @@ export default class RestoCard extends connect(store)(LitElement) {
                 @mouseleave=${this.handleHover}
             >
                 <div class="card__media">
-                    <img src="${imageUrl}" alt="${name}" alt="card-media" crossorigin="anonymous"/>
+                    <img class="lazyload" data-src="${imageUrl}" alt="${name}" alt="card-media" crossorigin="anonymous"/>
                     <div class="overlay ${this.onHover ? 'hover' : ''}">
                         <div>Read More</div>
                     </div>
@@ -99,6 +100,6 @@ export default class RestoCard extends connect(store)(LitElement) {
             </a>
         `;
     }
-
-    createRenderRoot() { return this; }
 }
+
+customElements.define('resto-card', RestoCard);

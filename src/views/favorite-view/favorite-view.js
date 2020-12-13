@@ -1,20 +1,24 @@
-import {
-    html, customElement, property,
-} from 'lit-element';
-import _ from 'lodash';
-import BaseView from 'src/views/base-view';
+import { html } from 'lit-element';
+import BaseView from '../base-view';
 import './favorite-view.scss';
 
-@customElement('favorite-view')
 export default class FavoriteView extends BaseView {
-    @property({ type: Array })
-    restaurants = [];
+    static get properties() {
+        return {
+            restaurants: { type: Array },
+            pageTitle: { type: String },
+        };
+    }
 
-    @property({ type: String })
-    pageTitle = 'favorites';
+    constructor() {
+        super();
+        this.pageTitle = 'favorites';
+        this.restaurants = [];
+    }
 
     stateChanged(state) {
-        this.restaurants = _.values(state.restaurant);
+        this.restaurants = Object.entries(state.restaurant)
+            .map(([, restaurant]) => ({ ...restaurant }));
     }
 
     render() {
@@ -35,7 +39,7 @@ export default class FavoriteView extends BaseView {
                     </resto-list>
                 </section>
                 ` : html`
-                <div class="not-found">
+                <div id="noFavoriteFound" class="not-found">
                     <i class="far fa-file"></i>
                     <p tabindex="0">You have no favorite restaurants</p>
                 </div>
@@ -44,3 +48,5 @@ export default class FavoriteView extends BaseView {
         `;
     }
 }
+
+customElements.define('favorite-view', FavoriteView);

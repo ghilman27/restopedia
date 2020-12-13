@@ -1,36 +1,41 @@
-import API from 'src/data/api';
-import {
-    html, customElement, property,
-} from 'lit-element';
-import renderToast from 'src/utils/notifications';
-import BaseView from 'src/views/base-view';
+import { html } from 'lit-element';
+import API from '../../data/api';
+import renderToast from '../../utils/notifications';
+import BaseView from '../base-view';
 import './restaurant-info/restaurant-info';
 import './restaurant-menus/restaurant-menus';
 import './restaurant-reviews/restaurant-reviews';
 import './detail-view.scss';
+import ENV from '../../global/env';
 
-@customElement('detail-view')
 export default class DetailView extends BaseView {
-    @property({ type: Object })
-    restaurant;
+    static get properties() {
+        return {
+            restaurant: { type: Object },
+            pageTitle: { type: String },
+        };
+    }
 
-    @property({ type: String })
-    pageTitle = 'detail';
+    constructor() {
+        super();
+        this.pageTitle = 'detail';
+    }
 
     connectedCallback() {
         super.connectedCallback();
         this.fetchData();
     }
 
-    renderToast = (message) => {
+    renderToast(message) {
         renderToast(message);
+        return this;
     }
 
     async fetchData() {
         const restaurantId = this.location.params.id;
         try {
             this.restaurant = await API.getRestaurant(restaurantId);
-            this.restaurant.imageUrl = `${process.env.API_URL_IMAGE_LARGE}/${this.restaurant.pictureId}`;
+            this.restaurant.imageUrl = `${ENV.API_URL_IMAGE_LARGE}/${this.restaurant.pictureId}`;
         } catch (error) {
             this.renderToast(error);
         }
@@ -69,3 +74,5 @@ export default class DetailView extends BaseView {
         `;
     }
 }
+
+customElements.define('detail-view', DetailView);

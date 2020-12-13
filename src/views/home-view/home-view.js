@@ -1,18 +1,22 @@
-import API from 'src/data/api';
-import {
-    html, customElement, property,
-} from 'lit-element';
-import renderErrorToast from 'src/utils/notifications';
-import BaseView from 'src/views/base-view';
+import { html } from 'lit-element';
+import API from '../../data/api';
+import renderErrorToast from '../../utils/notifications';
+import BaseView from '../base-view';
 import './home-view.scss';
 
-@customElement('home-view')
 export default class HomeView extends BaseView {
-    @property({ type: Array })
-    data = [];
+    static get properties() {
+        return {
+            data: { type: Array },
+            pageTitle: { type: String },
+        };
+    }
 
-    @property({ type: String })
-    pageTitle = 'home';
+    constructor() {
+        super();
+        this.pageTitle = 'home';
+        this.data = [];
+    }
 
     connectedCallback() {
         super.connectedCallback();
@@ -49,3 +53,5 @@ export default class HomeView extends BaseView {
         `;
     }
 }
+
+customElements.define('home-view', HomeView);

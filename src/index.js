@@ -1,4 +1,6 @@
 import 'regenerator-runtime';
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 import store from './store';
 import { setSavedRestaurants } from './store/restaurant/actions';
 import initRoutes from './routes';

@@ -1,14 +1,20 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
+import { html } from 'lit-element';
 import './loading-indicator.scss';
+import BaseComponent from '../../global/BaseComponent';
 
 const LOADING_TEXT = 'Loading Content';
 
-@customElement('loading-indicator')
-export default class LoadingIndicator extends LitElement {
-    @property({ type: String })
-    loadingText = LOADING_TEXT;
+export default class LoadingIndicator extends BaseComponent {
+    static get properties() {
+        return {
+            loadingText: { type: String },
+        };
+    }
+
+    constructor() {
+        super();
+        this.loadingText = LOADING_TEXT;
+    }
 
     render() {
         return html`
@@ -18,8 +24,6 @@ export default class LoadingIndicator extends LitElement {
             </div>
         `;
     }
-
-    createRenderRoot() {
-        return this;
-    }
 }
+
+customElements.define('loading-indicator', LoadingIndicator);

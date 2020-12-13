@@ -1,8 +1,7 @@
-import { html, customElement } from 'lit-element';
-import BaseShell from 'src/components/app-shell/base-shell';
+import { html } from 'lit-element';
+import BaseShell from '../../base-shell';
 import './user-dropdown.scss';
 
-@customElement('user-dropdown')
 export default class UserDropdown extends BaseShell {
     constructor() {
         super();
@@ -20,26 +19,42 @@ export default class UserDropdown extends BaseShell {
     }
 
     closeOnOutsideClick(event) {
-        if (!this.contains(event.target)) {
+        if (!this.contains(event.target) && this.dropdownOpen) {
             this.closeDropdown();
         }
     }
 
     render() {
         const {
-            firstname, lastname, email, photo,
+            firstname, lastname, email, photo, photoSmall, photoLarge,
         } = this.user;
 
         return html`
             <div class="user-dropdown ${this.dropdownOpen ? 'open' : ''}">
                 <div class="user-dropdown__info">
-                    <img 
-                        src=${photo} 
-                        alt="profile picture" 
-                        class="user-dropdown__photo"
-                        tabindex="0"
-                        crossorigin="anonymous"
-                    >
+                    <picture>
+                        <source 
+                            type="image/webp" 
+                            src=${photo} 
+                            srcset="${photoSmall}.webp 480w, ${photoLarge}.webp 800w"
+                            sizes="(max-width: 600px) 480px, 800px"
+                        >
+                        <source 
+                            type="image/jpeg" 
+                            src=${photo} 
+                            srcset="${photoSmall}.jpg 480w, ${photoLarge}.jpg 800w"
+                            sizes="(max-width: 600px) 480px, 800px"
+                        >
+                        <img 
+                            src=${photo} 
+                            srcset="${photoSmall}.jpg 480w, ${photoLarge}.jpg 800w"
+                            sizes="(max-width: 600px) 480px, 800px"
+                            alt="profile picture" 
+                            class="user-dropdown__photo"
+                            tabindex="0"
+                            crossorigin="anonymous"
+                        >
+                    </picture>
                     <span class="user-dropdown__name" tabindex="0">
                         ${`${firstname} ${lastname}`}
                     </span>
@@ -67,3 +82,5 @@ export default class UserDropdown extends BaseShell {
         `;
     }
 }
+
+customElements.define('user-dropdown', UserDropdown);

@@ -1,10 +1,10 @@
-import { LitElement, html, customElement } from 'lit-element';
+import { html } from 'lit-element';
 import './resto-card/resto-card';
 import './resto-list.scss';
 import './resto-list_responsive.scss';
+import BaseComponent from '../../global/BaseComponent';
 
-@customElement('resto-list')
-export default class RestoList extends LitElement {
+export default class RestoList extends BaseComponent {
     static get properties() {
         return {
             title: { type: String },
@@ -23,6 +23,6 @@ export default class RestoList extends LitElement {
             </div>
         `;
     }
-
-    createRenderRoot() { return this; }
 }
+
+customElements.define('resto-list', RestoList);

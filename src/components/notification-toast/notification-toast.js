@@ -1,17 +1,21 @@
-import {
-    LitElement, html, customElement, property,
-} from 'lit-element';
+import { html } from 'lit-element';
 import './notification-toast.scss';
+import BaseComponent from '../../global/BaseComponent';
 
 const TOAST_TIMEOUT_IN_MS = 3000;
 
-@customElement('notification-toast')
-export default class NotificationToast extends LitElement {
-    @property({ type: Object })
-    content;
+export default class NotificationToast extends BaseComponent {
+    static get properties() {
+        return {
+            content: { type: Object },
+            show: { type: Boolean },
+        };
+    }
 
-    @property({ type: Boolean })
-    show = true;
+    constructor() {
+        super();
+        this.show = true;
+    }
 
     connectedCallback() {
         super.connectedCallback();
@@ -25,14 +29,12 @@ export default class NotificationToast extends LitElement {
     render() {
         const { name, message } = this.content;
         return html`
-                <div class="container">
-                    ${name ? html`<span class="name">${name}</span>` : ''}
-                    ${message ? html`<span class="message">${message}</span>` : ''}
-                </div>
+            <div class="container">
+                ${name ? html`<span class="name">${name}</span>` : ''}
+                ${message ? html`<span class="message">${message}</span>` : ''}
+            </div>
         `;
     }
-
-    createRenderRoot() {
-        return this;
-    }
 }
+
+customElements.define('notification-toast', NotificationToast);

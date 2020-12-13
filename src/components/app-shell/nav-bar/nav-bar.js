@@ -1,10 +1,9 @@
-import { html, customElement } from 'lit-element';
-import BaseShell from 'src/components/app-shell/base-shell';
+import { html } from 'lit-element';
+import BaseShell from '../base-shell';
 import './user-dropdown/user-dropdown';
 import './nav-bar.scss';
 import './nav-bar_responsive.scss';
 
-@customElement('nav-bar')
 export default class NavBar extends BaseShell {
     render() {
         return html`
@@ -36,13 +35,29 @@ export default class NavBar extends BaseShell {
                             aria-haspopup="true" 
                             aria-expanded=${this.dropdownOpen ? 'true' : 'false'}
                         >
-                            <img 
-                                @click=${this.toggleDropdown} 
-                                src=${this.user.photo} 
-                                alt="${this.user.firstname} ${this.user.lastname} profile" 
-                                class="nav-desktop__photo"
-                                crossorigin="anonymous"
-                            >
+                            <picture>
+                                <source 
+                                    type="image/webp"
+                                    src=${this.user.photo}
+                                    srcset="${this.user.photoLarge}.webp 480w, ${this.user.photoLarge}.webp 800w"
+                                    sizes="(max-width: 600px) 480px, 800px"
+                                >
+                                <source 
+                                    type="image/jpeg"
+                                    src=${this.user.photo} 
+                                    srcset="${this.user.photoSmall}.jpg 480w, ${this.user.photoLarge}.jpg 800w"
+                                    sizes="(max-width: 600px) 480px, 800px"
+                                >
+                                <img 
+                                    @click=${this.toggleDropdown} 
+                                    src=${this.user.photo} 
+                                    srcset="${this.user.photoSmall}.jpg 480w, ${this.user.photoLarge}.jpg 800w"
+                                    sizes="(max-width: 600px) 480px, 800px"
+                                    alt="${this.user.firstname} ${this.user.lastname} profile" 
+                                    class="nav-desktop__photo"
+                                    crossorigin="anonymous"
+                                >
+                            </picture>
                         </button>
                         <user-dropdown></user-dropdown>
                     </li>
@@ -51,3 +66,5 @@ export default class NavBar extends BaseShell {
         `;
     }
 }
+
+customElements.define('nav-bar', NavBar);

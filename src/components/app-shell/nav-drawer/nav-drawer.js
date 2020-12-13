@@ -1,8 +1,7 @@
-import { html, customElement } from 'lit-element';
-import BaseShell from 'src/components/app-shell/base-shell';
+import { html } from 'lit-element';
+import BaseShell from '../base-shell';
 import './nav-drawer.scss';
 
-@customElement('nav-drawer')
 export default class NavDrawer extends BaseShell {
     constructor() {
         super();
@@ -20,7 +19,7 @@ export default class NavDrawer extends BaseShell {
     }
 
     closeOnOutsideClick(event) {
-        if (!this.contains(event.target)) {
+        if (!this.contains(event.target) && this.drawerOpen) {
             this.closeDrawer();
         }
     }
@@ -29,13 +28,29 @@ export default class NavDrawer extends BaseShell {
         return html`
             <nav class="nav-drawer-mobile ${this.drawerOpen ? 'open' : ''}">
                 <div class="user-view">
-                    <img 
-                        src=${this.user.photo} 
-                        alt="profile picture" 
-                        class="user-view__photo" 
-                        tabindex="0" 
-                        crossorigin="anonymous"
-                    />
+                    <picture>
+                        <source 
+                            type="image/webp"
+                            src=${this.user.photo}
+                            srcset="${this.user.photoLarge}.webp 480w, ${this.user.photoLarge}.webp 800w"
+                            sizes="(max-width: 600px) 480px, 800px"
+                        >
+                        <source 
+                            type="image/jpeg"
+                            src=${this.user.photo} 
+                            srcset="${this.user.photoSmall}.jpg 480w, ${this.user.photoLarge}.jpg 800w"
+                            sizes="(max-width: 600px) 480px, 800px"
+                        >
+                        <img 
+                            src=${this.user.photo} 
+                            srcset="${this.user.photoSmall}.jpg 480w, ${this.user.photoLarge}.jpg 800w"
+                            sizes="(max-width: 600px) 480px, 800px"
+                            alt="profile picture" 
+                            class="user-view__photo" 
+                            tabindex="0" 
+                            crossorigin="anonymous"
+                        />
+                    </picture>
                     <span class="user-view__name" tabindex="0">${`${this.user.firstname} ${this.user.lastname}`}
                     </span>
                     <span class="user-view__email" tabindex="0">${this.user.email}</span>
@@ -71,3 +86,5 @@ export default class NavDrawer extends BaseShell {
         `;
     }
 }
+
+customElements.define('nav-drawer', NavDrawer);

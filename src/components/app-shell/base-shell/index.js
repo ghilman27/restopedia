@@ -1,33 +1,20 @@
-import { LitElement, property } from 'lit-element';
-import { connect } from 'pwa-helpers';
-import store from 'src/store';
-import { setDrawerOpen, setDropdownOpen } from 'src/store/shell/actions';
-import { setDarkMode } from 'src/store/global/actions';
+import { setDrawerOpen, setDropdownOpen } from '../../../store/shell/actions';
+import { setDarkMode } from '../../../store/global/actions';
+import BaseComponent from '../../../global/BaseComponent';
 
-export default class BaseShell extends connect(store)(LitElement) {
-    @property({ type: Boolean })
-    drawerOpen;
-
-    @property({ type: Boolean })
-    dropdownOpen;
-
-    @property({ type: Array })
-    navMenus;
-
-    @property({ type: Array })
-    accountMenus;
-
-    @property({ type: String })
-    selectedPage;
-
-    @property({ type: Boolean })
-    darkMode;
-
-    @property({ type: Object })
-    user;
-
-    @property({ type: String })
-    logoName;
+export default class BaseShell extends BaseComponent {
+    static get properties() {
+        return {
+            drawerOpen: { type: Boolean },
+            dropdownOpen: { type: Boolean },
+            navMenus: { type: Array },
+            accountMenus: { type: Array },
+            selectedPage: { type: String },
+            darkMode: { type: Boolean },
+            user: { type: Object },
+            logoName: { type: String },
+        };
+    }
 
     stateChanged(state) {
         this.drawerOpen = state.shell.drawerOpen;
@@ -44,39 +31,35 @@ export default class BaseShell extends connect(store)(LitElement) {
         event.preventDefault();
         event.stopPropagation();
         if (this.dropdownOpen) {
-            store.dispatch(setDropdownOpen(false));
+            this.dispatchAction(setDropdownOpen(false));
         } else {
-            store.dispatch(setDropdownOpen(true));
+            this.dispatchAction(setDropdownOpen(true));
         }
     }
 
-    toggleDrawer = (event) => {
+    toggleDrawer(event) {
         event.preventDefault();
         event.stopPropagation();
         if (this.drawerOpen) {
-            store.dispatch(setDrawerOpen(false));
+            this.dispatchAction(setDrawerOpen(false));
         } else {
-            store.dispatch(setDrawerOpen(true));
+            this.dispatchAction(setDrawerOpen(true));
         }
     }
 
-    closeDrawer = () => {
-        store.dispatch(setDrawerOpen(false));
+    closeDrawer() {
+        this.dispatchAction(setDrawerOpen(false));
     }
 
-    closeDropdown = () => {
-        store.dispatch(setDropdownOpen(false));
+    closeDropdown() {
+        this.dispatchAction(setDropdownOpen(false));
     }
 
     toggleDarkMode() {
         if (this.darkMode) {
-            store.dispatch(setDarkMode(false));
+            this.dispatchAction(setDarkMode(false));
         } else {
-            store.dispatch(setDarkMode(true));
+            this.dispatchAction(setDarkMode(true));
         }
-    }
-
-    createRenderRoot() {
-        return this;
     }
 }

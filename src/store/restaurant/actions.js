@@ -1,6 +1,5 @@
-import RestaurantDB from 'src/data/db';
-import _ from 'lodash';
-import { IdbWriteError, IdbGetError } from 'src/utils/errors';
+import RestaurantDB from '../../data/db';
+import { IdbWriteError, IdbGetError } from '../../utils/errors';
 import { SAVE_RESTAURANT, DELETE_RESTAURANT, SET_INITIAL_STATE } from './types';
 
 export const saveRestaurant = (restaurant) => async (dispatch) => {
@@ -29,17 +28,19 @@ export const deleteRestaurant = (restaurantId) => async (dispatch) => {
 
 export const setSavedRestaurants = () => async (dispatch, getState) => {
     const currentState = getState().restaurant;
+    if (Object.keys(currentState).length > 0) {
+        return;
+    }
+
     try {
-        if (_.isEmpty(currentState)) {
-            const restaurants = await RestaurantDB.getRestaurants();
-            let savedRestaurants;
-            if (restaurants.length) {
-                savedRestaurants = Object.assign(
-                    ...restaurants.map((restaurant) => ({
-                        [restaurant.id]: restaurant,
-                    })),
-                );
-            }
+        const restaurants = await RestaurantDB.getRestaurants();
+        let savedRestaurants;
+        if (restaurants.length) {
+            savedRestaurants = Object.assign(
+                ...restaurants.map((restaurant) => ({
+                    [restaurant.id]: restaurant,
+                })),
+            );
             dispatch({
                 type: SET_INITIAL_STATE,
                 payload: savedRestaurants,
@@ -51,4 +52,11 @@ export const setSavedRestaurants = () => async (dispatch, getState) => {
         /* eslint-enable no-console */
         throw new IdbGetError(error);
     }
+};
+
+export const resetRestaurants = () => async (dispatch) => {
+    dispatch({
+        type: SET_INITIAL_STATE,
+        payload: {},
+    });
 };
